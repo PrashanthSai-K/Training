@@ -1,0 +1,342 @@
+Movie Store - DB Design 
+------------------------
+
+MovieCategory:
+Id, Category (Ex: 1, Comedy...)
+
+MovieFormat:
+Id, Format (Ex:1, DVD...)
+
+Movies:
+MovieNumber, MovieCategory_Id, MovieFormat_ID, MovieName, RentPrice (Ex: 1, 1, 1, HomeAlone, 1500.00....)
+
+MemberType:
+Id, Type, RentLimit (Ex: 1, Gold, 3...) 
+
+Members:
+Id, MemberType_Id, MemberName, PhoneNumber, Email, FavMovieCategory_Id, MovieCount
+(Ex: 1, 1, Doe, 1234567890, asv@van.ad, 1, 0)
+
+Dependent:
+Id, Member_Id, Name, MovieCount (Ex: 1, 1, Jhon, 0)
+
+CardDetails:
+Id, CardNumber, CVV, ExpiryDate, MemberId
+
+StatusMaster:
+Id, StatusMessage (Ex: 1, Rented or 2, Expired or 3, Cancelled or 4, Successfull...)
+
+RentDetails:
+Id, MovieNumber, Member_Id, StartDate, EndDate, Price, Status_Id 
+(Ex: 1, 1, 1, 05/05/2025, 04/06/2025, 1500, 1)
+
+PaymentHistory:
+Id, RentID, CardId, Amount, StatusId
+(Ex: 1, 1, 1, 1500, 4)
+
+
+Problems
+-------------
+
+1. public static void plusMinus(List<int> arr)
+    {
+        int Size = arr.Count;
+        
+        float Positive = 0, Negative = 0, Zero = 0;
+        
+        for(int i=0;i<Size;i++)
+        {
+            if(arr[i] == 0)
+                Zero++;
+            if(arr[i] < 0)
+                Negative++;
+            if(arr[i] > 0)
+                Positive++;
+        }
+        Console.WriteLine(Positive/Size);
+        Console.WriteLine(Negative/Size);
+        Console.WriteLine(Zero/Size);
+    }
+
+2. public static void staircase(int n)
+    {
+        int Space = n - 1;
+        int Hash = 1;
+        
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<Space;j++)
+            {
+                Console.Write(" ");
+            }
+            for(int j=0;j<Hash;j++)
+            {
+                Console.Write("#");
+            }
+            Space--;
+            Hash++;
+            Console.WriteLine();
+        }
+    }
+3. public static void miniMaxSum(List<int> arr)
+    {
+        arr.Sort();
+        
+        uint minSum =0, maxSum=0;
+        
+        for(int i=0;i<4;i++)
+        {
+            minSum += (uint)arr[i];
+        }
+        for(int i=1;i<5;i++)
+        {
+            maxSum += (uint)arr[i];
+        }
+        Console.WriteLine($"{minSum} {maxSum}");
+    }
+
+4. public static int FindTallestCandle(List<int> candles)
+    {
+        int max = int.MinValue;
+        
+        for(int i=0;i<candles.Count;i++)
+        {
+          if(candles[i]>max)
+            max = candles[i]; 
+        }
+        return max;
+    }
+    
+   public static int birthdayCakeCandles(List<int> candles)
+    {
+        int Size = candles.Count;
+        
+        int tallest = FindTallestCandle(candles);
+        
+        int count = 0;
+        
+        for(int i=0;i<candles.Count;i++)
+        {
+            if(candles[i] == tallest)
+                count++;
+        }
+        return count;
+    }
+
+5. public static string timeConversion(string s)
+    {
+        StringBuilder time = new StringBuilder();
+        string meridian = s.Substring(8, 2);
+        
+        if(meridian == "AM")
+        {
+            string hr = s.Substring(0, 2);
+            if(hr == "12")
+                time.Append("00");
+            else
+                time.Append(hr);
+             time.Append($":{s.Substring(3, 2)}:{s.Substring(6, 2)}");
+        }
+        
+        if(meridian == "PM")
+        {
+            int hr = Int32.Parse(s.Substring(0, 2));
+            if(hr != 12)
+                time.Append($"{hr+12}");
+            else
+                time.Append($"{hr}");
+            time.Append($":{s.Substring(3, 2)}:{s.Substring(6, 2)}");
+        }
+        return time.ToString();
+    }
+
+6. public static List<int> gradingStudents(List<int> grades)
+    {
+        for(int i=0;i<grades.Count;i++)
+        {
+            if(grades[i]>=38)
+            {
+                int remainder = grades[i] % 5;
+                if(remainder >= 3)
+                    grades[i] = grades[i] + 5 - remainder;
+                else 
+                    grades[i] = grades[i];
+            }
+        }
+        return grades;
+    }
+
+7. public static void countApplesAndOranges(int s, int t, int a, int b, List<int> apples, List<int> oranges)
+    {
+        int appleCount = 0, OrangeCount = 0;
+
+        for(int i=0;i<apples.Count;i++)
+        {
+            apples[i] = a + apples[i];
+            if(apples[i] >= s && apples[i] <= t)
+                appleCount++;
+        }
+        for(int i=0;i<oranges.Count;i++)
+        {
+            oranges[i] = b+oranges[i];
+            if(oranges[i] >= s && oranges[i] <= t)
+                OrangeCount++;
+        }
+        Console.WriteLine($"{appleCount}\n{OrangeCount}");
+    }
+
+8. public static string kangaroo(int x1, int v1, int x2, int v2)
+    {
+        if(v1 - v2 <= 0)
+            return "NO";
+        else
+            return (x1 - x2) % (v1 - v2) == 0 ? "YES" : "NO";
+    } 
+
+
+9. public static int LCM(int a, int b)
+    {
+        return (a * b) / GCD(a, b);
+    }
+    
+   public static int GCD(int a, int b)
+    {
+        while(b != 0)
+        {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+
+   public static int getTotalX(List<int> a, List<int> b)
+    {
+        int lcm = a.Aggregate((a, b) => LCM(a, b));
+        
+        int gcd = b.Aggregate((a, b) => GCD(a, b));
+        
+        int count = 0;
+        for(int i = lcm; i <= gcd; i+=lcm)
+        {
+            if(gcd % i == 0)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+10. public static List<int> breakingRecords(List<int> scores)
+    {
+        int HighScore = scores[0];
+        int LowestScore = scores[0];
+        
+        int minCount = 0, maxCount = 0;
+        
+        for(int i=0;i<scores.Count;i++)
+        {
+            if(scores[i] < LowestScore)
+            {
+                LowestScore = scores[i];
+                minCount++;
+            }
+            if(scores[i] > HighScore)
+            {
+                HighScore = scores[i];
+                maxCount++;
+            }
+        }
+        return [maxCount, minCount];
+    }
+
+11. public static int birthday(List<int> s, int d, int m)
+    {
+        int count = 0;
+        
+        int total = 0;
+        
+        for(int i=0;i<m;i++)
+        {
+            total += s[i];
+        }
+        
+        if(total == d) count++;
+        
+        for(int i = 1; i<=s.Count-m;i++)
+        {
+            total = total - s[i - 1] + s[i + m -1];
+            if(total == d) count++;
+        }
+
+        return count;
+    }
+
+12. public static int divisibleSumPairs(int n, int k, List<int> ar)
+    {
+        int count = 0;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=i+1;j<n;j++)
+            {
+                if((ar[i] + ar[j]) %  k == 0)
+                    count++;
+            }
+        }
+        return count;
+    }
+
+13. public static int migratoryBirds(List<int> arr)
+    {
+        Dictionary<int, int> frequency = new Dictionary<int, int>();
+        if(arr.Count == 1) return arr[0];
+        for(int i=0;i<arr.Count;i++)
+        {
+            if(frequency.ContainsKey(arr[i]))
+                frequency[arr[i]]= frequency[arr[i]]+1;
+            else
+                frequency.Add(arr[i], 1);
+        }
+
+        int max= frequency.Values.Max();
+        return frequency
+                .Where(entry => entry.Value == max)
+                .Select(entry=>entry.Key).Min();
+    }
+
+14. public static string dayOfProgrammer(int year)
+    {
+        if (year == 1918)
+        {
+            return $"26.09.{year}";
+        }
+        else if (year >= 1700 && year <= 1917)
+        {
+            if (year % 4 == 0)
+                return $"12.09.{year}";
+            else
+                return $"13.09.{year}";
+        }
+        else
+        {
+            if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
+                return $"12.09.{year}";
+            else
+                return $"13.09.{year}";
+        }
+    }
+
+15. public static void bonAppetit(List<int> bill, int k, int b)
+    {
+        int total = 0;
+        for(int i=0;i<bill.Count;i++)
+        {
+            if(i == k)
+                continue;
+            total += bill[i];
+        }
+        if(total/2 == b)
+            Console.WriteLine("Bon Appetit");
+        else
+            Console.WriteLine(b - total/2);
+    }
