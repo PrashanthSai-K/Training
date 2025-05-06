@@ -1,0 +1,60 @@
+Product:
+Id, Name, Price, Remarks
+
+Suppliers:
+Id, Name, contact, email
+
+Stock:
+Id, ProductId, SupplierId, Qty
+
+Customer:
+Id, Name, Mobile, Email, Address
+
+Order:
+Id, customerId, OrderDate
+
+OrderDetails:
+Id, OrderId, ProductID, SupplierId, Qty
+
+BillDetails:
+Id, OrderId, TransactionID, Mode, Amount, Status, Timestamp
+
+
+Refactored 
+---------------------------------------------------------
+
+categories
+id, name, status
+ 
+country
+id, name
+ 
+state
+id, name, country_id
+ 
+City
+id, name, state_id
+ 
+area
+zipcode, name, city_id
+ 
+address
+id, door_number, addressline1, zipcode
+ 
+supplier
+id, name, contact_person, phone, email, address_id, status
+ 
+product
+id, Name, unit_price, quantity, description, image
+ 
+product_supplier
+transaction_id, product_id, supplier_id, date_of_supply, quantity,
+ 
+Customer
+id, Name, Phone, age, address_id
+ 
+order
+  order_number, customer_id, Date_of_order, amount, order_status
+ 
+order_details
+  id, order_number, product_id, quantity, unit_price
