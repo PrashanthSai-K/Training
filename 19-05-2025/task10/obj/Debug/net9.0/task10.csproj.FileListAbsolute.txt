@@ -1,0 +1,15 @@
+C:\sai\genspark_training\19-05-2025\task10\bin\Debug\net9.0\task10.exe
+C:\sai\genspark_training\19-05-2025\task10\bin\Debug\net9.0\task10.deps.json
+C:\sai\genspark_training\19-05-2025\task10\bin\Debug\net9.0\task10.runtimeconfig.json
+C:\sai\genspark_training\19-05-2025\task10\bin\Debug\net9.0\task10.dll
+C:\sai\genspark_training\19-05-2025\task10\bin\Debug\net9.0\task10.pdb
+C:\sai\genspark_training\19-05-2025\task10\obj\Debug\net9.0\task10.GeneratedMSBuildEditorConfig.editorconfig
+C:\sai\genspark_training\19-05-2025\task10\obj\Debug\net9.0\task10.AssemblyInfoInputs.cache
+C:\sai\genspark_training\19-05-2025\task10\obj\Debug\net9.0\task10.AssemblyInfo.cs
+C:\sai\genspark_training\19-05-2025\task10\obj\Debug\net9.0\task10.csproj.CoreCompileInputs.cache
+C:\sai\genspark_training\19-05-2025\task10\obj\Debug\net9.0\task10.sourcelink.json
+C:\sai\genspark_training\19-05-2025\task10\obj\Debug\net9.0\task10.dll
+C:\sai\genspark_training\19-05-2025\task10\obj\Debug\net9.0\refint\task10.dll
+C:\sai\genspark_training\19-05-2025\task10\obj\Debug\net9.0\task10.pdb
+C:\sai\genspark_training\19-05-2025\task10\obj\Debug\net9.0\task10.genruntimeconfig.cache
+C:\sai\genspark_training\19-05-2025\task10\obj\Debug\net9.0\ref\task10.dll
