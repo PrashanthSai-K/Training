@@ -26,16 +26,6 @@ public abstract class Repository<K, T> : IRepository<K,T> where T : class
         return item;
     }
 
-    public T Update(T item)
-    {
-        var myItem = GetById((K)item.GetType().GetProperty("Id").GetValue(item));
-        if(myItem == null)
-            throw new KeyNotFoundException("Item not found");
-        var index = _items.IndexOf(myItem);
-        _items[index] = item;
-        return item;
-    }
-
     public T Delete(K id)
     {
         var myItem = GetById(id);

@@ -35,10 +35,10 @@ public class PatitentAppointment
         PatientAge = age;
 
         DateTime date;
-        Console.Write("Enter Appointment Date (yyyy-MM-dd): ");
-        while (!DateTime.TryParse(Console.ReadLine(), out date))
+        Console.Write("Enter Appointment Date (yyyy-MM-dd HH:mm): ");
+        while (!DateTime.TryParseExact(Console.ReadLine(),"yyyy-MM-dd HH:mm", null, System.Globalization.DateTimeStyles.None, out date) || date < DateTime.Now )
         {
-            Console.Write("Invalid date. Please enter again (yyyy-MM-dd): ");
+            Console.Write("Invalid date. Please enter again (yyyy-MM-dd HH:mm): ");
         }
         AppointmentDate = date;
 
