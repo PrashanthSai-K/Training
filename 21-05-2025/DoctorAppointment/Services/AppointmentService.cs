@@ -34,7 +34,7 @@ public class AppointmentService : IAppointmentService
     {
         if (appointments == null || name == null)
             return appointments;
-        return appointments.Where(a => a.PatientName == name).ToList();
+        return appointments.Where(a => a.PatientName.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
     }
 
     public ICollection<PatitentAppointment>? SearchByAppointmentDate(ICollection<PatitentAppointment> appointments, DateTime? date)
