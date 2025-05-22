@@ -1,0 +1,15 @@
+C:\sai\genspark_training\22-05-2025\Delegates\bin\Debug\net9.0\Delegates.exe
+C:\sai\genspark_training\22-05-2025\Delegates\bin\Debug\net9.0\Delegates.deps.json
+C:\sai\genspark_training\22-05-2025\Delegates\bin\Debug\net9.0\Delegates.runtimeconfig.json
+C:\sai\genspark_training\22-05-2025\Delegates\bin\Debug\net9.0\Delegates.dll
+C:\sai\genspark_training\22-05-2025\Delegates\bin\Debug\net9.0\Delegates.pdb
+C:\sai\genspark_training\22-05-2025\Delegates\obj\Debug\net9.0\Delegates.GeneratedMSBuildEditorConfig.editorconfig
+C:\sai\genspark_training\22-05-2025\Delegates\obj\Debug\net9.0\Delegates.AssemblyInfoInputs.cache
+C:\sai\genspark_training\22-05-2025\Delegates\obj\Debug\net9.0\Delegates.AssemblyInfo.cs
+C:\sai\genspark_training\22-05-2025\Delegates\obj\Debug\net9.0\Delegates.csproj.CoreCompileInputs.cache
+C:\sai\genspark_training\22-05-2025\Delegates\obj\Debug\net9.0\Delegates.sourcelink.json
+C:\sai\genspark_training\22-05-2025\Delegates\obj\Debug\net9.0\Delegates.dll
+C:\sai\genspark_training\22-05-2025\Delegates\obj\Debug\net9.0\refint\Delegates.dll
+C:\sai\genspark_training\22-05-2025\Delegates\obj\Debug\net9.0\Delegates.pdb
+C:\sai\genspark_training\22-05-2025\Delegates\obj\Debug\net9.0\Delegates.genruntimeconfig.cache
+C:\sai\genspark_training\22-05-2025\Delegates\obj\Debug\net9.0\ref\Delegates.dll

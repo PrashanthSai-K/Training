@@ -1,0 +1,15 @@
+C:\sai\genspark_training\22-05-2025\SOLID\bin\Debug\net9.0\SOLID.exe
+C:\sai\genspark_training\22-05-2025\SOLID\bin\Debug\net9.0\SOLID.deps.json
+C:\sai\genspark_training\22-05-2025\SOLID\bin\Debug\net9.0\SOLID.runtimeconfig.json
+C:\sai\genspark_training\22-05-2025\SOLID\bin\Debug\net9.0\SOLID.dll
+C:\sai\genspark_training\22-05-2025\SOLID\bin\Debug\net9.0\SOLID.pdb
+C:\sai\genspark_training\22-05-2025\SOLID\obj\Debug\net9.0\SOLID.GeneratedMSBuildEditorConfig.editorconfig
+C:\sai\genspark_training\22-05-2025\SOLID\obj\Debug\net9.0\SOLID.AssemblyInfoInputs.cache
+C:\sai\genspark_training\22-05-2025\SOLID\obj\Debug\net9.0\SOLID.AssemblyInfo.cs
+C:\sai\genspark_training\22-05-2025\SOLID\obj\Debug\net9.0\SOLID.csproj.CoreCompileInputs.cache
+C:\sai\genspark_training\22-05-2025\SOLID\obj\Debug\net9.0\SOLID.sourcelink.json
+C:\sai\genspark_training\22-05-2025\SOLID\obj\Debug\net9.0\SOLID.dll
+C:\sai\genspark_training\22-05-2025\SOLID\obj\Debug\net9.0\refint\SOLID.dll
+C:\sai\genspark_training\22-05-2025\SOLID\obj\Debug\net9.0\SOLID.pdb
+C:\sai\genspark_training\22-05-2025\SOLID\obj\Debug\net9.0\SOLID.genruntimeconfig.cache
+C:\sai\genspark_training\22-05-2025\SOLID\obj\Debug\net9.0\ref\SOLID.dll
