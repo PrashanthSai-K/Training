@@ -1,0 +1,15 @@
+C:\sai\genspark_training\23-05-2025\AbstractFactory\bin\Debug\net9.0\AbstractFactory.exe
+C:\sai\genspark_training\23-05-2025\AbstractFactory\bin\Debug\net9.0\AbstractFactory.deps.json
+C:\sai\genspark_training\23-05-2025\AbstractFactory\bin\Debug\net9.0\AbstractFactory.runtimeconfig.json
+C:\sai\genspark_training\23-05-2025\AbstractFactory\bin\Debug\net9.0\AbstractFactory.dll
+C:\sai\genspark_training\23-05-2025\AbstractFactory\bin\Debug\net9.0\AbstractFactory.pdb
+C:\sai\genspark_training\23-05-2025\AbstractFactory\obj\Debug\net9.0\AbstractFactory.GeneratedMSBuildEditorConfig.editorconfig
+C:\sai\genspark_training\23-05-2025\AbstractFactory\obj\Debug\net9.0\AbstractFactory.AssemblyInfoInputs.cache
+C:\sai\genspark_training\23-05-2025\AbstractFactory\obj\Debug\net9.0\AbstractFactory.AssemblyInfo.cs
+C:\sai\genspark_training\23-05-2025\AbstractFactory\obj\Debug\net9.0\AbstractFactory.csproj.CoreCompileInputs.cache
+C:\sai\genspark_training\23-05-2025\AbstractFactory\obj\Debug\net9.0\AbstractFactory.sourcelink.json
+C:\sai\genspark_training\23-05-2025\AbstractFactory\obj\Debug\net9.0\AbstractFactory.dll
+C:\sai\genspark_training\23-05-2025\AbstractFactory\obj\Debug\net9.0\refint\AbstractFactory.dll
+C:\sai\genspark_training\23-05-2025\AbstractFactory\obj\Debug\net9.0\AbstractFactory.pdb
+C:\sai\genspark_training\23-05-2025\AbstractFactory\obj\Debug\net9.0\AbstractFactory.genruntimeconfig.cache
+C:\sai\genspark_training\23-05-2025\AbstractFactory\obj\Debug\net9.0\ref\AbstractFactory.dll

@@ -1,0 +1,15 @@
+C:\sai\genspark_training\23-05-2025\Proxy\bin\Debug\net9.0\Proxy.exe
+C:\sai\genspark_training\23-05-2025\Proxy\bin\Debug\net9.0\Proxy.deps.json
+C:\sai\genspark_training\23-05-2025\Proxy\bin\Debug\net9.0\Proxy.runtimeconfig.json
+C:\sai\genspark_training\23-05-2025\Proxy\bin\Debug\net9.0\Proxy.dll
+C:\sai\genspark_training\23-05-2025\Proxy\bin\Debug\net9.0\Proxy.pdb
+C:\sai\genspark_training\23-05-2025\Proxy\obj\Debug\net9.0\Proxy.GeneratedMSBuildEditorConfig.editorconfig
+C:\sai\genspark_training\23-05-2025\Proxy\obj\Debug\net9.0\Proxy.AssemblyInfoInputs.cache
+C:\sai\genspark_training\23-05-2025\Proxy\obj\Debug\net9.0\Proxy.AssemblyInfo.cs
+C:\sai\genspark_training\23-05-2025\Proxy\obj\Debug\net9.0\Proxy.csproj.CoreCompileInputs.cache
+C:\sai\genspark_training\23-05-2025\Proxy\obj\Debug\net9.0\Proxy.sourcelink.json
+C:\sai\genspark_training\23-05-2025\Proxy\obj\Debug\net9.0\Proxy.dll
+C:\sai\genspark_training\23-05-2025\Proxy\obj\Debug\net9.0\refint\Proxy.dll
+C:\sai\genspark_training\23-05-2025\Proxy\obj\Debug\net9.0\Proxy.pdb
+C:\sai\genspark_training\23-05-2025\Proxy\obj\Debug\net9.0\Proxy.genruntimeconfig.cache
+C:\sai\genspark_training\23-05-2025\Proxy\obj\Debug\net9.0\ref\Proxy.dll
