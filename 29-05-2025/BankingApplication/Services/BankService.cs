@@ -51,6 +51,7 @@ public class BankService : IBankService
 
     public async Task<TransferDto> Transfer(TransferDto transferDto)
     {
+        
         var DebitAccount = await _bankDbContext.Accounts.FirstOrDefaultAsync(a => a.Id == transferDto.DebitAccountID)
                     ?? throw new Exception($"Debit Account with ID {transferDto.DebitAccountID} not found");
 
