@@ -11,13 +11,13 @@ public class FaqChatService : IChatService
     private readonly IChatClient _chatClient;
     public FaqChatService()
     {
-        _chatClient = new OllamaApiClient(new Uri("http://localhost:11434"), "Banking-Chat:latest");
+        _chatClient = new OllamaApiClient(new Uri("http://localhost:11434"), "Banking-Chat:latest"); //Local LLM model for privacy
     }
 
     public async Task<string> AnswerFaq(string promt)
     {
 
-        List<Faq> faqs = FaqKnowledgeService.GetMatchingQuestions(promt);
+        List<Faq> faqs = FaqKnowledgeService.GetMatchingQuestions(promt); //RAG based LLM prompting - Feeding the knowledge required to answer the question
 
         if (faqs == null || faqs.Count == 0)
         {

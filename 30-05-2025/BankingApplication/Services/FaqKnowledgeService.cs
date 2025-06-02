@@ -50,7 +50,7 @@ public class FaqKnowledgeService
         new ()
         {
             Question = "how long does a transfer take",
-            Answer = "Transfers within the bank are typically instant, but processing times can vary depending on the recipient's bank policies."
+            Answer = "Transfers within the bank are typically instant, but processing times can vary depending on the traffic"
         }
     };
 
