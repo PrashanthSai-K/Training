@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using ClinicManagement.Interfaces;
 using ClinicManagement.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,24 +19,28 @@ namespace ClinicManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Doctor")]
         public async Task<ActionResult<IEnumerable<Appointment>>> GetAppointments()
         {
             var appointments = await _appointmentService.GetAppointments();
             return Ok(appointments);
         }
         [HttpPost]
+        [Authorize(Roles = "Patient")]
         public async Task<ActionResult<Appointment>> CreateAppointment(Appointment appointment)
         {
             var createdAppointment = await _appointmentService.CreateAppointment(appointment);
             return Created("", createdAppointment);
         }
         [HttpPut]
+        [Authorize(Roles = "Patient")]
         public async Task<ActionResult<Appointment>> RescheduleAppointment(Appointment appointment)
         {
             var RescheduledAppointment = await _appointmentService.RescheduleAppointment(appointment);
             return Ok(RescheduledAppointment);
         }
         [HttpDelete]
+        [Authorize(Roles = "Patient")]
         public async Task<ActionResult<Appointment>> CancelAppointment(int id)
         {
             var CancelledAppointment = await _appointmentService.CancelAppointment(id);
