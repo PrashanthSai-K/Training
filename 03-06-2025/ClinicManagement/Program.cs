@@ -55,6 +55,8 @@ builder.Services.AddDbContext<ClinicDBContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Logging.AddLog4Net();
+
 #region Repositoy
 builder.Services.AddScoped<IRepository<int, Patient>, PatientRepository>();
 builder.Services.AddScoped<IRepository<int, Doctor>, DoctorRepository>();

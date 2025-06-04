@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/presidio/sai/Training/03-05-2025/ClinicManagement/ClinicManagement.csproj": {}
+    "/Users/presidio/sai/Training/03-06-2025/ClinicManagement/ClinicManagement.csproj": {}
   },
   "projects": {
-    "/Users/presidio/sai/Training/03-05-2025/ClinicManagement/ClinicManagement.csproj": {
+    "/Users/presidio/sai/Training/03-06-2025/ClinicManagement/ClinicManagement.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/presidio/sai/Training/03-05-2025/ClinicManagement/ClinicManagement.csproj",
+        "projectUniqueName": "/Users/presidio/sai/Training/03-06-2025/ClinicManagement/ClinicManagement.csproj",
         "projectName": "ClinicManagement",
-        "projectPath": "/Users/presidio/sai/Training/03-05-2025/ClinicManagement/ClinicManagement.csproj",
+        "projectPath": "/Users/presidio/sai/Training/03-06-2025/ClinicManagement/ClinicManagement.csproj",
         "packagesPath": "/Users/presidio/.nuget/packages/",
-        "outputPath": "/Users/presidio/sai/Training/03-05-2025/ClinicManagement/obj/",
+        "outputPath": "/Users/presidio/sai/Training/03-06-2025/ClinicManagement/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/presidio/.nuget/NuGet/NuGet.Config"
@@ -65,6 +65,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.5, )"
+            },
+            "Microsoft.Extensions.Logging.Log4Net.AspNetCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
