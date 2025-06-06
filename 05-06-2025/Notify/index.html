@@ -1,0 +1,39 @@
+<html>
+  <body>
+      <h2>SignalR Demo</h2>
+       <input type="text" id="message" placeholder="Message"/>
+       <button onclick="sendMessage()">Send</button>
+       <div id="msgs">
+
+       </div>
+      <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@8.0.7/dist/browser/signalr.min.js"></script>
+        <script>
+            const connection = new signalR.HubConnectionBuilder()
+                                .withUrl("http://localhost:5077/file-upload",{
+                                    withCredentials:true
+                                })
+                                .withAutomaticReconnect()
+                                .build();
+            connection.on("FileUploaded",(message)=>{
+                const placeHolder = document.getElementById("msgs");
+                const content = document.createElement("p")
+                content.innerHTML = `${message}`;
+                placeHolder.append(content);
+            });
+
+            connection.start().then(()=>{
+                connection.invoke("SendMessage", "Hello World");
+            })
+            .catch(err=>{
+                console.log("sinalR connection Failed")
+            })
+            function sendMessage(){
+                var message = document.getElementById("message").value;
+                connection.invoke("SendMessage",message)
+                         .catch(err=>{
+                            console.error(err);
+                         })
+            }
+        </script>
+  </body>
+</html>
