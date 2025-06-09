@@ -1,0 +1,42 @@
+<html>
+
+<body>
+    <h2>SignalR Demo</h2>
+    <!-- <button onclick="sendMessage()">Send</button> -->
+    <div id="msgs">
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@8.0.7/dist/browser/signalr.min.js"></script>
+    <script>
+        async function startConnection() {
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl("http://localhost:5124/chathub", {
+                    withCredentials: true
+                })
+                .withAutomaticReconnect()
+                .build();
+
+            connection.on("ReceiveMessage", (result) => {
+                const placeHolder = document.getElementById("msgs");
+                const message = document.createElement("p");
+                console.log(result);
+                message.innerHTML = `Message : ${result.message}, Chat Id : ${result.chatId}, User Id : ${result.userId}`;
+                placeHolder.append(message);
+            });
+
+            try {
+                await connection.start();
+                console.log("SignalR connected");
+
+                await connection.invoke("JoinGroup", 1);
+            } catch (err) {
+                console.error("SignalR connection failed:", err);
+            }
+        }
+
+        startConnection();
+
+    </script>
+</body>
+
+</html>

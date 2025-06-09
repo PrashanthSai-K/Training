@@ -1,0 +1,376 @@
+/*
+Generics section
+*/
+
+:root {
+    --Primary-gray: #333333;
+    --Medium-gray: #666666;
+    --Light-gray: #CCCCCC;
+    --Background-color: #F5F5F5;
+    --White-color: #ffffff;
+    --Accent-Gray: #E0E0E0;
+}
+
+* {
+    font-family: "Poppins", sans-serif;
+    padding: 0;
+    margin: 0;
+    background: var(--Background-color);
+    scroll-behavior: smooth;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--Primary-gray);
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+p {
+    font-size: 16px;
+    font-weight: normal;
+    color: var(--Medium-gray);
+}
+
+a {
+    text-decoration: none;
+    color: var(--Primary-gray);
+}
+
+/*
+Headers section
+*/
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    position: sticky;
+    top: 0;
+}
+
+header>.heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    color: var(--Primary-gray);
+}
+
+header>.heading>.logo {
+    color: #21A4FB;
+    font-size: 1.5rem;
+}
+
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+header>nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    font-size: 20px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 20px;
+    border: 1px solid var(--Light-gray);
+    background-color: var(--Background-color);
+}
+
+.btn-primary {
+    background-color: #21A4FB;
+    color: white;
+    border: 0;
+}
+
+/*
+Home section
+*/
+
+#Home {
+    display: flex;
+    height: calc(100vh - 100px);
+    align-items: center;
+    justify-content: center;
+    background-color: #acdaf8;
+    width: 100%;
+}
+
+.home-content {
+    background-color: #acdaf8;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 50%;
+}
+
+.home-content>h1 {
+    font-size: 55px;
+    text-wrap: wrap;
+}
+
+.home-content>p {
+    padding: 10px;
+    font-size: 24px;
+}
+
+.home-content>h1,
+.home-content>p {
+    background-color: #acdaf8;
+}
+
+.home-image {
+    width: 600px;
+    height: 600px;
+    background-color: #acdaf8;
+    border: 0;
+}
+
+/*
+Services section
+*/
+
+#Services {
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+
+.service-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 100px;
+    padding-top: 24px;
+}
+
+.card:hover {
+    scale: 1.05;
+}
+
+.card {
+    width: 300px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--Light-gray);
+    border-radius: 8px;
+    padding: 5px;
+    transition: scale 0.5s;
+}
+
+.icon-md {
+    height: 64px;
+    width: 64px;
+    color: #21A4FB;
+}
+
+/*
+Testimonial section
+*/
+
+#Testimonials {
+    display: grid;
+    place-items: center;
+    padding: 32px;
+    background-color: #acdaf8;
+}
+
+
+.testimonial-title {
+    text-align: center;
+    padding: 16px;
+    background-color: #acdaf8;
+}
+
+.testimonial-card {
+    display: flex;
+    width: 600px;
+    padding: 16px;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    border-radius: 8px;
+}
+
+.testimonial-icon {
+    height: 100px;
+    width: 100px;
+    background-color: white;
+    color: #21A4FB;
+    rotate: 180deg;
+}
+
+.testimonial-content>h2,
+.testimonial-content>p {
+    background-color: white;
+}
+
+.testimonial-content>h2 {
+    font-size: 24;
+    text-align: justify;
+}
+
+/*
+Clinic hours section
+*/
+
+#Clinic-Hours {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 32px;
+}
+
+.hours {
+    width: 50%;
+    padding: 32px;
+}
+
+.hours>p {
+    font-size: 20px;
+    padding-left: 10%;
+}
+
+/*
+Responsive section
+*/
+
+@media screen and (max-width: 600px) {
+
+    /*
+        Header Section
+    */
+    header>.heading>h1 {
+        white-space: nowrap;
+        font-size: 24px;
+    }
+
+    header>nav {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+        color: var(--Primary-gray);
+        padding: 8px;
+    }
+
+    nav {
+        display: none;
+        flex-direction: column;
+        gap: 16px;
+        position: absolute;
+        top: 80px;
+        right: 24px;
+        padding: 16px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
+    nav.nav-active {
+        display: flex;
+    }
+
+    nav a,
+    nav button {
+        font-size: 18px;
+    }
+
+    /*
+        Home Section
+    */
+    #Home {
+        flex-direction: column-reverse;
+        min-height: 80vh;
+        height: auto;
+    }
+
+    .home-content {
+        width: 90%;
+    }
+
+    .home-content>h1 {
+        font-size: 32px;
+    }
+
+    .home-content>p {
+        font-size: 16px;
+    }
+
+    .home-image {
+        height: 300px;
+        width: 300px;
+    }
+
+    .btn {
+        font-size: 16px;
+    }
+
+    /*
+        Services section
+    */
+    .service-cards {
+        grid-template-columns: 1fr;
+        grid-row-gap: 16px;
+    }
+
+    /*
+        Testimonial section
+    */
+    .testimonial-title {
+        font-size: 24px;
+    }
+
+    .testimonial-card {
+        width: 90%;
+    }
+
+    .testimonial-content>h2 {
+        font-size: 16px;
+    }
+
+    .testimonial-content>p {
+        font-size: 10px;
+    }
+
+    /*
+        Clinic hours section
+    */
+
+    #Clinic-Hours {
+        flex-direction: column;
+        padding: 20px 0px;
+    }
+
+    .hours {
+        padding: 10px;
+        width: 90%;
+    }
+
+    .hours>p {
+        padding-left: 8px;
+        font-size: 16px;
+    }
+
+}

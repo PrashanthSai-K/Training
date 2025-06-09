@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor's Clinic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <header>
+        <div class="heading">
+            <i data-lucide="stethoscope" class="logo"></i>
+            <h1 class="title">Doctor's Clinic</h1>
+        </div>
+        <!-- Hamburger Icon (visible only on mobile) -->
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+            <i data-lucide="menu"></i>
+        </button>
+
+        <nav id="navbar">
+            <a href="#Home">Home</a>
+            <a href="#Services">Services</a>
+            <button class="btn btn-primary" href="">Login</button>
+            <button class="btn" href="">Register</button>
+        </nav>
+    </header>
+
+    <section id="Home">
+        <div class="home-content">
+            <h1>Quality care for your health</h1>
+            <p>Our clinic provides the best medical services for you and your family</p>
+            <button class="btn btn-primary">Book Appointment</button>
+        </div>
+        <img src="./imges/doctor.png" class="home-image" alt="b">
+    </section>
+
+    <section id="Services">
+        <h1>Our Services</h1>
+        <div class="service-cards">
+            <div class="card">
+                <i data-lucide="clipboard-list" class="icon-md"></i>
+                <h2>Primary Care</h2>
+                <p>Provide decter early care or cultanes</p>
+            </div>
+
+            <div class="card">
+                <i data-lucide="stethoscope" class="icon-md"></i>
+                <h2>Pediatrics</h2>
+                <p>Provide careare with kids in-names.</p>
+            </div>
+
+            <div class="card">
+                <i data-lucide="circle-plus" class="icon-md"></i>
+                <h2>Speciality Care</h2>
+                <p>Provide accarecarie and curisel-car.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="Testimonials">
+        <h1 class="testimonial-title">What our patients are saying</h1>
+        <div class="testimonial-card">
+            <i data-lucide="quote" class="testimonial-icon"></i>
+            <div class="testimonial-content">
+                <h2>Excellent service and wonderfull staff. I always feel well taken care of.</h2>
+                <p>Jhon D.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="Clinic-Hours">
+        <div class="hours">
+            <h2>Clinic Hours</h3>
+                <p>Monday – Friday: 8:00 AM – 6:00 PM<br>Saturday: 9:00 AM – 1:00 PM</p>
+        </div>
+        <div class="hours">
+            <h2>Clinic Hours</h3>
+                <p>Monday – Friday: 8:00 AM – 5:00 PM<br>Saturday: 9:00 AM – 1:00 PM</p>
+        </div>
+    </section>
+
+   
+<script type="module">
+        import { createIcons, icons } from 'https://cdn.jsdelivr.net/npm/lucide@latest/+esm';
+
+        createIcons({ icons });
+
+        const hamburger = document.getElementById('hamburger');
+        const navbar = document.getElementById('navbar');
+
+        hamburger.addEventListener('click', () => {
+            navbar.classList.toggle('nav-active');
+        });
+    </script>
+
+</body>
+
+</html>
