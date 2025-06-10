@@ -22,9 +22,8 @@ public class AuthService : IAuthService
     {
         var user = await _userRepository.GetById(requestDto.Username);
 
-        Console.WriteLine(_hashingService.HashData(requestDto.Password));
-        Console.WriteLine(user.Password);
-
+        Console.WriteLine(BCrypt.Net.BCrypt.Verify(requestDto.Password, user.Password));
+        
         if (!_hashingService.VerifyHash(requestDto.Password, user.Password))
             throw new PassowrdWrongException("Password in invalid");
 

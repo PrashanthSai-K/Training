@@ -1,0 +1,18 @@
+<h1 class="section-title">Customer Details</h1>
+
+<div class="customer-grid">
+  <div *ngFor="let customer of customers" class="customer-card">
+    <div class="customer-info">
+      <h2 class="customer-name">{{ customer.name }}</h2>
+      <p class="customer-email">{{ customer.email }}</p>
+      <div class="customer-stats">
+        <span>👍 {{ customer.likes }}</span>
+        <span>👎 {{ customer.dislikes }}</span>
+      </div>
+    </div>
+    <div class="customer-actions">
+      <i class="bi bi-hand-thumbs-up icon-btn" (click)="onLikeClick(customer.email)"></i>
+      <i class="bi bi-hand-thumbs-down icon-btn" (click)="onDislikeClick(customer.email)"></i>
+    </div>
+  </div>
+</div>

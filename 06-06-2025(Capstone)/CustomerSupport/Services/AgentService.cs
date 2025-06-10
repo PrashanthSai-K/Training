@@ -13,33 +13,45 @@ public class AgentService : IAgentService
     private readonly IRepository<int, Agent> _agentRepository;
     private readonly IRepository<string, User> _userRepository;
     private readonly IHashingService _hashingService;
+    private readonly IAuditLogService _auditLogService;
     private readonly IMapper _mapper;
 
-    public AgentService(IRepository<int, Agent> agentRepository, IRepository<string, User> userRepository, IMapper mapper, IHashingService hashingService)
+    public AgentService(IRepository<int, Agent> agentRepository,
+                        IRepository<string, User> userRepository,
+                        IMapper mapper,
+                        IAuditLogService auditLogService,
+                        IHashingService hashingService)
     {
         _agentRepository = agentRepository;
         _userRepository = userRepository;
         _hashingService = hashingService;
+        _auditLogService = auditLogService;
         _mapper = mapper;
     }
     public async Task<Agent> CreateAgent(AgentRegisterDto agentDto)
     {
         var user = _mapper.Map<AgentRegisterDto, User>(agentDto);
-        user.Password = _hashingService.HashData(user.Password);
+        user.Password = _hashingService.HashData(agentDto.Password);
         user.Roles = "Agent";
 
         var agent = _mapper.Map<AgentRegisterDto, Agent>(agentDto);
 
         var createdUser = await _userRepository.Create(user);
         var createagent = await _agentRepository.Create(agent);
-
+        await _auditLogService.CreateAuditLog(new AuditLog() { UserId = user.Username, Action = "Create", Entity = "Agent", CreatedOn = DateTime.UtcNow });
         return createagent;
     }
 
-    public async Task<Agent> DeleteAgent(int id)
+    public async Task<Agent> DeleteAgent(string? userId, int id)
     {
+        var existingAgent = await _agentRepository.GetById(id);
+
+        if (existingAgent.Email != userId)
+            throw new UnauthorizedAccessException("User not authorized to delete this account details");
+
         var deleteagent = await _agentRepository.Delete(id);
         var deletedUser = await _userRepository.Delete(deleteagent.Email);
+        await _auditLogService.CreateAuditLog(new AuditLog() { UserId = userId, Action = "Delete", Entity = "Agent", CreatedOn = DateTime.UtcNow });
 
         return deleteagent;
     }
@@ -62,15 +74,20 @@ public class AgentService : IAgentService
         return agents;
     }
 
-    public async Task<Agent> UpdateAgent(int id, AgentUpdateDto agentDto)
+    public async Task<Agent> UpdateAgent(string? userId, int id, AgentUpdateDto agentDto)
     {
         var existingAgent = await _agentRepository.GetById(id);
+        
+        if (existingAgent.Email != userId)
+            throw new UnauthorizedAccessException("User not authorized to update this account details");
 
         var agent = _mapper.Map<AgentUpdateDto, Agent>(agentDto);
         agent.Id = existingAgent.Id;
         agent.Email = existingAgent.Email;
 
         var updatedagent = await _agentRepository.Update(id, agent);
+        await _auditLogService.CreateAuditLog(new AuditLog() { UserId = userId, Action = "Update", Entity = "Agent", CreatedOn = DateTime.UtcNow });
+
         return updatedagent;
     }
 

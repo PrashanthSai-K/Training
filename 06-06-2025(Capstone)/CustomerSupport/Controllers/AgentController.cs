@@ -26,20 +26,27 @@ namespace CustomerSupport.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Agent")]
         public async Task<IActionResult> UpdateAgent(int id, AgentUpdateDto agentDto)
         {
-            var updatedAgent = await _agentService.UpdateAgent(id, agentDto);
+            var userId = User?.Identity?.Name;
+
+            var updatedAgent = await _agentService.UpdateAgent(userId, id, agentDto);
             return Ok(updatedAgent);
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Agent")]
         public async Task<IActionResult> DeleteAgent(int id)
         {
-            var updatedAgent = await _agentService.DeleteAgent(id);
+            var userId = User?.Identity?.Name;
+
+            var updatedAgent = await _agentService.DeleteAgent(userId, id);
             return Ok(updatedAgent);
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> GetAgentById(int id)
         {
             var agent = await _agentService.GetAgentById(id);
@@ -47,7 +54,8 @@ namespace CustomerSupport.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAgents([FromQuery]AgentQueryParams queryParams)
+        [Authorize]
+        public async Task<IActionResult> GetAgents([FromQuery] AgentQueryParams queryParams)
         {
             var agents = await _agentService.GetAgents(queryParams);
             return Ok(agents);

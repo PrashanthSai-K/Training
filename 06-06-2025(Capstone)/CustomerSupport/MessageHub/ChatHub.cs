@@ -13,7 +13,6 @@ public class ChatHub : Hub
     {
         try
         {
-            Console.WriteLine(chatId);
             await Groups.AddToGroupAsync(Context.ConnectionId, chatId.ToString());
         }
         catch (Exception e)

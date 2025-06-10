@@ -1,5 +1,6 @@
 using CustomerSupport.Interfaces;
 using CustomerSupport.Models.Dto;
+using CustomerSupport.Models.QueryParams;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,29 +22,37 @@ namespace CustomerSupport.Controllers
         [Authorize(Roles = "Agent, Customer")]
         public async Task<IActionResult> CreateMessage([FromRoute] int chatId, [FromBody] ChatMessageCreateDto chatMessageDto)
         {
-            var chatMessage = await _chatMessageService.CreateTextMessage(chatId, chatMessageDto);
+            var userId = User.Identity?.Name;
+
+            var chatMessage = await _chatMessageService.CreateTextMessage(userId, chatId, chatMessageDto);
             return Ok(chatMessage);
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Agent, Customer")]
         public async Task<IActionResult> UpdateMessage([FromRoute] int chatId, int id, [FromBody] ChatMessageEditDto chatMessageDto)
         {
-            var message = await _chatMessageService.EditMessage(chatId, id, chatMessageDto);
+            var userId = User.Identity?.Name;
+
+            var message = await _chatMessageService.EditMessage(userId, chatId, id, chatMessageDto);
             return Ok(message);
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Agent, Customer")]
         public async Task<IActionResult> DeleteMessage([FromRoute] int chatId, int id)
         {
-            var chatMessage = await _chatMessageService.DeleteMessage(chatId, id);
+            var userId = User.Identity?.Name;
+
+            var chatMessage = await _chatMessageService.DeleteMessage(userId, chatId, id);
             return Ok(chatMessage);
         }
 
         [HttpGet]
-        [Authorize(Roles = "Agent")]
-        public async Task<IActionResult> GetMessages([FromRoute] int chatId)
+        [Authorize]
+        public async Task<IActionResult> GetMessages([FromRoute] int chatId, [FromQuery]ChatMessageQueryParams queryParams)
         {
-            var messages = await _chatMessageService.GetMessages(chatId);
+            var messages = await _chatMessageService.GetMessages(chatId, queryParams);
             return Ok(messages);
         }
     }

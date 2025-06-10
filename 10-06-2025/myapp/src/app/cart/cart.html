@@ -1,0 +1,21 @@
+<div class="cart-header">
+  <h1 class="cart-title">🛒 Your Cart</h1>
+  <div class="cart-icon-container">
+    <i class="bi bi-cart-plus cart-icon"></i>
+    <span class="cart-counter">{{ cartCount }}</span>
+  </div>
+</div>
+
+<div class="product-grid">
+  <div *ngFor="let product of products" class="product-card">
+    <img [src]="product.image" [alt]="product.name" class="product-image" />
+
+    <h2 class="product-name">{{ product.name }}</h2>
+    <p class="product-price">₹ {{ product.price }}</p>
+    <p class="product-quantity">Qty: {{ product.quantity }}</p>
+
+    <button (click)="onAddToCart(product)" class="add-button">
+      Add to Cart
+    </button>
+  </div>
+</div>

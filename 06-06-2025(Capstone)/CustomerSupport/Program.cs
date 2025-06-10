@@ -1,6 +1,7 @@
 
 using System.Text;
 using CustomerSupport.Context;
+using CustomerSupport.Exceptions;
 using CustomerSupport.Interfaces;
 using CustomerSupport.MessageHub;
 using CustomerSupport.Models;
@@ -54,6 +55,9 @@ builder.Services.AddDbContext<ChatDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 #region AuthenticationFilter
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -92,6 +96,7 @@ builder.Services.AddTransient<IChatMessageService, ChatMessageService>();
 builder.Services.AddTransient<IImageService, ImageService>();
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<ITokenService, TokenService>();
+builder.Services.AddTransient<IAuditLogService, AuditLogService>();
 #endregion
 
 #region Repositories
@@ -102,6 +107,7 @@ builder.Services.AddTransient<IRepository<int, Chat>, ChatRepository>();
 builder.Services.AddTransient<IRepository<int, ChatMessage>, ChatMessagesRepository>();
 builder.Services.AddTransient<IRepository<string, Image>, ImageRepository>();
 builder.Services.AddTransient<IRepository<int, AuditLog>, AuditLogRepository>();
+builder.Services.AddTransient<IOtherContextFunctions, OtherContextFunctions>();
 #endregion
 
 #region AutoMapper
@@ -123,6 +129,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseExceptionHandler();
 app.UseCors();
 
 app.MapControllers();

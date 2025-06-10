@@ -1,0 +1,68 @@
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+  text-align: center;
+}
+
+.customer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 2rem;
+}
+
+.customer-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.customer-card:hover {
+  transform: translateY(-4px);
+}
+
+.customer-info {
+  flex: 1;
+}
+
+.customer-name {
+  font-size: 1.2rem;
+  margin: 0 0 0.25rem 0;
+  color: #2c3e50;
+}
+
+.customer-email {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.customer-stats {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #555;
+  display: flex;
+  gap: 1rem;
+}
+
+.customer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.icon-btn {
+  font-size: 1.5rem;
+  color: #6c757d;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.icon-btn:hover {
+  color: #007bff;
+}

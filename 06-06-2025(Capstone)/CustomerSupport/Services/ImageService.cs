@@ -11,29 +11,49 @@ public class ImageService : IImageService
     private readonly IRepository<string, Image> _imageRepository;
     private readonly IRepository<int, Chat> _chatRepository;
     private readonly IRepository<int, ChatMessage> _chatMessageRepository;
+    private readonly IAuditLogService _auditLogService;
+    private readonly IOtherContextFunctions _otherContextFUnctions;
     private readonly IRepository<string, User> _userRepository;
 
-    public ImageService(IRepository<string, Image> imageRepository, IRepository<int, Chat> chatRepository, IRepository<int, ChatMessage> chatMessageRepository, IRepository<string, User> userRepository)
+    public ImageService(IRepository<string, Image> imageRepository,
+                        IRepository<int, Chat> chatRepository,
+                        IRepository<int, ChatMessage> chatMessageRepository,
+                        IAuditLogService auditLogService,
+                        IOtherContextFunctions otherContextFunctions,
+                        IRepository<string, User> userRepository)
     {
         _imageRepository = imageRepository;
         _chatRepository = chatRepository;
         _chatMessageRepository = chatMessageRepository;
+        _auditLogService = auditLogService;
+        _otherContextFUnctions = otherContextFunctions;
         _userRepository = userRepository;
     }
 
-    public async Task<Image> DeleteImage(int chatId, string imageName)
+    public async Task<Image> DeleteImage(string userId, int chatId, string imageName)
     {
         var chat = await _chatRepository.Delete(chatId);
+
+        var isUserInChat = await _otherContextFUnctions.IsUserInChat(chatId, userId);
+        if (!isUserInChat)
+            throw new UnauthorizedAccessException("User not authorized to upload image to this chat");
+
         var deletedImage = await _imageRepository.Delete(imageName);
+        await _auditLogService.CreateAuditLog(new AuditLog() { UserId = userId, Action = "Delete", Entity = "Image", CreatedOn = DateTime.UtcNow });
 
         return deletedImage;
     }
 
-    public async Task<ImageReponseDto> DownloadImage(int chatId, string imageName)
+    public async Task<ImageReponseDto> DownloadImage(string userId, int chatId, string imageName)
     {
         var chat = await _chatRepository.GetById(chatId);
 
+        var isUserInChat = await _otherContextFUnctions.IsUserInChat(chatId, userId);
+        if (!isUserInChat)
+            throw new UnauthorizedAccessException("User not authorized to upload image to this chat");
+
         var image = await _imageRepository.GetById(imageName);
+
         return new ImageReponseDto()
         {
             ImageName = image.ImageName,
@@ -41,10 +61,14 @@ public class ImageService : IImageService
         };
     }
 
-    public async Task<string> UploadImage(int chatId, ImageUploadDto imageDto)
+    public async Task<string> UploadImage(string userId, int chatId, ImageUploadDto imageDto)
     {
         var chat = await _chatRepository.GetById(chatId);
         var user = await _userRepository.GetById(imageDto.UserId);
+
+        var isUserInChat = await _otherContextFUnctions.IsUserInChat(chatId, userId);
+        if (!isUserInChat)
+            throw new UnauthorizedAccessException("User not authorized to upload image to this chat");
 
         var allowedExtentions = new[] { ".jpg", ".jpeg", ".png" };
         string fileName = imageDto.formFile.FileName;
@@ -63,6 +87,8 @@ public class ImageService : IImageService
 
         var createdImage = await _imageRepository.Create(image);
         await CreateImageMessage(chatId, createdImage.ImageName, imageDto.UserId);
+        await _auditLogService.CreateAuditLog(new AuditLog() { UserId = user.Username, Action = "Create", Entity = "Image", CreatedOn = DateTime.UtcNow });
+
         return "Image Uploaded";
     }
 

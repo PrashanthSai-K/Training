@@ -1,5 +1,7 @@
 using CustomerSupport.Interfaces;
 using CustomerSupport.Models.Dto;
+using CustomerSupport.Models.QueryParams;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,20 +26,27 @@ namespace CustomerSupport.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> UpdateCustomer(int id, CustomerUpdateDto customerDto)
         {
-            var customer = await _customerService.UpdateCustomer(id, customerDto);
+            var userId = User?.Identity?.Name;
+
+            var customer = await _customerService.UpdateCustomer(userId, id, customerDto);
             return Ok(customer);
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> DeleteCustomer(int id)
         {
-            var customer = await _customerService.DeleteCustomer(id);
+            var userId = User?.Identity?.Name;
+
+            var customer = await _customerService.DeleteCustomer(userId, id);
             return Ok(customer);
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> GetCustomerById(int id)
         {
             var customer = await _customerService.GetCustomerById(id);
@@ -45,9 +54,10 @@ namespace CustomerSupport.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCustomers()
+        [Authorize]
+        public async Task<IActionResult> GetCustomers([FromQuery] CustomerQueryParams queryParams)
         {
-            var customers = await _customerService.GetCustomers();
+            var customers = await _customerService.GetCustomers(queryParams);
             return Ok(customers);
         }
     }
