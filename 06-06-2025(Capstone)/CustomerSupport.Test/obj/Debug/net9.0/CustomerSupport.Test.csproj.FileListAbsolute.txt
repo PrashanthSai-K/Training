@@ -146,3 +146,13 @@
 /Users/presidio/sai/Training/06-06-2025(Capstone)/CustomerSupport.Test/obj/Debug/net9.0/ref/CustomerSupport.Test.dll
 /Users/presidio/sai/Training/06-06-2025(Capstone)/CustomerSupport.Test/bin/Debug/net9.0/Castle.Core.dll
 /Users/presidio/sai/Training/06-06-2025(Capstone)/CustomerSupport.Test/bin/Debug/net9.0/Moq.dll
+/Users/presidio/sai/Training/06-06-2025(Capstone)/CustomerSupport.Test/bin/Debug/net9.0/Microsoft.Extensions.DependencyModel.dll
+/Users/presidio/sai/Training/06-06-2025(Capstone)/CustomerSupport.Test/bin/Debug/net9.0/Serilog.dll
+/Users/presidio/sai/Training/06-06-2025(Capstone)/CustomerSupport.Test/bin/Debug/net9.0/Serilog.AspNetCore.dll
+/Users/presidio/sai/Training/06-06-2025(Capstone)/CustomerSupport.Test/bin/Debug/net9.0/Serilog.Extensions.Hosting.dll
+/Users/presidio/sai/Training/06-06-2025(Capstone)/CustomerSupport.Test/bin/Debug/net9.0/Serilog.Extensions.Logging.dll
+/Users/presidio/sai/Training/06-06-2025(Capstone)/CustomerSupport.Test/bin/Debug/net9.0/Serilog.Formatting.Compact.dll
+/Users/presidio/sai/Training/06-06-2025(Capstone)/CustomerSupport.Test/bin/Debug/net9.0/Serilog.Settings.Configuration.dll
+/Users/presidio/sai/Training/06-06-2025(Capstone)/CustomerSupport.Test/bin/Debug/net9.0/Serilog.Sinks.Console.dll
+/Users/presidio/sai/Training/06-06-2025(Capstone)/CustomerSupport.Test/bin/Debug/net9.0/Serilog.Sinks.Debug.dll
+/Users/presidio/sai/Training/06-06-2025(Capstone)/CustomerSupport.Test/bin/Debug/net9.0/Serilog.Sinks.File.dll

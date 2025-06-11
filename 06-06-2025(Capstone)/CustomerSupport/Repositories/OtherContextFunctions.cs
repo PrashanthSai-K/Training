@@ -20,4 +20,9 @@ public class OtherContextFunctions : IOtherContextFunctions
                              .AnyAsync(c => (c.Agent != null && c.Agent.Email == email)
                              || (c.Customer != null && c.Customer.Email == email));
     }
+
+    public async Task<bool> IsUsernameExists(string username)
+    {
+        return await _chatDbContext.Users.AnyAsync(u => u.Username == username);
+    }
 }

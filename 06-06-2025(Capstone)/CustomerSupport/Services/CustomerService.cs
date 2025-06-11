@@ -1,5 +1,6 @@
 using System;
 using AutoMapper;
+using CustomerSupport.Exceptions;
 using CustomerSupport.Interfaces;
 using CustomerSupport.Models;
 using CustomerSupport.Models.Dto;
@@ -13,23 +14,29 @@ public class CustomerService : ICustomerService
     private readonly IRepository<string, User> _userRepository;
     private readonly IAuditLogService _auditLogService;
     private readonly IHashingService _hashingService;
+    private readonly IOtherContextFunctions _otherContextFunctionalities;
     private readonly IMapper _mapper;
 
     public CustomerService(IRepository<int, Customer> customerRepository,
                             IRepository<string, User> userRepository,
                             IMapper mapper,
                             IAuditLogService auditLogService,
+                            IOtherContextFunctions otherContextFunctions,
                             IHashingService hashingService)
     {
         _customerRepository = customerRepository;
         _userRepository = userRepository;
         _auditLogService = auditLogService;
         _hashingService = hashingService;
+        _otherContextFunctionalities = otherContextFunctions;
         _mapper = mapper;
 
     }
     public async Task<Customer> CreateCustomer(CustomerRegisterDto customerDto)
     {
+        if (await _otherContextFunctionalities.IsUsernameExists(customerDto.Email))
+            throw new DuplicateEntryException("Email already exists");
+
         var user = _mapper.Map<CustomerRegisterDto, User>(customerDto);
         user.Password = _hashingService.HashData(customerDto.Password);
         user.Roles = "Customer";

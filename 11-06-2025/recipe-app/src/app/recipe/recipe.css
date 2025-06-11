@@ -1,0 +1,23 @@
+.recipe-card {
+  width: 100%;
+  min-height: 100%;
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+}
+
+.recipe-card:hover {
+  transform: scale(1.01);
+}
+
+.recipe-image {
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+
+.recipe-ingredients {
+  font-size: 0.9rem;
+  text-align: justify;
+  max-height: 6rem;
+  overflow-y: scroll;
+}

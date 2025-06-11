@@ -12,6 +12,7 @@ public class AgentServiceTests
     private Mock<IRepository<string, User>> _userRepoMock;
     private Mock<IHashingService> _hashingMock;
     private Mock<IAuditLogService> _auditMock;
+    private Mock<IOtherContextFunctions> _otherContextMock;
     private IMapper _mapper;
     private AgentService _service;
 
@@ -22,6 +23,7 @@ public class AgentServiceTests
         _userRepoMock = new Mock<IRepository<string, User>>();
         _hashingMock = new Mock<IHashingService>();
         _auditMock = new Mock<IAuditLogService>();
+        _otherContextMock = new Mock<IOtherContextFunctions>();
 
         var config = new MapperConfiguration(cfg =>
         {
@@ -31,7 +33,7 @@ public class AgentServiceTests
         });
         _mapper = config.CreateMapper();
 
-        _service = new AgentService(_agentRepoMock.Object, _userRepoMock.Object, _mapper, _auditMock.Object, _hashingMock.Object);
+        _service = new AgentService(_agentRepoMock.Object, _userRepoMock.Object, _mapper, _auditMock.Object,_otherContextMock.Object, _hashingMock.Object);
     }
 
     [Test]
@@ -42,6 +44,7 @@ public class AgentServiceTests
         _agentRepoMock.Setup(r => r.Create(It.IsAny<Agent>())).ReturnsAsync(new Agent());
         _userRepoMock.Setup(r => r.Create(It.IsAny<User>())).ReturnsAsync(new User());
         _hashingMock.Setup(h => h.HashData("secret")).Returns("hashed");
+        _otherContextMock.Setup(o => o.IsUsernameExists(It.IsAny<string>())).ReturnsAsync(false);
 
         var result = await _service.CreateAgent(dto);
 

@@ -1,6 +1,7 @@
 using System;
 using AutoMapper;
 using AutoMapper.Configuration.Annotations;
+using CustomerSupport.Exceptions;
 using CustomerSupport.Interfaces;
 using CustomerSupport.Models;
 using CustomerSupport.Models.Dto;
@@ -13,6 +14,7 @@ public class AgentService : IAgentService
     private readonly IRepository<int, Agent> _agentRepository;
     private readonly IRepository<string, User> _userRepository;
     private readonly IHashingService _hashingService;
+    private readonly IOtherContextFunctions _otherContextFunctionalities;
     private readonly IAuditLogService _auditLogService;
     private readonly IMapper _mapper;
 
@@ -20,16 +22,21 @@ public class AgentService : IAgentService
                         IRepository<string, User> userRepository,
                         IMapper mapper,
                         IAuditLogService auditLogService,
+                        IOtherContextFunctions otherContextFunctions,
                         IHashingService hashingService)
     {
         _agentRepository = agentRepository;
         _userRepository = userRepository;
         _hashingService = hashingService;
+        _otherContextFunctionalities = otherContextFunctions;
         _auditLogService = auditLogService;
         _mapper = mapper;
     }
     public async Task<Agent> CreateAgent(AgentRegisterDto agentDto)
     {
+        if (await _otherContextFunctionalities.IsUsernameExists(agentDto.Email))
+            throw new DuplicateEntryException("Email already exists");
+
         var user = _mapper.Map<AgentRegisterDto, User>(agentDto);
         user.Password = _hashingService.HashData(agentDto.Password);
         user.Roles = "Agent";
@@ -77,7 +84,7 @@ public class AgentService : IAgentService
     public async Task<Agent> UpdateAgent(string? userId, int id, AgentUpdateDto agentDto)
     {
         var existingAgent = await _agentRepository.GetById(id);
-        
+
         if (existingAgent.Email != userId)
             throw new UnauthorizedAccessException("User not authorized to update this account details");
 

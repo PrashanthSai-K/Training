@@ -11,9 +11,24 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
+
+#region Logger configuration
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build())
+                .Enrich.FromLogContext()
+                .CreateLogger();
+#endregion
 
 var builder = WebApplication.CreateBuilder(args);
 
+Log.Information("Application started");
+
+builder.Host.UseSerilog();
+
+#region Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opt =>
 {
@@ -42,6 +57,7 @@ builder.Services.AddSwaggerGen(opt =>
         }
     });
 });
+#endregion
 
 builder.Services.AddControllers()
                 .AddJsonOptions(opts =>
@@ -50,13 +66,17 @@ builder.Services.AddControllers()
                     opts.JsonSerializerOptions.WriteIndented = true;
                 });
 
+#region Database Context
 builder.Services.AddDbContext<ChatDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+#endregion
 
+#region Exceptionhandling
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
+#endregion
 
 #region AuthenticationFilter
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -123,7 +143,6 @@ builder.Services.AddSignalR();
 var app = builder.Build();
 app.MapHub<ChatHub>("/chathub");
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -137,6 +156,8 @@ app.MapControllers();
 app.Run();
 
 
+
+#region Endpoints list
 /*
 
 Endpoints :
@@ -164,11 +185,7 @@ delete - /api/v1/chat/{chatId}/message/{id}
 get    - /api/v1/chat/{chatId}/message?pagination&filter
 
 post - /api/v1/chat/{chatId}/image/upload
-get  - /api/v1/chat/{chatId}/image/{id}/dowmload //individual
-get  - /api/v1/chat/{chatId}/image //list
-
-post   - /api/v1/auditlog/create
-delete - /api/v1/auditlog/{id}
-get    - /api/v1/auditlog?pagination&filter
+get  - /api/v1/chat/{chatId}/image/{id}/download
 
 */
+#endregion

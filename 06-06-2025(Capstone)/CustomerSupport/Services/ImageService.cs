@@ -1,8 +1,10 @@
 using System;
 using CustomerSupport.Exceptions;
 using CustomerSupport.Interfaces;
+using CustomerSupport.MessageHub;
 using CustomerSupport.Models;
 using CustomerSupport.Models.Dto;
+using Microsoft.AspNetCore.SignalR;
 
 namespace CustomerSupport.Services;
 
@@ -13,6 +15,7 @@ public class ImageService : IImageService
     private readonly IRepository<int, ChatMessage> _chatMessageRepository;
     private readonly IAuditLogService _auditLogService;
     private readonly IOtherContextFunctions _otherContextFUnctions;
+    private readonly IHubContext<ChatHub> _chatHub;
     private readonly IRepository<string, User> _userRepository;
 
     public ImageService(IRepository<string, Image> imageRepository,
@@ -20,6 +23,7 @@ public class ImageService : IImageService
                         IRepository<int, ChatMessage> chatMessageRepository,
                         IAuditLogService auditLogService,
                         IOtherContextFunctions otherContextFunctions,
+                        IHubContext<ChatHub> chatHub,
                         IRepository<string, User> userRepository)
     {
         _imageRepository = imageRepository;
@@ -27,6 +31,7 @@ public class ImageService : IImageService
         _chatMessageRepository = chatMessageRepository;
         _auditLogService = auditLogService;
         _otherContextFUnctions = otherContextFunctions;
+        _chatHub = chatHub;
         _userRepository = userRepository;
     }
 
@@ -102,6 +107,15 @@ public class ImageService : IImageService
             MessageType = MessageType.Image,
             CreatedAt = DateTime.UtcNow
         };
+        await _chatHub.Clients.Group(chatId.ToString()).SendAsync("ReceiveMessage", new
+        {
+            chatMessage.ChatId,
+            chatMessage.UserId,
+            chatMessage.MessageType,
+            chatMessage.ImageName,
+            chatMessage.CreatedAt
+        });
+
         return await _chatMessageRepository.Create(chatMessage);
     }
 }

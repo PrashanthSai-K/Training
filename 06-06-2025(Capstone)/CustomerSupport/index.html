@@ -20,7 +20,10 @@
                 const placeHolder = document.getElementById("msgs");
                 const message = document.createElement("p");
                 console.log(result);
-                message.innerHTML = `Message : ${result.message}, Chat Id : ${result.chatId}, User Id : ${result.userId}`;
+                if (result.messageType == 1)
+                    message.innerHTML = `Message : ${result.imageName}, Chat Id : ${result.chatId}, User Id : ${result.userId}`;
+                else
+                    message.innerHTML = `Message : ${result.message}, Chat Id : ${result.chatId}, User Id : ${result.userId}`;
                 placeHolder.append(message);
             });
 

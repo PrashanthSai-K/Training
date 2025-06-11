@@ -12,6 +12,7 @@ public class CustomerServiceTests
     private Mock<IRepository<string, User>> _userRepoMock;
     private Mock<IAuditLogService> _auditMock;
     private Mock<IHashingService> _hashingMock;
+    private Mock<IOtherContextFunctions> _otherContextMock;
     private IMapper _mapper;
     private CustomerService _service;
 
@@ -22,6 +23,7 @@ public class CustomerServiceTests
         _userRepoMock = new Mock<IRepository<string, User>>();
         _auditMock = new Mock<IAuditLogService>();
         _hashingMock = new Mock<IHashingService>();
+        _otherContextMock = new Mock<IOtherContextFunctions>();
 
         var config = new MapperConfiguration(cfg =>
         {
@@ -32,7 +34,7 @@ public class CustomerServiceTests
 
         _mapper = config.CreateMapper();
 
-        _service = new CustomerService(_customerRepoMock.Object, _userRepoMock.Object, _mapper, _auditMock.Object, _hashingMock.Object);
+        _service = new CustomerService(_customerRepoMock.Object, _userRepoMock.Object, _mapper, _auditMock.Object, _otherContextMock.Object, _hashingMock.Object);
     }
 
     [Test]
@@ -43,7 +45,8 @@ public class CustomerServiceTests
 
         _userRepoMock.Setup(r => r.Create(It.IsAny<User>())).ReturnsAsync(new User());
         _customerRepoMock.Setup(r => r.Create(It.IsAny<Customer>())).ReturnsAsync(new Customer());
-
+        _otherContextMock.Setup(o => o.IsUsernameExists(It.IsAny<string>())).ReturnsAsync(false);
+        
         var result = await _service.CreateCustomer(dto);
 
         Assert.That(result, Is.Not.Null);

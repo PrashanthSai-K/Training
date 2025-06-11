@@ -39,13 +39,18 @@ public class GlobalExceptionHandler : IExceptionHandler
                 httpContext.Response.StatusCode = 401;
                 break;
             case UnsupportedFileUploadException:
-                errorResponse.StatusCode = 405;
-                httpContext.Response.StatusCode = 405;
+                errorResponse.StatusCode = 415;
+                httpContext.Response.StatusCode = 415;
                 break;
             case UnauthorizedAccessException:
                 errorResponse.StatusCode = 401;
                 httpContext.Response.StatusCode = 401;
                 break;
+            case DuplicateEntryException:
+                errorResponse.StatusCode = 409;
+                httpContext.Response.StatusCode = 409;
+                break;
+
 
             default:
                 errorResponse.StatusCode = 500;
