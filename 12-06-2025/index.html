@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-gray-50">
+    <h1 class="text-center text-2xl font-bold mt-5">API Call</h1>
+    <div class="flex items-center justify-center mt-5 flex-col gap-10 ">
+        <div class=" flex items-center justify-center gap-10 flex-col md:flex-row">
+            <button class="border p-2 rounded bg-sky-600 text-white hover:bg-sky-500 hover:scale-[0.98] duration-200"
+                onclick="GetUsers('callback')">
+                API Call(Callback)
+            </button>
+            <button class="border p-2 rounded bg-sky-600 text-white hover:bg-sky-500 hover:scale-[0.98] duration-200"
+                onclick="GetUsers('promise')">
+                API Call(Promise)
+            </button>
+            <button class="border p-2 rounded bg-sky-600 text-white hover:bg-sky-500 hover:scale-[0.98] duration-200"
+                onclick="GetUsers('async')">
+                API Call(Async/Await)
+            </button>
+        </div>
+        <div class="w-96 h-96 bg-white rounded-lg shadow-md">
+            <p class="px-10 py-5 font-semibold">Users Name : <span id="calltype"></span> </p>
+            <ul class="px-10" id="user-list">
+                <li class="pl-2 text-md ">No Users</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>

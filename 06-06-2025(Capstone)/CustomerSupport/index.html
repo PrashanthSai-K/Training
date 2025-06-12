@@ -8,12 +8,18 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@8.0.7/dist/browser/signalr.min.js"></script>
     <script>
+        let connection;
         async function startConnection() {
-            const connection = new signalR.HubConnectionBuilder()
+            if (connection && connection.state === "Connected") return;
+            connection = new signalR.HubConnectionBuilder()
                 .withUrl("http://localhost:5124/chathub", {
                     withCredentials: true
                 })
-                .withAutomaticReconnect()
+                .withAutomaticReconnect({
+                    nextRetryDelayInMilliseconds: retryContext => {
+                        return Math.min(retryContext.previousRetryCount * 1000, 5000);
+                    }
+                })
                 .build();
 
             connection.on("ReceiveMessage", (result) => {

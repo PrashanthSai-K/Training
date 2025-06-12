@@ -12,21 +12,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using Serilog.Debugging;
 
-#region Logger configuration
-Log.Logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .Build())
-                .Enrich.FromLogContext()
-                .CreateLogger();
-#endregion
 
 var builder = WebApplication.CreateBuilder(args);
 
-Log.Information("Application started");
+// Log.Logger = new LoggerConfiguration()
+//     .ReadFrom.Configuration(builder.Configuration)
+//     .Enrich.FromLogContext()
+//     .CreateLogger();
 
-builder.Host.UseSerilog();
+// builder.Host.UseSerilog();
 
 #region Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -141,7 +137,7 @@ builder.Services.AddAutoMapper(typeof(ChatMessage));
 builder.Services.AddSignalR();
 
 var app = builder.Build();
-app.MapHub<ChatHub>("/chathub");
+
 
 if (app.Environment.IsDevelopment())
 {
@@ -149,9 +145,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseExceptionHandler();
+app.UseRouting();
 app.UseCors();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<ChatHub>("/chathub");
 
 app.Run();
 
