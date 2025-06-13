@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerSupport.Controllers
 {
-    [Route("api/v1/chat/{chatId}/message")]
+    [Route("api/v{version:apiVersion}/chat/{chatId}/message")]
     [ApiController]
+    [ApiVersion("1.0")]
     public class ChatMessages : ControllerBase
     {
         private readonly IChatMessageService _chatMessageService;
@@ -50,7 +51,7 @@ namespace CustomerSupport.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> GetMessages([FromRoute] int chatId, [FromQuery]ChatMessageQueryParams queryParams)
+        public async Task<IActionResult> GetMessages([FromRoute] int chatId, [FromQuery] ChatMessageQueryParams queryParams)
         {
             var messages = await _chatMessageService.GetMessages(chatId, queryParams);
             return Ok(messages);

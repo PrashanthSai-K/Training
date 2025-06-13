@@ -4,11 +4,13 @@ using CustomerSupport.Models.QueryParams;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace CustomerSupport.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
     public class AgentController : ControllerBase
     {
         private readonly IAgentService _agentService;
@@ -55,6 +57,7 @@ namespace CustomerSupport.Controllers
 
         [HttpGet]
         [Authorize]
+        [EnableRateLimiting("RateLimiter")]
         public async Task<IActionResult> GetAgents([FromQuery] AgentQueryParams queryParams)
         {
             var agents = await _agentService.GetAgents(queryParams);

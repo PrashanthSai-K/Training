@@ -1,0 +1,18 @@
+<div class="d-flex flex-column align-items-center justify-content-center" style="height: 60vh;">
+    <div class="card p-3" style="width: 40rem;">
+        <h4 class=" py-2">Login</h4>
+        <form (ngSubmit)="onSubmit()" #useform="ngForm">
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Username</label>
+                <input type="text" class="form-control" name="username" [(ngModel)]="login.username" id="formGroupExampleInput"
+                    placeholder="Enter Userame" required="">
+            </div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput2" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" [(ngModel)]="login.password" id="formGroupExampleInput2"
+                    placeholder="Enter Password" required="">
+            </div>
+            <button class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 
 using System.Text;
+using System.Threading.RateLimiting;
 using CustomerSupport.Context;
 using CustomerSupport.Exceptions;
 using CustomerSupport.Interfaces;
@@ -8,6 +9,8 @@ using CustomerSupport.Models;
 using CustomerSupport.Repositories;
 using CustomerSupport.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -17,12 +20,13 @@ using Serilog.Debugging;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Log.Logger = new LoggerConfiguration()
-//     .ReadFrom.Configuration(builder.Configuration)
-//     .Enrich.FromLogContext()
-//     .CreateLogger();
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .CreateLogger();
 
-// builder.Host.UseSerilog();
+Log.Information("Serilog is configured properly");
+
 
 #region Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -55,12 +59,23 @@ builder.Services.AddSwaggerGen(opt =>
 });
 #endregion
 
+#region Controller
 builder.Services.AddControllers()
                 .AddJsonOptions(opts =>
                 {
                     opts.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
                     opts.JsonSerializerOptions.WriteIndented = true;
                 });
+#endregion
+
+#region API Versioning
+builder.Services.AddApiVersioning(opts =>
+{
+    opts.DefaultApiVersion = new ApiVersion(1, 0);
+    opts.AssumeDefaultVersionWhenUnspecified = true;
+    opts.ReportApiVersions = true;
+});
+#endregion
 
 #region Database Context
 builder.Services.AddDbContext<ChatDbContext>(options =>
@@ -134,6 +149,21 @@ builder.Services.AddAutoMapper(typeof(Chat));
 builder.Services.AddAutoMapper(typeof(ChatMessage));
 #endregion
 
+#region  Rate Limiting
+builder.Services.AddRateLimiter(opts =>
+{
+    opts.AddTokenBucketLimiter(policyName: "RateLimiter", options =>
+    {
+        options.QueueLimit = 0;
+        options.TokenLimit = 10;
+        options.ReplenishmentPeriod = TimeSpan.FromSeconds(1);
+        options.TokensPerPeriod = 1;
+        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+    });
+    opts.RejectionStatusCode = 429;
+});
+#endregion
+
 builder.Services.AddSignalR();
 
 var app = builder.Build();
@@ -144,18 +174,24 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseExceptionHandler();
+
 app.UseRouting();
+
 app.UseCors();
+
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseRateLimiter();
 
 app.MapControllers();
 app.MapHub<ChatHub>("/chathub");
 
 app.Run();
 
-
+Log.CloseAndFlush();
 
 #region Endpoints list
 /*

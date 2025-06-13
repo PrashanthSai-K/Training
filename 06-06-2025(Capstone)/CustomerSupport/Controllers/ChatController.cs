@@ -8,8 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerSupport.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
     public class ChatController : ControllerBase
     {
         private readonly IChatService _chatService;

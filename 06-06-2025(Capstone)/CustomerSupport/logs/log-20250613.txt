@@ -1,0 +1,96 @@
+2025-06-13 15:12:05.867 +05:30 [INF] Serilog is configured properly
+2025-06-13 15:14:19.713 +05:30 [INF] Serilog is configured properly
+2025-06-13 15:18:22.421 +05:30 [INF] Serilog is configured properly
+2025-06-13 15:18:34.306 +05:30 [INF] Executed DbCommand (94ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."Status"
+FROM "Chats" AS c
+WHERE c."Id" = @__id_0
+LIMIT 1
+2025-06-13 15:18:34.590 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-06-13 15:18:34.873 +05:30 [INF] Executed DbCommand (64ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-06-13 15:18:35.184 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?' (DbType = Int32), @p5='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "ChatMessages" ("ChatId", "CreatedAt", "ImageName", "Message", "MessageType", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5)
+RETURNING "Id";
+2025-06-13 15:19:36.086 +05:30 [INF] Serilog is configured properly
+2025-06-13 15:19:58.683 +05:30 [INF] Executed DbCommand (80ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."Status"
+FROM "Chats" AS c
+WHERE c."Id" = @__id_0
+LIMIT 1
+2025-06-13 15:19:58.844 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-06-13 15:19:58.984 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-06-13 15:19:59.263 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?' (DbType = Int32), @p5='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "ChatMessages" ("ChatId", "CreatedAt", "ImageName", "Message", "MessageType", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5)
+RETURNING "Id";
+2025-06-13 15:23:44.028 +05:30 [INF] Serilog is configured properly
+2025-06-13 15:23:52.962 +05:30 [INF] Executed DbCommand (83ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."Status"
+FROM "Chats" AS c
+WHERE c."Id" = @__id_0
+LIMIT 1
+2025-06-13 15:23:53.427 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-06-13 15:23:53.590 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-06-13 15:23:53.919 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?' (DbType = Int32), @p5='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "ChatMessages" ("ChatId", "CreatedAt", "ImageName", "Message", "MessageType", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5)
+RETURNING "Id";
+2025-06-13 15:23:54.058 +05:30 [INF] HTTP POST /api/v1/chat/1/message responded 200 in 3287.6790 ms
+2025-06-13 15:24:04.292 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."Status"
+FROM "Chats" AS c
+WHERE c."Id" = @__id_0
+LIMIT 1
+2025-06-13 15:24:04.313 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-06-13 15:24:04.317 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-06-13 15:24:04.333 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?' (DbType = Int32), @p5='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "ChatMessages" ("ChatId", "CreatedAt", "ImageName", "Message", "MessageType", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5)
+RETURNING "Id";
+2025-06-13 15:24:04.365 +05:30 [INF] HTTP POST /api/v1/chat/1/message responded 200 in 141.2509 ms
+2025-06-13 15:24:31.656 +05:30 [INF] Serilog is configured properly
+2025-06-13 15:24:53.141 +05:30 [INF] Serilog is configured properly
+2025-06-13 15:27:07.100 +05:30 [INF] Serilog is configured properly
+2025-06-13 15:47:58.388 +05:30 [INF] Serilog is configured properly
+2025-06-13 15:50:37.896 +05:30 [INF] Serilog is configured properly

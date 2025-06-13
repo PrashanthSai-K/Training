@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerSupport.Controllers
 {
-    [Route("api/v1/chat/{chatId}/image")]
+    [Route("api/v{version:apiVersion}/chat/{chatId}/image")]
     [ApiController]
+    [ApiVersion("1.0")]
     public class ImageController : ControllerBase
     {
         private readonly IImageService _imageService;
