@@ -13,16 +13,16 @@ export class Weather implements OnInit {
 
   public city: WritableSignal<string> = signal('');
   private weatherService: WeatherService = inject(WeatherService);
-  public weather: WritableSignal<any> = signal<any>(null);
+  public weather: any = null;
 
   ngOnInit() {
     console.log("called");
     this.weatherService.weather$.subscribe({
       next: (data) => {
-        this.weather.set(data);
+        this.weather = data;
       },
       error: (err) => {
-        this.weather.set(null)
+        this.weather =  null;
         console.log(err);
       }
     })

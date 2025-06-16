@@ -11,35 +11,35 @@
         <button class="btn btn-primary" type="button" (click)="onSearch()">Search</button>
       </div>
 
-      @if (weather() != null && !weather().error) {
+      @if (weather != null && !weather.error) {
         <div class="card mx-auto shadow" style="max-width: 25rem;">
           <div class="card-body">
             <h4 class="card-title fw-bold mb-1">
-              {{ weather().location.name }}, {{ weather().location.region }}, {{ weather().location.country }}
+              {{ weather.location.name }}, {{ weather.location.region }}, {{ weather.location.country }}
             </h4>
             <small class="text-muted d-block mb-3">
-              🕒 Local Time: {{ weather().location.localtime }}
+              🕒 Local Time: {{ weather.location.localtime }}
             </small>
 
-            <img [src]="'https:' + weather().current.condition.icon"
+            <img [src]="'https:' + weather.current.condition.icon"
                  alt="Weather icon"
                  class="my-3"
                  style="width: 64px; height: 64px;" />
 
-            <p class="display-6 fw-bold">{{ weather().current.temp_c }}°C</p>
-            <p class="text-capitalize text-muted">{{ weather().current.condition.text }}</p>
+            <p class="display-6 fw-bold">{{ weather.current.temp_c }}°C</p>
+            <p class="text-capitalize text-muted">{{ weather.current.condition.text }}</p>
 
             <hr />
 
             <div class="text-start">
-              <p><strong>Feels Like:</strong> {{ weather().current.feelslike_c }}°C</p>
-              <p><strong>Humidity:</strong> {{ weather().current.humidity }}%</p>
-              <p><strong>Wind Speed:</strong> {{ weather().current.wind_kph }} km/h</p>
-              <p><strong>Last Updated:</strong> {{ weather().current.last_updated }}</p>
+              <p><strong>Feels Like:</strong> {{ weather.current.feelslike_c }}°C</p>
+              <p><strong>Humidity:</strong> {{ weather.current.humidity }}%</p>
+              <p><strong>Wind Speed:</strong> {{ weather.current.wind_kph }} km/h</p>
+              <p><strong>Last Updated:</strong> {{ weather.current.last_updated }}</p>
             </div>
           </div>
         </div>
-      } @else if (weather()?.error) {
+      } @else if (weather?.error) {
         <div class="alert alert-danger mt-4" role="alert">
           🚫 No city found or invalid city name.
         </div>

@@ -1,0 +1,7 @@
+.top-icon{
+    transition: all 1s ease-in;
+    cursor: pointer;
+}
+.top-icon :hover{
+    scale: 0.96;
+}
