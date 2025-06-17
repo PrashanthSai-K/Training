@@ -22,7 +22,8 @@ public class AuthService : IAuthService
     {
         var user = await _userRepository.GetById(requestDto.Username);
 
-        Console.WriteLine(BCrypt.Net.BCrypt.Verify(requestDto.Password, user.Password));
+        if (user.Status != "Active")
+            throw new UnauthorizedAccessException("User account has been deactivated");
         
         if (!_hashingService.VerifyHash(requestDto.Password, user.Password))
             throw new PassowrdWrongException("Password in invalid");

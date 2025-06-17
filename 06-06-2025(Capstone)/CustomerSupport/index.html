@@ -1,19 +1,40 @@
 <html>
-
 <body>
     <h2>SignalR Demo</h2>
-    <!-- <button onclick="sendMessage()">Send</button> -->
-    <div id="msgs">
+    <div id="msgs"></div>
 
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@8.0.7/dist/browser/signalr.min.js"></script>
     <script>
         let connection;
+        const storageKey = "chat_messages";
+
+        const messages = JSON.parse(localStorage.getItem(storageKey)) || [];
+
+        function saveMessagesToStorage() {
+            localStorage.setItem(storageKey, JSON.stringify(messages));
+        }
+
+        function renderMessages() {
+            const placeHolder = document.getElementById("msgs");
+            placeHolder.innerHTML = "";
+
+            messages.forEach(result => {
+                const message = document.createElement("p");
+                if (result.messageType == 1) {
+                    message.innerHTML = `📷 <strong>Image:</strong> ${result.imageName}, <strong>Chat Id:</strong> ${result.chatId}, <strong>User Id:</strong> ${result.userId}`;
+                } else {
+                    message.innerHTML = `💬 <strong>Message:</strong> ${result.message}, <strong>Chat Id:</strong> ${result.chatId}, <strong>User Id:</strong> ${result.userId}`;
+                }
+                placeHolder.appendChild(message);
+            });
+        }
+
         async function startConnection() {
             if (connection && connection.state === "Connected") return;
+
             connection = new signalR.HubConnectionBuilder()
                 .withUrl("http://localhost:5124/chathub", {
-                    withCredentials: true
+                    withCredentials: true,
                 })
                 .withAutomaticReconnect({
                     nextRetryDelayInMilliseconds: retryContext => {
@@ -23,29 +44,23 @@
                 .build();
 
             connection.on("ReceiveMessage", (result) => {
-                const placeHolder = document.getElementById("msgs");
-                const message = document.createElement("p");
-                console.log(result);
-                if (result.messageType == 1)
-                    message.innerHTML = `Message : ${result.imageName}, Chat Id : ${result.chatId}, User Id : ${result.userId}`;
-                else
-                    message.innerHTML = `Message : ${result.message}, Chat Id : ${result.chatId}, User Id : ${result.userId}`;
-                placeHolder.append(message);
+                console.log("Received:", result);
+                messages.push(result);
+                saveMessagesToStorage();     
+                renderMessages();
             });
 
             try {
                 await connection.start();
-                console.log("SignalR connected");
-
+                console.log("✅ SignalR connected");
                 await connection.invoke("JoinGroup", 1);
             } catch (err) {
-                console.error("SignalR connection failed:", err);
+                console.error("❌ SignalR connection failed:", err);
             }
         }
 
+        renderMessages();
         startConnection();
-
     </script>
 </body>
-
 </html>

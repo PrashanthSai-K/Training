@@ -15,17 +15,24 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using Serilog.Events;
+using Serilog.Extensions.Logging;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 Log.Logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(builder.Configuration)
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+    .MinimumLevel.Override("Microsoft.AspNetCore.SignalR", LogEventLevel.Information)
+    .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Information)
     .Enrich.FromLogContext()
+    .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
+    .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day,
+        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
     .CreateLogger();
 
 Log.Information("Serilog is configured properly");
-
 
 #region Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -77,11 +84,15 @@ builder.Services.AddApiVersioning(opts =>
 #endregion
 
 #region Database Context
+ILoggerFactory loggerFactory = new SerilogLoggerFactory(Log.Logger);
 builder.Services.AddDbContext<ChatDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseLoggerFactory(loggerFactory);
 });
 #endregion
+
+builder.Logging.ClearProviders();
 
 #region Exceptionhandling
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
@@ -224,3 +235,4 @@ get  - /api/v1/chat/{chatId}/image/{id}/download
 
 */
 #endregion
+

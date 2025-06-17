@@ -40,8 +40,10 @@ public class CustomerService : ICustomerService
         var user = _mapper.Map<CustomerRegisterDto, User>(customerDto);
         user.Password = _hashingService.HashData(customerDto.Password);
         user.Roles = "Customer";
+        user.Status = "Active";
 
         var customer = _mapper.Map<CustomerRegisterDto, Customer>(customerDto);
+        customer.Status = "Active";
 
         var createdUser = await _userRepository.Create(user);
         var createdCustomer = await _customerRepository.Create(customer);
@@ -57,10 +59,14 @@ public class CustomerService : ICustomerService
         if (existingCustomer.Email != userId)
             throw new UnauthorizedAccessException("User not authorized to update this account details");
 
-        var deletedCustomer = await _customerRepository.Delete(id);
-        var deletedUser = await _userRepository.Delete(deletedCustomer.Email);
-        await _auditLogService.CreateAuditLog(new AuditLog() { UserId = userId, Action = "Delete", Entity = "Customer", CreatedOn = DateTime.UtcNow });
+        existingCustomer.Status = "Deleted";
+        var deletedCustomer = await _customerRepository.Update(id, existingCustomer);
 
+        var deletedUser = await _userRepository.GetById(deletedCustomer.Email);
+        deletedUser.Status = "Deleted";
+        await _userRepository.Update(existingCustomer.Email, deletedUser);
+
+        await _auditLogService.CreateAuditLog(new AuditLog() { UserId = userId, Action = "Delete", Entity = "Customer", CreatedOn = DateTime.UtcNow });
         return deletedCustomer;
     }
 

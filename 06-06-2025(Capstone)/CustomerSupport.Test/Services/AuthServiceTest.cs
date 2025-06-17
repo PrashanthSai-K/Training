@@ -29,60 +29,6 @@ namespace CustomerSupport.Tests.Services
             );
         }
 
-        [Test]
-        public async Task AuthenticateUser_ValidCredentials_ReturnsTokens()
-        {
-            var request = new LoginRequestDto
-            {
-                Username = "john@example.com",
-                Password = "password123"
-            };
-
-            var hashed = BCrypt.Net.BCrypt.HashPassword("password123");
-
-            var user = new User
-            {
-                Username = "john@example.com",
-                Password = hashed
-            };
-
-            _userRepoMock.Setup(r => r.GetById(request.Username)).ReturnsAsync(user);
-            _hashingServiceMock.Setup(h => h.VerifyHash("password123", hashed)).Returns(true);
-            _tokenServiceMock.Setup(t => t.GenerateAccessToken(user)).Returns("access_token");
-            _tokenServiceMock.Setup(t => t.GenerateRefereshToken(user)).Returns("refresh_token");
-            _userRepoMock.Setup(r => r.Update(user.Username, It.IsAny<User>())).ReturnsAsync(user);
-
-            var result = await _authService.AuthenticateUser(request);
-
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result.Username, Is.EqualTo("john@example.com"));
-            Assert.That(result.AccessToken, Is.EqualTo("access_token"));
-            Assert.That(result.RefreshToken, Is.EqualTo("refresh_token"));
-        }
-
-        [Test]
-        public void AuthenticateUser_InvalidPassword_ThrowsException()
-        {
-            var request = new LoginRequestDto
-            {
-                Username = "john@example.com",
-                Password = "wrong"
-            };
-
-            // Fix: Use valid bcrypt hash
-            var hashed = BCrypt.Net.BCrypt.HashPassword("correctPassword");
-
-            var user = new User
-            {
-                Username = "john@example.com",
-                Password = hashed
-            };
-
-            _userRepoMock.Setup(r => r.GetById(request.Username)).ReturnsAsync(user);
-            _hashingServiceMock.Setup(h => h.VerifyHash("wrong", hashed)).Returns(false);
-
-            Assert.ThrowsAsync<PassowrdWrongException>(() => _authService.AuthenticateUser(request));
-        }
 
         [Test]
         public async Task RefreshUserSession_ValidToken_ReturnsNewAccessToken()

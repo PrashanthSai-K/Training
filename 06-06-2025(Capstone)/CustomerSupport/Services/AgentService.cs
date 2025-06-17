@@ -40,8 +40,10 @@ public class AgentService : IAgentService
         var user = _mapper.Map<AgentRegisterDto, User>(agentDto);
         user.Password = _hashingService.HashData(agentDto.Password);
         user.Roles = "Agent";
-
+        user.Status = "Active";
+        
         var agent = _mapper.Map<AgentRegisterDto, Agent>(agentDto);
+        agent.Status = "Active";
 
         var createdUser = await _userRepository.Create(user);
         var createagent = await _agentRepository.Create(agent);
@@ -56,10 +58,14 @@ public class AgentService : IAgentService
         if (existingAgent.Email != userId)
             throw new UnauthorizedAccessException("User not authorized to delete this account details");
 
-        var deleteagent = await _agentRepository.Delete(id);
-        var deletedUser = await _userRepository.Delete(deleteagent.Email);
-        await _auditLogService.CreateAuditLog(new AuditLog() { UserId = userId, Action = "Delete", Entity = "Agent", CreatedOn = DateTime.UtcNow });
+        existingAgent.Status = "Deleted";
+        var deleteagent = await _agentRepository.Update(id, existingAgent);
 
+        var existingUser = await _userRepository.GetById(deleteagent.Email);
+        existingUser.Status = "Deleted";
+        await _userRepository.Update(existingAgent.Email, existingUser);
+
+        await _auditLogService.CreateAuditLog(new AuditLog() { UserId = userId, Action = "Delete", Entity = "Agent", CreatedOn = DateTime.UtcNow });
         return deleteagent;
     }
 

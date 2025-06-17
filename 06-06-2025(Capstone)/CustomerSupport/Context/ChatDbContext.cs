@@ -1,6 +1,8 @@
 using System;
 using CustomerSupport.Models;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Serilog.Events;
 
 namespace CustomerSupport.Context;
 
@@ -81,3 +83,5 @@ public class ChatDbContext : DbContext
                     .OnDelete(DeleteBehavior.Restrict);
     }
 }
+
+

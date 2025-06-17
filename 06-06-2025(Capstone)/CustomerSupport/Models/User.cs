@@ -10,6 +10,8 @@ public class User
     public string Password { get; set; } = string.Empty;
     public string Roles { get; set; } = string.Empty;
     public string? RefreshToken { get; set; } = string.Empty;
+    public string Status { get; set; } = string.Empty;
+
     public Agent? Agent { get; set; }
     public Customer? Customer { get; set; }
     public ICollection<ChatMessage>? ChatMessages { get; set; }

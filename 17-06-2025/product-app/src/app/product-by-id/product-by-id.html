@@ -1,0 +1,38 @@
+<div class="container py-5">
+  <div class="row align-items-center">
+    <!-- Product Image -->
+    <div class="col-md-6 text-center mb-4 mb-md-0">
+      <img [src]="product.thumbnail" alt="{{ product.title }}" class="img-fluid rounded shadow" style="max-height: 450px;">
+    </div>
+
+    <!-- Product Details -->
+    <div class="col-md-6">
+      <h1 class="display-5 fw-bold">{{ product.title }}</h1>
+      <p class="text-muted fs-5">{{ product.category }} &middot; {{ product.brand }}</p>
+
+      <p class="fs-6 lh-base">{{ product.description }}</p>
+
+      <div class="my-3">
+        <span class="fs-3 text-success fw-bold">{{ product.price | currency: 'INR' }}</span>
+        <span 
+          class="badge ms-3"
+          [ngClass]="{
+            'bg-success': product.rating > 4,
+            'bg-warning': product.rating > 2.5 && product.rating <= 4,
+            'bg-danger': product.rating <= 2.5
+          }">
+          ★ {{ product.rating }}
+        </span>
+      </div>
+
+      <div class="mb-3">
+        <strong>In Stock:</strong>
+        <span class="badge bg-info text-dark">{{ product.stock }}</span>
+      </div>
+
+      <button class="btn btn-primary btn-lg mt-3 w-100">
+        Buy Now
+      </button>
+    </div>
+  </div>
+</div>
