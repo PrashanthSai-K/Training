@@ -1,0 +1,51 @@
+<div class="w-full space-y-10 py-10 px-4">
+    <div class="max-w-5xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 mb-4 w-full gap-4">
+            <div class="col-span-1 w-full">
+                <select [(ngModel)]="filterRole" (change)="onRoleInput()" class="border rounded-lg px-3 py-2 placeholder-gray-400 w-full">
+                    <option selected>Select Role</option>
+                    <option value="admin">Admin</option>
+                    <option value="moderator">Moderator</option>
+                    <option value="user">User</option>
+                </select>
+            </div>
+            <div class="col-span-1 w-full">
+                <select [(ngModel)]="filterGender" (change)="onGenderInput()"  class="border rounded-lg px-3 py-2 placeholder-gray-400 w-full">
+                    <option selected>Select Gener</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+            <div class="col-span-1">
+                <input [(ngModel)]="searchQuery" (input)="onSearchInput()" type="text" placeholder="Search..."
+                    class="border rounded-lg px-3 py-2 w-full  placeholder-gray-400 " />
+            </div>
+        </div>
+        <div class="overflow-auto max-h-96 rounded-lg">
+            <table class="min-w-full table-auto bg-white shadow-lg rounded-xl">
+                <thead>
+                    <tr class="bg-blue-gray-100 text-gray-700 border-b">
+                        <th class="py-3 px-4 text-left">First Name</th>
+                        <th class="py-3 px-4 text-left">Last Name</th>
+                        <th class="py-3 px-4 text-left">Email</th>
+                        <th class="py-3 px-4 text-left">Role</th>
+                        <th class="py-3 px-4 text-left">Gender</th>
+                        <th class="py-3 px-4 text-left">State</th>
+                    </tr>
+                </thead>
+                <tbody class="text-blue-gray-900">
+                    @for (item of filteredUsers; track $index) {
+                    <tr class=" border-blue-gray-200">
+                        <td class="py-3 px-4">{{item.firstName | titlecase}}</td>
+                        <td class="py-3 px-4">{{item.lastName | titlecase}}</td>
+                        <td class="py-3 px-4">{{item.email}}</td>
+                        <td class="py-3 px-4">{{item.role}}</td>
+                        <td class="py-3 px-4">{{item.gender | titlecase}}</td>
+                        <td class="py-3 px-4">{{item.address.state}}</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

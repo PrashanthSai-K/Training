@@ -1,0 +1,119 @@
+<div class=" flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <img class="mx-auto h-10 w-auto" src="https://www.svgrepo.com/show/301692/login.svg" alt="Workflow">
+        <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+            Create new user
+        </h2>
+    </div>
+
+    <div class="mt-8 sm:mx-auto sm:w-full max-w-2xl">
+        <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                <div class="grid grid-cols-1 sm:grid-cols-2 place-content-center gap-4">
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">First name</label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <input type="text" placeholder="Enter first name" formControlName="firstName"
+                                class="block w-full px-3 py-2 border rounded-md focus:outline-none"
+                                [ngClass]="{ 'border-red-500': firstName.invalid && (firstName.dirty || firstName.touched) }" />
+                            @if (firstName.invalid && (firstName.dirty || firstName.touched)) {
+                            <span class="text-red-500 text-sm">First name is required</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Last name</label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <input type="text" placeholder="Enter last name" formControlName="lastName"
+                                class="block w-full px-3 py-2 border rounded-md focus:outline-none"
+                                [ngClass]="{ 'border-red-500': lastName.invalid && (lastName.dirty || lastName.touched) }" />
+                            @if (lastName.invalid && (lastName.dirty || lastName.touched)) {
+                            <span class="text-red-500 text-sm">Last name is required</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700">Email</label>
+                        <div class="mt-1">
+                            <input type="email" placeholder="Enter email" formControlName="email"
+                                class="block w-full px-3 py-2 border rounded-md focus:outline-none"
+                                [ngClass]="{ 'border-red-500': email.invalid && (email.dirty || email.touched) }" />
+                            @if (email.invalid && (email.dirty || email.touched)) {
+                            <span class="text-red-500 text-sm">Valid email is required</span>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Age -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Age</label>
+                        <div class="mt-1">
+                            <input type="number" placeholder="Enter age" formControlName="age"
+                                class="block w-full px-3 py-2 border rounded-md focus:outline-none"
+                                [ngClass]="{ 'border-red-500': age.invalid && (age.dirty || age.touched) }" />
+                            @if (age.invalid && (age.dirty || age.touched)) {
+                            <span class="text-red-500 text-sm">Enter a valid age (min 1)</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Gender</label>
+                        <div class="mt-1">
+                            <select formControlName="gender"
+                                class="block w-full px-3 py-2 border rounded-md focus:outline-none"
+                                [ngClass]="{ 'border-red-500': gender.invalid && (gender.dirty || gender.touched) }">
+                                <option value="">Select gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                            @if (gender.invalid && (gender.dirty || gender.touched)) {
+                            <span class="text-red-500 text-sm">Please select gender</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Phone</label>
+                        <div class="mt-1">
+                            <input type="number" placeholder="Enter phone number" formControlName="phone"
+                                class="block w-full px-3 py-2 border rounded-md focus:outline-none"
+                                [ngClass]="{ 'border-red-500': phone.invalid && (phone.dirty || phone.touched) }" />
+                            @if (phone.invalid && (phone.dirty || phone.touched)) {
+                            <span class="text-red-500 text-sm">Enter a valid phone number</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">DOB</label>
+                        <div class="mt-1">
+                            <input type="date" placeholder="Enter DOB" formControlName="birthDate"
+                                class="block w-full px-3 py-2 border rounded-md focus:outline-none"
+                                [ngClass]="{ 'border-red-500': birthDate.invalid && (birthDate.dirty || birthDate.touched) }" />
+                            @if (birthDate.invalid && (birthDate.dirty || birthDate.touched)) {
+                            <span class="text-red-500 text-sm">Please enter your date of birth</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <button type="submit" [disabled]="userForm.invalid || loading()"
+                        class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-500 text-white rounded-md">
+                        @if (loading()) {
+                        Loading...
+                        } @else {
+                        Create account
+                        }
+                    </button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
