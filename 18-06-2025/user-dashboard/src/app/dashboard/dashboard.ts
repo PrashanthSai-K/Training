@@ -22,7 +22,6 @@ export class Dashboard implements OnInit {
   public pieChartType: ChartType = 'pie';
   public barChartType: ChartType = 'bar';
 
-
   constructor(private userService: UserService) {
   }
   stateCounts(users: UserModel[]): Record<string, number> {

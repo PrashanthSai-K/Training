@@ -1,0 +1,11 @@
+@if (products) {
+    <div class="d-flex flex-wrap align-items-center justify-content-center gap-4 mt-5">
+    @for (item of products; track $index) 
+    {
+        <app-product [product]="item"></app-product>
+    }
+    </div>
+}
+@else {
+    <div> No products !</div>
+}

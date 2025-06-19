@@ -1,0 +1,146 @@
+<div class=" flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <img class="mx-auto h-10 w-auto" src="https://www.svgrepo.com/show/301692/login.svg" alt="Workflow">
+        <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+            Create new user
+        </h2>
+    </div>
+
+    <div class="mt-8 sm:mx-auto sm:w-full max-w-2xl">
+        <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                <div class="grid grid-cols-1 sm:grid-cols-2 place-content-center gap-4">
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">First name</label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <input type="text" placeholder="Enter first name" formControlName="firstName"
+                                class="block w-full px-3 py-2 border rounded-md focus:outline-none"
+                                [ngClass]="{ 'border-red-500': firstName.invalid && (firstName.dirty || firstName.touched) }" />
+                            @if (firstName.invalid && (firstName.dirty || firstName.touched)) {
+                            <span class="text-red-500 text-sm">First name is required</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Last name</label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <input type="text" placeholder="Enter last name" formControlName="lastName"
+                                class="block w-full px-3 py-2 border rounded-md focus:outline-none"
+                                [ngClass]="{ 'border-red-500': lastName.invalid && (lastName.dirty || lastName.touched) }" />
+                            @if (lastName.invalid && (lastName.dirty || lastName.touched)) {
+                            <span class="text-red-500 text-sm">Last name is required</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700">Email</label>
+                        <div class="mt-1">
+                            <input type="email" placeholder="Enter email" formControlName="email"
+                                class="block w-full px-3 py-2 border rounded-md focus:outline-none"
+                                [ngClass]="{ 'border-red-500': email.invalid && (email.dirty || email.touched) }" />
+                            @if (email.invalid && (email.dirty || email.touched)) {
+                            <span class="text-red-500 text-sm">Valid email is required</span>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Age -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Username</label>
+                        <div class="mt-1">
+                            <input type="text" placeholder="Enter username" formControlName="username"
+                                class="block w-full px-3 py-2 border rounded-md focus:outline-none"
+                                [ngClass]="{ 'border-red-500': username.invalid && (username.dirty || username.touched) }" />
+                            @if (username.dirty || username.touched) {
+                            @if(username.errors?.lenError){
+                            <span class="text-red-500 text-sm">Length must be 6 to 12</span>
+                            }@else if(username.errors?.wordError) {
+                            <span class="text-red-500 text-sm">Username must not contains 'admin', 'root'</span>
+                            }@else if(username.errors) {
+                            <span class="text-red-500 text-sm">Enter a valid username</span>
+                            }
+                            }
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Password</label>
+                        <div class="mt-1">
+                            <input type="password" placeholder="Enter Password" formControlName="password"
+                                class="block w-full px-3 py-2 border rounded-md focus:outline-none"
+                                [ngClass]="{ 'border-red-500': password.invalid && (password.dirty || password.touched) }" />
+                            @if (password.dirty || password.touched) {
+                            @if(password?.errors?.lenError){
+                            <span class="text-red-500 text-sm">Length must be 6 to 12</span>
+                            }
+                            @else if(password?.errors?.symError){
+                            <span class="text-red-500 text-sm">Must include a symbol</span>
+                            }
+                            @else if(password?.errors?.upperError){
+                            <span class="text-red-500 text-sm">Must include one upper case</span>
+                            }
+                            @else if(password?.errors?.lowerError){
+                            <span class="text-red-500 text-sm">Must include one lower case</span>
+                            }
+                            @else if(password?.errors){
+                            <span class="text-red-500 text-sm">Enter a valid username</span>
+                            }
+                            }
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <label class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                        <div class="mt-1">
+                            <input type="passowrd" placeholder="Enter confirm password"
+                                formControlName="confirmPassword"
+                                class="block w-full px-3 py-2 border rounded-md focus:outline-none"
+                                [ngClass]="{ 'border-red-500': confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched) }" />
+                            @if (confirmPassword.dirty || confirmPassword.touched) {
+                            @if(confirmPassword.value !== password.value){
+                            <span class="text-red-500 text-sm">Confirm password and password must be same</span>
+                            }
+                            @else if (confirmPassword?.errors) {
+                            <span class="text-red-500 text-sm">Enter a Confirm Password</span>
+                            }
+                            }
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <label class="block text-sm font-medium text-gray-700">Role</label>
+                        <div class="mt-1">
+                            <select type="passowrd" formControlName="role"
+                                class="block w-full px-3 py-2 border rounded-md focus:outline-none"
+                                [ngClass]="{ 'border-red-500': role.invalid && (role.dirty || role.touched) }">
+                                <option value="admin" selected>Admin</option>
+                                <option value="user">User</option>
+                            </select>
+                            @if (role.invalid && (role.dirty || role.touched)) {
+                            <span class="text-red-500 text-sm">Enter a valid phone number</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="mt-6">
+                    <button type="submit" [disabled]="userForm.invalid || loading()"
+                        class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-500 text-white rounded-md">
+                        @if (loading()) {
+                        Loading...
+                        } @else {
+                        Create account
+                        }
+                        <!-- Create User -->
+                    </button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>

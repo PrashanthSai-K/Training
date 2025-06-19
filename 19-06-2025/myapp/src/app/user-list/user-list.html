@@ -1,0 +1,11 @@
+<app-add-user></app-add-user>
+
+<p>user-list works!</p>
+<div *ngIf="loading$ | async">Loading users...</div>
+<div *ngIf="!(loading$ | async)">
+    <ul>
+        <li *ngFor="let user of users$ | async">
+            {{user.email}}
+        </li>
+    </ul>
+</div>

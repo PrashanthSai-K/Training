@@ -1,0 +1,6 @@
+<div class="p-2 border border-gray-400 rounded-2xl w-56 flex flex-col gap-5">
+    <p><span class="font-medium ">First Name : </span><span>{{user.firstName | titlecase}}</span></p>
+    <p><span class="font-medium ">Last Name : </span><span>{{user.lastName | titlecase}}</span></p>
+    <p><span class="font-medium ">Email : </span><span>{{user.email}}</span></p>
+    <p><span class="font-medium ">Role : </span><span [className]="user.role == 'admin' ? 'bg-amber-500 p-0.5 px-3 rounded-lg text-white' : 'bg-green-600 p-0.5 px-3 rounded-lg text-white'">{{user.role | titlecase }}</span></p>
+</div>
