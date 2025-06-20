@@ -1,0 +1,7 @@
+<div class="w-full h-full" >
+    @if (chats) {
+        @for (chat of chats; track $index) {
+            <app-chat-item (click)="setMessage(chat)" [chat]="chat"></app-chat-item>
+        }
+    }
+</div>

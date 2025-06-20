@@ -68,6 +68,9 @@ public class ChatService : IChatService
     public async Task<IEnumerable<Chat>> GetChats(ChatQueryParams queryParams)
     {
         var chats = await _chatRepository.GetAll();
+        var customers = await _customerRepository.GetAll();
+        var agents = await _agentRepository.GetAll();
+
 
         chats = GetChatsByAgent(chats, queryParams.AgentId);
         chats = GetChatsByCustomer(chats, queryParams.CustomerId);

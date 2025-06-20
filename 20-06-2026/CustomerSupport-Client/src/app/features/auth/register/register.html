@@ -1,0 +1,38 @@
+<form class="rounded-lg bg-white pt-5 pb-10 px-10 register-form">
+    <div class="flex flex-col items-center justify-center w-full gap-3">
+        <lucide-icon name="bot-message-square" class="w-12 h-12 stroke-white fill-blue-600"></lucide-icon>
+        <p class="text-xl font-medium"> Sign up to you account</p>
+    </div>
+    <div class="mt-5">
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">Name</legend>
+            <input type="text" class="input w-full" placeholder="" />
+        </fieldset>
+    </div>
+
+    <div class="mt-5">
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">Email address</legend>
+            <input type="text" class="input w-full" placeholder="" />
+        </fieldset>
+    </div>
+    <div class="mt-5">
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">Phone</legend>
+            <input type="number" class="input w-full" placeholder="" />
+        </fieldset>
+    </div>
+
+    <div class="mt-5">
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">Password</legend>
+            <input type="password" class="input w-full" placeholder="" />
+        </fieldset>
+    </div>
+    <button class="btn btn-soft bg-blue-600 text-white w-full mt-10 cursor-pointer hover:bg-blue-700">
+        Sign Up
+    </button>
+    <p class="text-sm text-gray-400 text-center pt-5">Already user ? Please <span class="text-blue-600 cursor-pointer"
+            (click)="redirectLogin()">click here to sign in</span></p>
+
+</form>
