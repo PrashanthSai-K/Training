@@ -1,5 +1,7 @@
+using System.Security.Claims;
 using CustomerSupport.Interfaces;
 using CustomerSupport.Models.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +34,19 @@ namespace CustomerSupport.Controllers
         {
             var result = await _authService.RefreshUserSession(requestDto);
             return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet("me")]
+        public IActionResult GetCuttentUser()
+        {
+            var username = User?.FindFirst(ClaimTypes.Name)?.Value;
+            var role = User?.FindFirst(ClaimTypes.Role)?.Value;
+            return Ok(new
+            {
+                username = username,
+                role = role,
+            });
         }
     }
 }

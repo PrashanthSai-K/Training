@@ -5,7 +5,6 @@ namespace CustomerSupport.Models.Dto;
 
 public class ChatMessageCreateDto
 {
-    [Required]
     public string UserId { get; set; } = string.Empty;
     [Required]
     public string? Message { get; set; }

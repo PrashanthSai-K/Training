@@ -1,8 +1,0 @@
-<div class="min-w-screen h-screen grid grid-cols-1 sm:grid-cols-3 overflow-hidden">
-    <div class="col-span-1 h-full border-r border-gray-300 overflow-y-auto" (scroll)="onScroll($event)">
-        <app-chat-list [scrolledBottom]="scrolledBottom$"></app-chat-list>
-    </div>
-    <div class="col-span-2 ">
-        <app-chat [chatData]="chatData$"> </app-chat>
-    </div>
-</div>

@@ -35,7 +35,7 @@ public class ChatMessageService : IChatMessageService
     public async Task<ChatMessage> CreateTextMessage(string? userId, int chatId, ChatMessageCreateDto chatMessageDto)
     {
         var chat = await _chatRepository.GetById(chatId);
-        var user = await _userRepository.GetById(chatMessageDto.UserId);
+        var user = await _userRepository.GetById(userId ?? "");
 
         var isUserInChat = await _otherContextFunctions.IsUserInChat(chatId, userId ?? "");
         if (!isUserInChat)
@@ -43,6 +43,7 @@ public class ChatMessageService : IChatMessageService
 
         var chatMessage = _mapper.Map<ChatMessageCreateDto, ChatMessage>(chatMessageDto);
         chatMessage.ChatId = chatId;
+        chatMessage.UserId = userId ?? "";
         chatMessage.MessageType = MessageType.Message;
         chatMessage.CreatedAt = DateTime.UtcNow;
 
@@ -74,7 +75,7 @@ public class ChatMessageService : IChatMessageService
     {
         var chat = await _chatRepository.GetById(chatId);
         var chatMessage = await _chatMessageRepository.GetById(id);
-        
+
         if (chatMessage.UserId != userId)
             throw new UnauthorizedAccessException("User not authorized to edit message of this chat");
 
@@ -94,7 +95,7 @@ public class ChatMessageService : IChatMessageService
         messages = GetMessagesByDate(messages, queryParams.Date);
 
         messages = messages.Skip((queryParams.PageNumber - 1) * queryParams.PageSize).Take(queryParams.PageSize);
-        
+
         return messages;
     }
 

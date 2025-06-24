@@ -1,8 +1,10 @@
 using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
 namespace CustomerSupport.MessageHub;
 
+[Authorize]
 public class ChatHub : Hub
 {
     public async Task SendMessage(string chatId, string userId, string message)

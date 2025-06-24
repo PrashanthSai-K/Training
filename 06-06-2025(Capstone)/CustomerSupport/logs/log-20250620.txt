@@ -7382,3 +7382,12 @@ FROM "Customers" AS c
 2025-06-20 22:01:41.964 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
 SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
 FROM "Agents" AS a
+2025-06-20 22:48:19.415 +05:30 [INF] Executed DbCommand (47ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."Status"
+FROM "Chats" AS c
+2025-06-20 22:48:19.433 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Email", c."Name", c."Phone", c."Status"
+FROM "Customers" AS c
+2025-06-20 22:48:19.454 +05:30 [INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
