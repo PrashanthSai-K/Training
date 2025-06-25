@@ -1,13 +1,13 @@
-import { Component, computed, effect, Input, OnChanges, OnInit, signal, SimpleChanges, WritableSignal } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ChatModel } from '../../../core/models/chat';
 import { LucideAngularModule } from 'lucide-angular';
-import { CommonModule, TitleCasePipe } from '@angular/common';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { AsyncPipe, CommonModule, TitleCasePipe } from '@angular/common';
 import { ChatService } from '../../../core/services/chat-service';
+import { AuthService } from '../../../core/services/auth-service';
 
 @Component({
   selector: 'app-chat-item',
-  imports: [LucideAngularModule, TitleCasePipe, CommonModule],
+  imports: [LucideAngularModule, TitleCasePipe, CommonModule, AsyncPipe],
   templateUrl: './chat-item.html',
   styleUrl: './chat-item.css'
 })
@@ -18,7 +18,7 @@ export class ChatItem implements OnInit {
   activeChat: ChatModel | null = null;
   isActive: number | null = null;
 
-  constructor(private chatService: ChatService) {
+  constructor(private chatService: ChatService, public authService: AuthService) {
   }
 
   ngOnInit(): void {

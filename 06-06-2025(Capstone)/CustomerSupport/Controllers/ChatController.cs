@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using CustomerSupport.Interfaces;
 using CustomerSupport.Models;
 using CustomerSupport.Models.Dto;
@@ -52,7 +53,9 @@ namespace CustomerSupport.Controllers
         [Authorize]
         public async Task<IActionResult> GetChats([FromQuery] ChatQueryParams queryParams)
         {
-            var chats = await _chatService.GetChats(queryParams);
+            var userId = User?.Identity?.Name ?? "";
+
+            var chats = await _chatService.GetChats(userId, queryParams);
             return Ok(chats);
         }
 

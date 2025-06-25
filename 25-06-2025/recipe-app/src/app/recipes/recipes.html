@@ -1,0 +1,18 @@
+@if (recipes().length > 0) {
+<div class="container mt-3">
+    <div class="row g-3">
+        @for (item of recipes(); track $index) {
+        <div class="col-12 col-sm-6 col-lg-4">
+            <app-recipe [recipe]="item"></app-recipe>
+        </div>
+        }
+    </div>
+    <div class="d-flex align-items-center justify-content-between py-3">
+        <button [class]="'btn btn-primary ' + (skip === 0 ? 'disabled' : '')" (click)="onPrev()">Prev</button>
+        <button [class]="'btn btn-primary' + (skip >= 30 ? 'disabled' : '')" (click)="onNext()">Next</button>
+    </div>
+</div>
+}
+@else {
+<div class="d-flex align-items-center justify-content-center" style="height: 100vh">No recipes found.</div>
+}

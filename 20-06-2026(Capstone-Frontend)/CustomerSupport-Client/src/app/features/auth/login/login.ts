@@ -34,6 +34,12 @@ export class Login {
   private _snackBar = inject(MatSnackBar);
 
   constructor(private router: Router, private authService: AuthService) {
+    authService.currentUser$.subscribe({
+      next: (value) => {
+        if (value)
+          router.navigateByUrl("/chat");
+      },
+    })
   }
 
   onSubmit() {

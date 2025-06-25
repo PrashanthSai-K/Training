@@ -1,11 +1,9 @@
-import { AfterViewInit, Component, effect, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, signal, Signal, SimpleChanges, viewChild, WritableSignal } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, signal } from '@angular/core';
 import { ChatService } from '../../../core/services/chat-service';
 import { ChatModel } from '../../../core/models/chat';
 import { ChatItem } from '../chat-item/chat-item';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { Chat } from '../chat/chat';
-import { ChatTemplate } from '../chat-template/chat-template';
-import { LucideAngularModule } from 'lucide-angular';
+import { Observable } from 'rxjs';
+import { AuthService } from '../../../core/services/auth-service';
 
 @Component({
   selector: 'app-chat-list',
@@ -17,20 +15,23 @@ export class ChatList implements OnInit {
 
   chats: ChatModel[] | [] = [];
   @Input() scrolledBottom!: Observable<boolean>;
+  @Output() showChat = new EventEmitter<boolean>();
+  isLoading = signal<boolean>(true);
 
   constructor(private chatService: ChatService) {
   }
 
   setMessage(chat: ChatModel) {
     this.chatService.setActiveChat(chat);
+    this.showChat.emit(true);
   }
 
   ngOnInit(): void {
-
-    this.chatService.getChats();
-    this.chatService.chat$.subscribe({
+    this.isLoading.set(true);
+    this.chatService.getChats().subscribe({
       next: (data) => {
         this.chats = data as ChatModel[];
+        this.isLoading.set(false);
       }
     })
 

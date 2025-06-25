@@ -1,5 +1,7 @@
 using System;
+using System.Threading.Tasks;
 using AutoMapper;
+using CustomerSupport.Exceptions;
 using CustomerSupport.Interfaces;
 using CustomerSupport.Models;
 using CustomerSupport.Models.Dto;
@@ -13,27 +15,41 @@ public class ChatService : IChatService
     private readonly IRepository<int, Agent> _agentRepository;
     private readonly IRepository<int, Customer> _customerRepository;
     private readonly IAuditLogService _auditLogService;
+    private readonly IOtherContextFunctions _otherContextFunctions;
     private readonly IMapper _mapper;
 
     public ChatService(IRepository<int, Chat> chatRepository,
                         IRepository<int, Agent> agentRepository,
                         IRepository<int, Customer> customerRepository,
                         IAuditLogService auditLogService,
+                        IOtherContextFunctions otherContextFunctions,
                         IMapper mapper)
     {
         _chatRepository = chatRepository;
         _agentRepository = agentRepository;
         _customerRepository = customerRepository;
         _auditLogService = auditLogService;
+        _otherContextFunctions = otherContextFunctions;
         _mapper = mapper;
     }
 
     public async Task<Chat> CreateChat(string userId, ChatCreationDto chatDto)
     {
-        var agent = await _agentRepository.GetById(chatDto.AgentId);
-        var customer = await _customerRepository.GetById(chatDto.CustomerId);
+        var customers = await _customerRepository.GetAll();
+        var customer = customers.FirstOrDefault(c => c.Email == userId);
+        if (customer == null)
+            throw new ItemNotFoundException($"User with UserId:{userId} not found");
+
+        var agents = await _agentRepository.GetAll();
+        if (agents == null || !agents.Any())
+            throw new Exception("No agents available for assignment.");
+
+        var random = new Random();
+        var randomAgent = agents.ElementAt(random.Next(agents.Count()));
 
         var chat = _mapper.Map<ChatCreationDto, Chat>(chatDto);
+        chat.CustomerId = customer.Id;
+        chat.AgentId = randomAgent.Id;
         chat.CreatedOn = DateTime.UtcNow;
         chat.Status = "Active";
 
@@ -65,12 +81,14 @@ public class ChatService : IChatService
         return chat;
     }
 
-    public async Task<IEnumerable<Chat>> GetChats(ChatQueryParams queryParams)
+    public async Task<IEnumerable<Chat>> GetChats(string userId, ChatQueryParams queryParams)
     {
         var chats = await _chatRepository.GetAll();
+        chats = await GetChatsByUser(chats, userId);
+        Console.WriteLine(userId);
+        Console.WriteLine(chats);
         var customers = await _customerRepository.GetAll();
         var agents = await _agentRepository.GetAll();
-
 
         chats = GetChatsByAgent(chats, queryParams.AgentId);
         chats = GetChatsByCustomer(chats, queryParams.CustomerId);
@@ -80,6 +98,21 @@ public class ChatService : IChatService
         chats = chats.Skip((queryParams.PageNumber - 1) * queryParams.PageSize).Take(queryParams.PageSize);
 
         return chats;
+    }
+
+    public async Task<IEnumerable<Chat>> GetChatsByUser(IEnumerable<Chat> chats, string userId)
+    {
+        var result = new List<Chat>();
+
+        foreach (var chat in chats)
+        {
+            if (await _otherContextFunctions.IsUserInChat(chat.Id, userId))
+            {
+                result.Add(chat);
+            }
+        }
+
+        return result;
     }
 
     public IEnumerable<Chat> GetChatsByAgent(IEnumerable<Chat> chats, int? agentId)

@@ -10,5 +10,5 @@ public interface IChatService
     public Task<Chat> CreateChat(string userId, ChatCreationDto chatDto);
     public Task<Chat> DeleteChat(string userId, int id);
     public Task<Chat> GetChatById(int id);
-    public Task<IEnumerable<Chat>> GetChats(ChatQueryParams queryParams);
+    public Task<IEnumerable<Chat>> GetChats(string userId, ChatQueryParams queryParams);
 }

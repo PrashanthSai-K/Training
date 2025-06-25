@@ -1,10 +1,12 @@
-<div class="min-w-screen h-[92vh] grid grid-cols-1 sm:grid-cols-3 overflow-hidden">
-    <div class="col-span-1 h-full border-r flex flex-col border-gray-300 min-h-0" *ngIf="authService.currentUser$ | async as user">
-        User: {{user.username}},Role: {{user.role}}
+<div class="min-w-screen h-[92vh] grid grid-cols-1 sm:grid-cols-3 overflow-hidden"
+    *ngIf="authService.currentUser$ | async as user">
+    <div class="col-span-1 h-full border-r flex-col border-gray-300 min-h-0 flex"
+        *ngIf="isMobile && isListActive() || !isMobile">
         <div class="bg-white shadow-lg p-5 shrink-0">
             <div class="flex items-center justify-between">
                 <h1 class="text-lg font-semibold">Chats</h1>
-                <lucide-icon name="message-circle-plus" class="w-5 h-5 stroke-blue-600 cursor-pointer"></lucide-icon>
+                <lucide-icon name="message-circle-plus" (click)="showCreateChat()"
+                    class="w-5 h-5 stroke-blue-600 cursor-pointer"></lucide-icon>
             </div>
             <div class="mt-2">
                 <fieldset class="fieldset">
@@ -15,11 +17,11 @@
         </div>
 
         <div class="overflow-y-auto grow" (scroll)="onScroll($event)">
-            <app-chat-list [scrolledBottom]="scrolledBottom$"></app-chat-list>
+            <app-chat-list (showChat)="showChat($event)" [scrolledBottom]="scrolledBottom$"></app-chat-list>
         </div>
     </div>
 
-    <div class="col-span-2 pt-5 px-2.5">
+    <div class="col-span-2 py-2 px-2.5" *ngIf="isMobile && isChatActive() || !isMobile">
         @if (!activeChat) {
         <div class="flex h-full w-full items-center justify-center">
             <p> Select chat to view messages</p>
@@ -29,15 +31,27 @@
             <div class="bg-white shadow-lg shrink-0  border-gray-300 rounded-2xl p-5">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center justify-center gap-3 ">
-                        <lucide-icon name="circle-user" class="w-10 h-10 fill-gray-50 stroke-blue-600"></lucide-icon>
-                        <h1 class="text-lg font-semibold">{{activeChat.agent.name | titlecase}}</h1>
+                        <lucide-icon name="circle-user" class="w-8 h-8 fill-gray-50 stroke-blue-600"></lucide-icon>
+                        <h1 class="text-lg font-semibold">{{(user.role == 'Agent' ? activeChat.customer.name :
+                            activeChat.agent.name) | titlecase}}</h1>
                     </div>
-                    <lucide-icon name="message-circle-plus"
-                        class="w-5 h-5 stroke-blue-600 cursor-pointer"></lucide-icon>
+                    <div class="flex items-center gap-2">
+                        <lucide-icon name="circle-arrow-left" *ngIf="isMobile" (click)="backToList()"
+                            class="w-6 h-6 stroke-blue-600 cursor-pointer"></lucide-icon>
+
+                        <lucide-icon name="circle-x" *ngIf="user.role == 'Agent'"
+                            class="w-6 h-6 stroke-blue-600 cursor-pointer"></lucide-icon>
+                    </div>
                 </div>
             </div>
             <app-chat></app-chat>
         </div>
         }
+    </div>
+    <div class="h-[92vh] w-full absolute top-0 left-0 backdrop-blur-xs flex items-center justify-center" style="background-color: rgba(0, 0, 0, 0.4);"
+        *ngIf="isCreateChatActive()">
+        <lucide-icon name="circle-x" *ngIf="user.role == 'Agent'" (click)="closeCreateChat()"
+            class="w-6 h-6 stroke-white cursor-pointer absolute top-2 right-2"></lucide-icon>
+        <app-create-chat></app-create-chat>
     </div>
 </div>

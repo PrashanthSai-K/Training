@@ -25,7 +25,10 @@ namespace CustomerSupport.Controllers
             var userId = User?.Identity?.Name ?? "";
 
             var result = await _imageService.UploadImage(userId, chatId, imageDto);
-            return Ok(result);
+            return Ok(new
+            {
+                message = result
+            });
         }
 
         [HttpGet("{imageName}")]

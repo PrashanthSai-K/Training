@@ -2,7 +2,7 @@ import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListen
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { BotMessageSquare, CircleUser, LucideAngularModule, MessageCirclePlus, SendHorizontal, Upload } from 'lucide-angular';
+import { BotMessageSquare, CircleArrowLeft, CircleUser, CircleX, LucideAngularModule, MessageCirclePlus, SendHorizontal, Upload } from 'lucide-angular';
 import { ChatService } from './core/services/chat-service';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './auth-interceptor';
@@ -15,16 +15,8 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    importProvidersFrom(LucideAngularModule.pick({ BotMessageSquare, CircleUser, MessageCirclePlus, Upload, SendHorizontal })),
+    importProvidersFrom(LucideAngularModule.pick({ BotMessageSquare, CircleUser, MessageCirclePlus, Upload, SendHorizontal, CircleArrowLeft, CircleX })),
     provideHttpClient(withInterceptors([authInterceptor])),
-    // {
-    //   provide: "APP_INIT",
-    //   useFactory: (authService: AuthService) => {
-    //     return authService.getUser();
-    //   },
-    //   deps: [AuthService],
-    //   multi: true
-    // },
     ChatService,
     ChatHubService,
     AuthService,

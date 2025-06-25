@@ -1,0 +1,20 @@
+<div class="card recipe-card h-100 shadow-sm">
+  <img [src]="recipe?.image" class="card-img-top recipe-image" alt="recipe-image">
+  <div class="card-body d-flex flex-column">
+    <h5 class="card-title">
+      <strong>Name:</strong> {{ recipe?.name }}
+    </h5>
+
+    <p class="card-text recipe-ingredients flex-grow-1">
+      <strong>Ingredients:</strong> {{ recipe?.ingredients?.join(', ') }}
+    </p>
+
+    <p class="card-text ">
+      <strong>Cuisine:</strong> <span class="bg-success bg-gradient text-light p-1 rounded-1 mx-1">{{ recipe?.cuisine }}</span>
+    </p>
+
+    <a class="btn btn-outline-primary mt-auto w-100">
+      <strong>Cook Time:</strong> {{ recipe?.cookTimeMinutes }} mins
+    </a>
+  </div>
+</div>

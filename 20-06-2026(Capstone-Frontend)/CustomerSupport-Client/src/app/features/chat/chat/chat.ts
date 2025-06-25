@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, inject, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, inject, Input, OnInit, signal, ViewChild } from '@angular/core';
 import { ChatModel } from '../../../core/models/chat';
 import { Message } from '../../../core/models/message';
 import { CommonModule } from '@angular/common';
@@ -6,6 +6,8 @@ import { ChatService } from '../../../core/services/chat-service';
 import { LucideAngularModule } from 'lucide-angular';
 import { FormsModule } from '@angular/forms';
 import { ChatHubService } from '../../../core/services/chat-hub-service';
+import { AuthService } from '../../../core/services/auth-service';
+import { filter, switchMap } from 'rxjs';
 
 
 @Component({
@@ -19,20 +21,36 @@ export class Chat implements OnInit {
   chat: ChatModel | null = null;
   chatMessages: Message[] = [];
   message: string = "";
+  images: { [key: string]: string } = {};
+  previewImageUrl: string = "";
+  previewVisible = signal<boolean>(false);
+  file: File | null = null;
 
-  constructor(private chatService: ChatService, private chatHubService: ChatHubService, private cdr: ChangeDetectorRef) {
+  constructor(private chatService: ChatService, private chatHubService: ChatHubService, private cdr: ChangeDetectorRef, public authService: AuthService) {
   }
 
   onSendMessage() {
-    console.log(this.message);
     if (this.chat?.id) {
-      this.chatService.sendTextMessage(this.chat.id, this.message).subscribe({
-        next: (data:any) => {
-          console.log(data);
-          this.message = "";
-          this.scrollToBottom();
-        }
-      })
+      if (this.previewVisible() && this.file != null) {
+        console.log("triggered me");
+        this.chatService.sendImage(this.chat.id, this.file).subscribe({
+          next: () => {
+            this.previewImageUrl = "";
+            this.previewVisible.set(false);
+            this.file = null;
+          },
+          complete: () => this.scrollToBottom()
+        })
+      }
+
+      if (this.message.trim() != "")
+        this.chatService.sendTextMessage(this.chat.id, this.message).subscribe({
+          next: (data: any) => {
+            console.log(data);
+            this.message = "";
+            this.scrollToBottom();
+          }
+        });
     }
   }
 
@@ -42,20 +60,51 @@ export class Chat implements OnInit {
     this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
   }
 
-  ngOnInit(): void {
-    this.chatService.activeChat$.subscribe({
-      next: (data) => {
-        if (data) {
-          this.chat = data as ChatModel;
-          this.chatService.getChatMessages(data.id);
-          this.chatHubService.startConnection(data.id)
-        }
-      }
-    });
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    input.files && console.log(input?.files[0].name, input.files[0].type);
+    const reader = new FileReader();
+    if (input.files) {
+      reader.readAsBinaryString(input.files[0]);
+      this.file = input.files[0];
+      reader.onload = (eve) => {
+        this.previewImageUrl = btoa(eve.target?.result?.toString() || "");
+        this.previewVisible.set(true);
+      };
+    }
+  }
 
-    this.chatService.messages$.subscribe({
-      next: (data) => {
-        this.chatMessages = data as Message[];
+  onPreviewClose() {
+    this.previewVisible.set(false);
+    this.previewImageUrl = "";
+    this.file = null
+  }
+
+  getImage(name: string): string {
+    if (this.chat) {
+      if (!this.images[name]) {
+        this.chatService.getChatImage(this.chat.id, name).subscribe({
+          next: (data: any) => {
+            this.images[name] = data.imageUrl;
+          }
+        })
+      }
+      return this.images[name];
+    }
+    return "";
+  }
+
+  ngOnInit(): void {
+    this.chatService.activeChat$.pipe(
+      filter((chat): chat is ChatModel => !!chat),
+      switchMap(chat => {
+        this.chat = chat as ChatModel;
+        this.chatHubService.startConnection(chat.id);
+        return this.chatService.getChatMessages(chat.id);
+      })
+    ).subscribe({
+      next: (messages) => {
+        this.chatMessages = messages as Message[];
         this.cdr.detectChanges();
         this.scrollToBottom();
       }
@@ -63,9 +112,9 @@ export class Chat implements OnInit {
 
     this.chatHubService.messages$.subscribe({
       next: (data) => {
-        this.chatMessages = [...this.chatMessages, data as Message];
-        this.cdr.detectChanges();
-        this.scrollToBottom();
+        if (data) {
+          this.chatService.appendMessages(data as Message);
+        }
       }
     })
   }

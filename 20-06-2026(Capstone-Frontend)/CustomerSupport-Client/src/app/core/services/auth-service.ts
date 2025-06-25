@@ -11,7 +11,7 @@ import { User } from "../models/user";
 })
 export class AuthService {
 
-    private authUrl = "http://localhost:5124/api/v1/auth";
+    private authUrl = "https://h4t8wz09-5124.inc1.devtunnels.ms/api/v1/auth";
     private httpClient = inject(HttpClient);
     private router = inject(Router);
 
@@ -78,6 +78,8 @@ export class AuthService {
             catchError(err => {
                 console.error("Me failed:", err);
                 this.currentUserSubject.next(null);
+                if (err?.status == 401)
+                    this.router.navigateByUrl("/login");
                 return of(null);
             })
         )

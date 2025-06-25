@@ -6,7 +6,7 @@ namespace CustomerSupport.Models.Dto;
 public class ChatCreationDto
 {
     [Required]
-    public int AgentId { get; set; }
+    public string IssueName { get; set; } = string.Empty;
     [Required]
-    public int CustomerId { get; set; }
+    public string IssueDescription { get; set; } = string.Empty;
 }

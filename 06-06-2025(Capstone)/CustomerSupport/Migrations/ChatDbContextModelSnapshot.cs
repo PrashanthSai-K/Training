@@ -100,6 +100,14 @@ namespace CustomerSupport.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("IssueDescription")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("IssueName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("text");

@@ -13,7 +13,7 @@ export class ChatHubService {
         const token = localStorage.getItem("token");
 
         this.hubConnection = new signalR.HubConnectionBuilder()
-            .withUrl("http://localhost:5124/chathub", {
+            .withUrl("https://h4t8wz09-5124.inc1.devtunnels.ms/chathub", {
                 withCredentials: true,
                 accessTokenFactory: () => token || ""
             })
