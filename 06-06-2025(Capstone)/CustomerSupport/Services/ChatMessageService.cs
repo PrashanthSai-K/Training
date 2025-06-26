@@ -48,6 +48,10 @@ public class ChatMessageService : IChatMessageService
         chatMessage.CreatedAt = DateTime.UtcNow;
 
         var createdChatMessage = await _chatMessageRepository.Create(chatMessage);
+
+        chat.UpdatedAt = DateTime.UtcNow;
+        await _chatRepository.Update(chatId, chat);
+
         await _chatHub.Clients.Group(chatId.ToString()).SendAsync("ReceiveMessage", new
         {
             chatMessage.ChatId,

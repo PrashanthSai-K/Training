@@ -1,78 +1,49 @@
-<form class="rounded-lg bg-white pt-5 pb-10 px-10 register-form w-[30rem]" >
-    <div class="flex flex-col items-center justify-center w-full gap-3">
-        <lucide-icon name="bot-message-square" class="w-12 h-12 stroke-white fill-blue-600"></lucide-icon>
-        <p class="text-xl font-medium"> Sign up to you account</p>
+<form class="rounded-lg bg-white pt-5 pb-10 px-10 register-form w-[30rem]" [formGroup]="chatForm"
+    (ngSubmit)="onSubmit()">
+    <div class="flex  items-center justify-center w-full gap-3">
+        <lucide-icon name="message-square-plus" class="w-8 h-8 stroke-white fill-blue-600"></lucide-icon>
+        <p class="text-xl font-medium">Having an issue ?</p>
     </div>
     <div class="mt-5">
         <fieldset class="fieldset">
-            <legend class="fieldset-legend">Name</legend>
-            <input type="text" class="input w-full"
-                placeholder="" formControlName="name" />
-            <!-- @if(name.touched && name?.errors){
+            <legend class="fieldset-legend">Issue</legend>
+            <input type="text" class="input w-full" placeholder="" formControlName="issueName" />
+            @if (issueName.touched && (issueName.errors?.minlength || issueName.errors?.maxlength)){
             <p class="text-red-500">
-                Enter a valid name
+                Issue length must be 5 to 20
             </p>
-            } -->
+            }
+            @else if(issueName.touched && issueName?.errors){
+            <p class="text-red-500">
+                Enter a valid issue
+            </p>
+            }
         </fieldset>
     </div>
 
     <div class="mt-5">
         <fieldset class="fieldset">
-            <legend class="fieldset-legend">Email address</legend>
-            <input type="text" class="input w-full" 
-                placeholder="" formControlName="email" />
-            <!-- @if(email.touched && email?.errors){
+            <legend class="fieldset-legend">Issue Description</legend>
+            <input type="text" class="input w-full" placeholder="" formControlName="issueDescription" />
+            @if (issueDescription.touched && (issueDescription.errors?.minlength ||
+            issueDescription.errors?.maxlength)){
             <p class="text-red-500">
-                Enter a valid email address
+                Description length must be 20 to 100
             </p>
-            } -->
-        </fieldset>
-    </div>
-    <div class="mt-5">
-        <fieldset class="fieldset">
-            <legend class="fieldset-legend">Phone</legend>
-            <input type="text" class="input w-full" 
-                placeholder="" formControlName="phone" />
-            <!-- @if(phone.touched && phone.errors){
+            }
+            @else if(issueDescription.touched && issueDescription?.errors){
             <p class="text-red-500">
-                Enter a valid phone number
+                Enter a valid description
             </p>
-            } -->
+            }
         </fieldset>
     </div>
-
-    <div class="mt-5">
-        <fieldset class="fieldset">
-            <legend class="fieldset-legend">Password</legend>
-            <input type="password" class="input w-full"
-                formControlName="password" />
-            <!-- @if (password.errors?.lenError) {
-            <p class=" text-red-500">
-                Password length must be 6 to 12.
-            </p>
-            }@else if (password?.errors?.upperError) {
-            <p class=" text-red-500">
-                Password must contain one upper case letter.
-            </p>
-            }@else if (password?.errors?.lowerError) {
-            <p class=" text-red-500">
-                Password must contain one lower case letter.
-            </p>
-            }@else if (password?.errors?.digitError) {
-            <p class=" text-red-500">
-                Password must contain one digit.
-            </p>
-            } @else if(password?.touched && password?.errors){
-            <p class=" text-red-500">
-                Enter a valid password.
-            </p>
-            } -->
-        </fieldset>
-    </div>
-    <button class="btn btn-soft bg-blue-600 text-white w-full mt-10 cursor-pointer hover:bg-blue-700">
-        Sign Up
+    <button class="btn btn-soft bg-blue-600 text-white w-full mt-10 cursor-pointer hover:bg-blue-700"
+        [disabled]="isSubmitting()">
+        @if (isSubmitting()) {
+        Finding Support...
+        }@else {
+        Get Support
+        }
     </button>
-    <p class="text-sm text-gray-400 text-center pt-5">Already user ? Please <span class="text-blue-600 cursor-pointer"
-            >click here to sign in</span></p>
-
 </form>

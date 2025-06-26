@@ -59,6 +59,5 @@ namespace CustomerSupport.Controllers
             return Ok(chats);
         }
 
-
     }
 }

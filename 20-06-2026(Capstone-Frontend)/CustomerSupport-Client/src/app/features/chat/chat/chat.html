@@ -10,7 +10,8 @@
                 <span class="block text-[0.5rem] mt-1 text-gray-400">{{ msg.createdAt | date:'shortTime' }}</span>
             </div>
             <div *ngIf="msg.imageName" class="inline-block min-h-96">
-                <img *ngIf="msg.imageName" [src]="getImage(msg.imageName) || 'https://placehold.co/600x400?text=Loading...'"
+                <img *ngIf="msg.imageName"
+                    [src]="getImage(msg.imageName) || 'https://placehold.co/600x400?text=Loading...'"
                     alt={{msg.imageName}} class="mt-2 max-w-xs rounded text-sm object-cover h-80" />
                 <span class="block text-[0.5rem] mt-1 text-gray-400">{{ msg.createdAt | date:'shortTime' }}</span>
             </div>
@@ -27,18 +28,25 @@
             class="w-6 h-6 fill-blue-500 stroke-gray-50 cursor-pointer absolute top-1 right-2"></lucide-icon>
         <img [src]="('data:image/jpeg;base64,'+ previewImageUrl) " alt="" class="h-full rounded-lg ">
     </div>
-
-    <div
-        class="w-full px-3 py-3 shrink-0 flex items-center gap-4 bg-white shadow-lg border-gray-300 rounded-2xl p-5 mb-2">
-        <lucide-icon name="upload" strokeWidth="2" (click)="imageUpload.click()"
-            class="w-6 h-6 fill-gray-50 stroke-blue-500 cursor-pointer"></lucide-icon>
-        <input #imageUpload type="file" style="display: none;" (change)="onFileSelected($event)"
-            accept="image/png, image/jpeg">
-        <input type="text" placeholder="Type to send message..." [(ngModel)]="message" [disabled]="file != null"
-            class="input rounded-xl w-full placeholder:text-gray-400" />
-        <div (click)="onSendMessage()">
-            <lucide-icon name="send-horizontal" strokeWidth="1"
-                class="w-8 h-8 fill-blue-500 stroke-gray-50 cursor-pointer"></lucide-icon>
+    <form action="" (ngSubmit)="onSendMessage()" *ngIf="chat?.status == 'Active'">
+        <div
+            class="w-full px-3 py-3 shrink-0 flex items-center gap-4 bg-white shadow-lg border-gray-300 rounded-2xl p-5 mb-2">
+            <lucide-icon name="upload" strokeWidth="2" (click)="imageUpload.click()"
+                class="w-6 h-6 fill-gray-50 stroke-blue-500 cursor-pointer"></lucide-icon>
+            <input #imageUpload type="file" style="display: none;" (change)="onFileSelected($event)"
+                accept="image/png, image/jpeg">
+            <input type="text" placeholder="Type to send message..." name="message" [(ngModel)]="message"
+                [disabled]="file != null" class="input rounded-xl w-full placeholder:text-gray-400" />
+            <button type="submit">
+                <lucide-icon name="send-horizontal" strokeWidth="1"
+                    class="w-8 h-8 fill-blue-500 stroke-gray-50 cursor-pointer"></lucide-icon>
+            </button>
         </div>
+    </form>
+    <div *ngIf="chat?.status == 'Deleted'"
+        class="w-full px-3 py-3 shrink-0 flex items-center justify-center gap-4 bg-white shadow-lg border-gray-300 rounded-2xl p-5 mb-2">
+        <lucide-icon name="ticket-check" strokeWidth="1"
+            class="w-8 h-8 fill-blue-500 stroke-gray-50 cursor-pointer"></lucide-icon>
+        <p class="font-medium">Issue has been resolved</p>
     </div>
 </div>

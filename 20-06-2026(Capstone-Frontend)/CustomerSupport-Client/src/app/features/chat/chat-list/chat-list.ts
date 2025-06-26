@@ -33,16 +33,14 @@ export class ChatList implements OnInit {
         this.chats = data as ChatModel[];
         this.isLoading.set(false);
       }
-    })
+    });
 
-    this.scrolledBottom.subscribe({
+    this.chatService.chat$.subscribe({
       next: (data) => {
-        if (data) {
-          this.chatService.pageNumber += 1
-          this.chatService.getChats();
-        }
+        console.log("updated chats");
+        
+        this.chats = data;
       }
     })
   }
-
 }

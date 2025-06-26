@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, effect, OnInit, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, inject, OnInit, signal } from '@angular/core';
 import { ChatList } from "../chat-list/chat-list";
 import { Chat } from "../chat/chat";
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -9,30 +9,31 @@ import { AsyncPipe, CommonModule, TitleCasePipe } from '@angular/common';
 import { AuthService } from '../../../core/services/auth-service';
 import { User } from '../../../core/models/user';
 import { CreateChat } from "../create-chat/create-chat";
+import { FormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-chat-template',
-  imports: [ChatList, Chat, LucideAngularModule, TitleCasePipe, AsyncPipe, CommonModule, CreateChat],
+  imports: [ChatList, Chat, LucideAngularModule, TitleCasePipe, AsyncPipe, CommonModule, CreateChat, FormsModule],
   templateUrl: './chat-template.html',
   styleUrl: './chat-template.css'
 })
 export class ChatTemplate implements OnInit {
 
-  scrolledBottom = new BehaviorSubject<boolean>(false);
-  scrolledBottom$ = this.scrolledBottom.asObservable();
   activeChat: ChatModel | null = null;
   user: User | null = null;
   isMobile: boolean = false;
   isListActive = signal<boolean>(true);
   isChatActive = signal<boolean>(false);
   isCreateChatActive = signal<boolean>(false);
+  searchQuery: string = "";
+
+  private _snackBar = inject(MatSnackBar);
 
   constructor(private chatService: ChatService, public authService: AuthService) {
   }
 
   ngOnInit(): void {
-    console.log(this.showChat);
-
     this.isMobile = window.innerWidth < 640;
     window.addEventListener('resize', () => {
       this.isMobile = window.innerWidth < 640;
@@ -44,11 +45,29 @@ export class ChatTemplate implements OnInit {
     });
   }
 
+  onCloseChat() {
+    if (!window.confirm("Do you want to mark the issue as closed ?")) {
+      return
+    }
+    if (this.activeChat)
+      this.chatService.closeChat(this.activeChat.id).subscribe({
+        next: (data) => {
+          this._snackBar.open("Issue has been closed", "", {
+            duration: 10000
+          })
+        }
+      })
+  }
+
+  onSearch() {
+    this.chatService.searchSubject.next(this.searchQuery);
+  }
+
   showCreateChat() {
     this.isCreateChatActive.set(true);
   }
 
-  closeCreateChat() {
+  closeCreateChat(event: boolean) {
     this.isCreateChatActive.set(false);
   }
 
@@ -62,19 +81,5 @@ export class ChatTemplate implements OnInit {
   backToList() {
     this.isListActive.set(true);
     this.isChatActive.set(false);
-  }
-
-  //Infinite scroller for message container
-  onScroll(event: Event) {
-    const element = event.target as HTMLElement;
-    const scrollTop = element.scrollTop;
-    const scrollHeight = element.scrollHeight;
-    const clientHeight = element.clientHeight;
-
-    const scrolledToBottom = scrollTop + clientHeight >= scrollHeight - 100;
-
-    if (scrolledToBottom) {
-      this.scrolledBottom.next(true);
-    }
   }
 }

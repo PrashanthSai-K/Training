@@ -39,7 +39,10 @@ export class Chat implements OnInit {
             this.previewVisible.set(false);
             this.file = null;
           },
-          complete: () => this.scrollToBottom()
+          complete: () => {
+            this.scrollToBottom();
+            this.chatService.getChats();
+          }
         })
       }
 
@@ -48,10 +51,17 @@ export class Chat implements OnInit {
           next: (data: any) => {
             console.log(data);
             this.message = "";
+          },
+          complete: () => {
             this.scrollToBottom();
+            this.chatService.getChats();
           }
         });
     }
+  }
+
+  onSubmit() {
+
   }
 
   @ViewChild('scrollContainer') scrollContainer!: ElementRef<HTMLDivElement>;
@@ -113,7 +123,8 @@ export class Chat implements OnInit {
     this.chatHubService.messages$.subscribe({
       next: (data) => {
         if (data) {
-          this.chatService.appendMessages(data as Message);
+          // this.chatService.appendMessages(data as Message);
+          this.chatMessages.push(data);
         }
       }
     })

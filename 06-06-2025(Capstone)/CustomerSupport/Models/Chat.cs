@@ -10,6 +10,7 @@ public class Chat
     public int AgentId { get; set; }
     public int CustomerId { get; set; }
     public DateTime CreatedOn { get; set; }
+    public DateTime UpdatedAt { get; set; }
     public string Status { get; set; } = string.Empty;
 
     public Agent? Agent { get; set; }

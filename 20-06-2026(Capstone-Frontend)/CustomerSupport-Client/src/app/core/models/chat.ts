@@ -1,11 +1,14 @@
 export class ChatModel {
     constructor(public id: number = 0,
+        public issueName: string = "",
+        public issueDescription: string = "",
         public AgentId: number = 0,
         public CustomerId: number = 0,
         public customer: Customer = new Customer(),
         public agent: Agent = new Agent(),
-        public CreatedOn: string = "",
-        public Status: string = ""
+        public createdOn: string = "",
+        public updatedAt: string = "",
+        public status: string = ""
     ) {
     }
 }
@@ -31,4 +34,9 @@ export class Customer {
     ) {
 
     }
+}
+
+export interface ChatForm {
+    issueName: string,
+    issueDescription: string
 }

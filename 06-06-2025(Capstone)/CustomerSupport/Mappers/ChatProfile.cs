@@ -10,5 +10,6 @@ public class ChatProfile : Profile
     public ChatProfile()
     {
         CreateMap<ChatCreationDto, Chat>();
+        CreateMap<Chat, ChatResponseDto>();
     }
 }

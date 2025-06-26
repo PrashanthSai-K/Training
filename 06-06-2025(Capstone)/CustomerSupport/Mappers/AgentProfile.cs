@@ -11,5 +11,6 @@ public class AgentProfile : Profile
     {
         CreateMap<AgentRegisterDto, Agent>();
         CreateMap<AgentUpdateDto, Agent>();
+        CreateMap<Agent, AgentResponseDto>();
     }
 }

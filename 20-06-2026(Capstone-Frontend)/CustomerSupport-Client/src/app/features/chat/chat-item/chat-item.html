@@ -1,11 +1,16 @@
-<div class="relative p-5 border-b bg-gray-50 border-gray-300 hover:bg-blue-50 hover:cursor-pointe  group" 
+<div class="relative p-5 border-b bg-gray-50 border-gray-300 hover:bg-blue-50 hover:cursor-pointe  group"
     *ngIf="authService.currentUser$ | async as user">
     <div
         [class]="(activeChat?.id == chat.id ? 'opacity-100' : 'opacity-0') + ' absolute top-0 left-0 w-1 z-20 h-full bg-blue-500 transition-opacity duration-300'">
     </div>
     <div class="flex items-center gap-3">
-        <lucide-icon name="circle-user" class="w-10 h-10 fill-gray-50 stroke-blue-600">
+        <lucide-icon name="ticket-percent" class="w-10 h-10 fill-gray-50 stroke-blue-600">
         </lucide-icon>
-        <p>{{ (user.role == 'Agent' ? chat.customer.name : chat.agent.name )| titlecase }}</p>
+        <div class="">
+            <h1 class="text-md font-semibold">{{chat.issueName| titlecase}}</h1>
+            <p class="text-sm">{{user.role == 'Agent' ? 'Customer : ' : 'Agent : '}} {{(user.role == 'Agent' ?
+                chat.customer.name :
+                chat.agent.name) | titlecase}}</p>
+        </div>
     </div>
 </div>

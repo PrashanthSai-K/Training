@@ -11,7 +11,7 @@ import { User } from "../models/user";
 })
 export class AuthService {
 
-    private authUrl = "https://h4t8wz09-5124.inc1.devtunnels.ms/api/v1/auth";
+    private authUrl = "http://localhost:5124/api/v1/auth";
     private httpClient = inject(HttpClient);
     private router = inject(Router);
 

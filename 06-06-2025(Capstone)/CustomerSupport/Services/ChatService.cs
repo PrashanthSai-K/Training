@@ -51,6 +51,7 @@ public class ChatService : IChatService
         chat.CustomerId = customer.Id;
         chat.AgentId = randomAgent.Id;
         chat.CreatedOn = DateTime.UtcNow;
+        chat.UpdatedAt = DateTime.UtcNow;
         chat.Status = "Active";
 
         var createdChat = await _chatRepository.Create(chat);
@@ -81,15 +82,15 @@ public class ChatService : IChatService
         return chat;
     }
 
-    public async Task<IEnumerable<Chat>> GetChats(string userId, ChatQueryParams queryParams)
+    public async Task<IEnumerable<ChatResponseDto>> GetChats(string userId, ChatQueryParams queryParams)
     {
         var chats = await _chatRepository.GetAll();
         chats = await GetChatsByUser(chats, userId);
-        Console.WriteLine(userId);
-        Console.WriteLine(chats);
         var customers = await _customerRepository.GetAll();
         var agents = await _agentRepository.GetAll();
 
+        chats = chats.OrderByDescending(c => c.UpdatedAt);
+        chats = GetChatByQuery(chats, queryParams.Query);
         chats = GetChatsByAgent(chats, queryParams.AgentId);
         chats = GetChatsByCustomer(chats, queryParams.CustomerId);
         chats = GetChatsByStatus(chats, queryParams.Status);
@@ -97,7 +98,18 @@ public class ChatService : IChatService
 
         chats = chats.Skip((queryParams.PageNumber - 1) * queryParams.PageSize).Take(queryParams.PageSize);
 
-        return chats;
+        return _mapper.Map<IEnumerable<ChatResponseDto>>(chats);
+    }
+
+    public IEnumerable<Chat> GetChatByQuery(IEnumerable<Chat> chats, string? query)
+    {
+        if (query == null || query == "" || chats.Count() == 0)
+        {
+            return chats;
+        }
+
+        return chats.Where(c => c.IssueName.Contains(query, StringComparison.OrdinalIgnoreCase)
+                || c.IssueDescription.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
     }
 
     public async Task<IEnumerable<Chat>> GetChatsByUser(IEnumerable<Chat> chats, string userId)

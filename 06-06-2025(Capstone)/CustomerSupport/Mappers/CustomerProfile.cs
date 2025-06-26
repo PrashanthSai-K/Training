@@ -11,5 +11,6 @@ public class CustomerProfile : Profile
     {
         CreateMap<CustomerRegisterDto, Customer>();
         CreateMap<CustomerUpdateDto, Customer>();
+        CreateMap<Customer, CustomerResponseDto>();
     }
 }
