@@ -1,17 +1,18 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import { AuthService } from '../../../core/services/auth-service';
 import { LoginModel } from '../../../core/models/login';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PasswordValidator } from '../../../core/validators/password-validator';
 import { CommonModule } from '@angular/common';
+import { take } from 'rxjs';
 
 
 @Component({
   selector: 'app-login',
-  imports: [LucideAngularModule, FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [LucideAngularModule, FormsModule, ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
@@ -34,10 +35,13 @@ export class Login {
   private _snackBar = inject(MatSnackBar);
 
   constructor(private router: Router, private authService: AuthService) {
-    authService.currentUser$.subscribe({
+    authService.getUser().pipe(take(1)).subscribe({
       next: (value) => {
-        if (value)
-          router.navigateByUrl("/chat");
+        if (value != null)
+          if (value?.role == 'Admin')
+            router.navigateByUrl("/dashboard");
+          else if (value)
+            router.navigateByUrl("/chat")
       },
     })
   }
@@ -54,14 +58,16 @@ export class Login {
         this._snackBar.open("Logged in successfully", "", {
           duration: 1000
         });
-        this.router.navigateByUrl("/chat");
+        return this.router.navigateByUrl("/chat");
       },
       error: (err) => {
-        this.isSubmitting.set(false)
-        if (err?.error?.statusCode)
+        this.isSubmitting.set(false);
+        if (err?.error?.statusCode) {
           this._snackBar.open(err.error.message, "", {
             duration: 2000
           });
+
+        }
         else if (err?.error?.errors) {
           this._snackBar.open("Enter valid credentials", "", {
             duration: 2000

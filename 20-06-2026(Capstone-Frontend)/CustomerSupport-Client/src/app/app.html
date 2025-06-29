@@ -1,11 +1,13 @@
 <div class="h-screen bg-gray-50">
-
   <app-navbar></app-navbar>
-  <ng-container *ngIf="authService.currentUser$ | async as user">
-    <app-admin-sidebar *ngIf="user.role == 'Admin'"></app-admin-sidebar>
-  </ng-container>
-  <div class="w-full min-h-[92vh] relative flex items-center justify-center">
-    <router-outlet></router-outlet>
-  </div>
 
+  <div class="min-h-[92vh] flex w-full" [ngClass]="{'items-center justify-center': user?.role !== 'Admin'}">
+
+    <div *ngIf="user?.role === 'Admin'" class="sm:w-18">
+      <app-admin-sidebar></app-admin-sidebar>
+    </div>
+
+    <router-outlet></router-outlet>
+
+  </div>
 </div>

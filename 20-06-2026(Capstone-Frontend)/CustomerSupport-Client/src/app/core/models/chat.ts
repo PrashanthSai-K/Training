@@ -20,6 +20,7 @@ export class Agent {
         public email: string = "",
         public status: string = "",
         public dateOfJoin: string = "",
+
     ) {
 
     }
@@ -31,6 +32,7 @@ export class Customer {
         public name: string = "",
         public email: string = "",
         public phone: string = "",
+        public status: string = ""
     ) {
 
     }

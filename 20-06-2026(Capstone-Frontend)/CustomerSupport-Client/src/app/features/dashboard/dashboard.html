@@ -1,1 +1,45 @@
-<p>dashboard works!</p>
+<div class="flex flex-col  p-5 sm:px-10 sm:py-5 w-[95vw] h-full ">
+    <div class="w-full py-5">
+        <h1 class="w-full text-start font-medium text-2xl">Dashboard</h1>
+    </div>
+    <div class="grid sm:grid-cols-4 gap-5">
+        <div class="card bg-gradient-to-r from-blue-600 to-blue-500 text-primary-content ">
+            <div class="card-body">
+                <h2 class="card-title">Total Agents</h2>
+                <!-- <p>A card component has a figure, a body part, and inside body there are title and actions parts</p> -->
+                <div class="card-actions justify-end">
+                    <button class="font-medium text-xl text-white">{{summary?.agent}}</button>
+                </div>
+            </div>
+        </div>
+        <div class="card bg-gradient-to-r from-blue-600 to-blue-500 text-primary-content ">
+            <div class="card-body">
+                <h2 class="card-title">Total Customer</h2>
+                <!-- <p>A card component has a figure, a body part, and inside body there are title and actions parts</p> -->
+                <div class="card-actions justify-end">
+                    <button class="font-medium text-xl text-white">{{summary?.customer}}</button>
+                </div>
+            </div>
+        </div>
+        <div class="card bg-gradient-to-r from-blue-600 to-blue-500 text-primary-content ">
+            <div class="card-body">
+                <h2 class="card-title">Total Issues</h2>
+                <!-- <p>A card component has a figure, a body part, and inside body there are title and actions parts</p> -->
+                <div class="card-actions justify-end">
+                    <button class="font-medium text-xl text-white">{{summary?.chatCount}}</button>
+                </div>
+            </div>
+        </div>
+        <div class="card bg-gradient-to-r from-blue-600 to-blue-500 text-primary-content ">
+            <div class="card-body">
+                <h2 class="card-title">Open Issues</h2>
+                <!-- <p>A card component has a figure, a body part, and inside body there are title and actions parts</p> -->
+                <div class="card-actions justify-end">
+                    <button class="font-medium text-xl text-white">{{summary?.activeChat}}</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

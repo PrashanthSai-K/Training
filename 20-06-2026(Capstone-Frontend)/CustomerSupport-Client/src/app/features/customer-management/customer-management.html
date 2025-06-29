@@ -1,0 +1,71 @@
+<div class="p-4 sm:p-6 md:p-10 w-[95vw] h-full min-h-[92vh]">
+
+    <div class="w-full">
+        <h1 class="text-xl font-semibold">Customer Management</h1>
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-6">
+            <fieldset class="w-full">
+                <input type="text" class="input input-bordered w-full placeholder:text-sm placeholder:text-gray-400"
+                (input)="onSearch()" [(ngModel)]="searchQuery"   placeholder="Type to search..." />
+            </fieldset>
+
+            <div class="text-right">
+                <button class="btn whitespace-nowrap bg-blue-600 text-white hover:bg-blue-500 w-full sm:w-auto"
+                    (click)="openCreateCustomer()">Add
+                    Customer</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="mt-6 rounded-xl border border-gray-200 bg-white w-full overflow-x-auto">
+        <div class="pb-10 overflow-y-auto">
+            <table class="table w-full overflow-x-auto">
+                <thead class="sticky top-0 bg-gray-100 z-10">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (customer of customers; track $index) {
+                    <tr class="border-b border-gray-100">
+                        <th>{{$index+1}}</th>
+                        <td>{{customer.name}}</td>
+                        <td>{{customer.email}}</td>
+                        <td>{{customer.phone}}</td>
+                        <td>{{customer.status}}</td>
+                        <td>
+                            <div class="dropdown ">
+                                <label tabindex="0" class="btn btn-sm bg-white border-none shadow-none">
+                                    <lucide-icon name="more-vertical" class="w-4 h-4"></lucide-icon>
+                                </label>
+                                <ul tabindex="0"
+                                    class="dropdown-content bg-white absolute top-0 right-10 menu p-2 shadow  rounded-box w-40 ">
+                                    <li (click)="openEditCustomer(customer)"><a>Edit</a></li>
+                                    @if (customer.status == 'Active') {
+                                    <li (click)="deactivateCustomer(customer)"><a>Deactivate</a></li>
+                                    }@else{
+                                    <li (click)="activateCustomer(customer)"><a>Activate</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="h-[100vh] w-full absolute top-0 left-0 backdrop-blur-xs flex items-center justify-center z-[999]"
+    style="background-color: rgba(0, 0, 0, 0.4);" *ngIf="isCreateCustomerActive() || isEditCustomerActive()">
+    <lucide-icon name="circle-x" (click)="closeCustomerPopup()"
+        class="w-6 h-6 stroke-white cursor-pointer absolute top-2 right-2"></lucide-icon>
+    <app-create-customer (closeEdit)="closeEditPopup()"></app-create-customer>
+</div>

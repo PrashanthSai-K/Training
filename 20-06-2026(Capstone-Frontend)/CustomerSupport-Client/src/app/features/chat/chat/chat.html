@@ -35,7 +35,7 @@
                 class="w-6 h-6 fill-gray-50 stroke-blue-500 cursor-pointer"></lucide-icon>
             <input #imageUpload type="file" style="display: none;" (change)="onFileSelected($event)"
                 accept="image/png, image/jpeg">
-            <input type="text" placeholder="Type to send message..." name="message" [(ngModel)]="message"
+            <input type="text" placeholder="Type to send message..." name="message" [(ngModel)]="message" autocomplete="off"
                 [disabled]="file != null" class="input rounded-xl w-full placeholder:text-gray-400" />
             <button type="submit">
                 <lucide-icon name="send-horizontal" strokeWidth="1"

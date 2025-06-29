@@ -15,6 +15,10 @@ export class AuthService {
     private httpClient = inject(HttpClient);
     private router = inject(Router);
 
+    routeSubject = new BehaviorSubject<string>("");
+    route$ = this.routeSubject.asObservable();
+
+
     private currentUserSubject = new BehaviorSubject<User | null>(null);
     currentUser$ = this.currentUserSubject.asObservable();
 
@@ -70,9 +74,6 @@ export class AuthService {
                 new HttpHeaders().set('skip-refresh-interceptor', 'true').set('Authorization', `Bearer ${this.getAccessToken()}`)
         }).pipe(
             tap((response) => {
-                console.log(response);
-                console.log("called");
-
                 this.currentUserSubject.next(response);
             }),
             catchError(err => {
@@ -83,6 +84,14 @@ export class AuthService {
                 return of(null);
             })
         )
+    }
+
+    forgotPassword(email: string) {
+        return this.httpClient.post(`${this.authUrl}/forgotPassword`, { email: email });
+    }
+
+    resetPassword(token: string, email: string, password: string) {
+        return this.httpClient.post(`${this.authUrl}/resetPassword`, { token: token, email: email, password: password });
     }
 
     logoutUser() {

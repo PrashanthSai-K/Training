@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using CustomerSupport.Interfaces;
 using CustomerSupport.Models.Dto;
 using CustomerSupport.Models.QueryParams;
@@ -28,17 +29,16 @@ namespace CustomerSupport.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "Agent")]
+        [Authorize(Roles = "Agent, Admin")]
         public async Task<IActionResult> UpdateAgent(int id, AgentUpdateDto agentDto)
         {
             var userId = User?.Identity?.Name;
-
             var updatedAgent = await _agentService.UpdateAgent(userId, id, agentDto);
             return Ok(updatedAgent);
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Agent")]
+        [Authorize(Roles = "Agent, Admin")]
         public async Task<IActionResult> DeleteAgent(int id)
         {
             var userId = User?.Identity?.Name;
@@ -62,6 +62,25 @@ namespace CustomerSupport.Controllers
         {
             var agents = await _agentService.GetAgents(queryParams);
             return Ok(agents);
+        }
+
+        [HttpPut("{id}/activate")]
+        [Authorize(Roles = "Agent, Admin")]
+        public async Task<IActionResult> ActivateAgent(int id)
+        {
+            var userId = User?.Identity?.Name;
+
+            var agent = await _agentService.ActivateAgent(userId, id);
+            return Ok(agent);
+        }
+
+        [HttpPut("{id}/deactivate")]
+        [Authorize(Roles = "Agent, Admin")]
+        public async Task<IActionResult> DeactivateAgent(int id)
+        {
+            var userId = User?.Identity?.Name;
+            var agent = await _agentService.DeactivateAgent(userId, id);
+            return Ok(agent);
         }
 
     }

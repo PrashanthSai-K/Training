@@ -1,0 +1,71 @@
+<div class="p-4 sm:p-6 md:p-10 w-[95vw] h-full min-h-[92vh]">
+
+    <div class="w-full">
+        <h1 class="text-xl font-semibold">Agent Management</h1>
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-6">
+            <fieldset class="w-full">
+                <input type="text" class="input input-bordered w-full placeholder:text-sm placeholder:text-gray-400"
+                    [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Type to search..." />
+            </fieldset>
+
+            <div class="text-right">
+                <button (click)="openCreateAgent()"
+                    class="btn whitespace-nowrap bg-blue-600 text-white hover:bg-blue-500 w-full sm:w-auto">
+                    Add Agent</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="mt-6 rounded-xl border border-gray-200 bg-white w-full overflow-x-auto ">
+        <div class="relative overflow-y-auto pb-10">
+            <table class="table w-full overflow-x-auto">
+                <thead class="sticky top-0 bg-gray-100 z-10">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>DOJ</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (agent of agents; track $index) {
+                    <tr class="hover relative border-b border-gray-100">
+                        <th>{{$index+1}}</th>
+                        <td>{{agent.name}}</td>
+                        <td>{{agent.email}}</td>
+                        <td>{{agent.dateOfJoin | date}}</td>
+                        <td>{{agent.status}}</td>
+                        <td class="relative">
+                            <div class="dropdown">
+                                <label tabindex="0" class="btn btn-sm bg-white border-none shadow-none">
+                                    <lucide-icon name="more-vertical" class="w-4 h-4"></lucide-icon>
+                                </label>
+                                <ul tabindex="0"
+                                    class="dropdown-content absolute top-0 right-10 menu p-2 shadow bg-white rounded-box w-40 ">
+                                    <li (click)="openEditAgent(agent)"><a>Edit</a></li>
+                                    @if (agent.status == 'Active') {
+                                    <li (click)="deactivateAgent(agent)"><a>Deactivate</a></li>
+                                    }@else{
+                                    <li (click)="activateAgent(agent)"><a>Activate</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="h-[100vh] w-full absolute top-0 left-0 backdrop-blur-xs flex items-center justify-center z-[999]"
+    style="background-color: rgba(0, 0, 0, 0.4);" *ngIf="isCreateAgentActive() || isEditAgentActive()">
+    <lucide-icon name="circle-x" (click)="closeAgentPopup()"
+        class="w-6 h-6 stroke-white cursor-pointer absolute top-2 right-2"></lucide-icon>
+    <app-create-agent (closeEdit)="closeEditAgent()"></app-create-agent>
+</div>

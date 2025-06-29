@@ -152,6 +152,8 @@ builder.Services.AddTransient<IChatMessageService, ChatMessageService>();
 builder.Services.AddTransient<IImageService, ImageService>();
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<ITokenService, TokenService>();
+builder.Services.AddTransient<IEmailService, EmailService>();
+builder.Services.AddTransient<IDashboardService, DashboardService>();
 builder.Services.AddTransient<IAuditLogService, AuditLogService>();
 #endregion
 

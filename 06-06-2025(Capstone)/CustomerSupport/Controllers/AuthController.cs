@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using System.Threading.Tasks;
 using CustomerSupport.Interfaces;
 using CustomerSupport.Models.Dto;
 using Microsoft.AspNetCore.Authorization;
@@ -47,6 +48,23 @@ namespace CustomerSupport.Controllers
                 username = username,
                 role = role,
             });
+        }
+
+        [HttpPost("forgotPassword")]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordRequestDto requestDto)
+        {
+            var token = await _authService.ForgotPassword(requestDto);
+            return Ok(new
+            {
+                token = token
+            });
+        }
+
+        [HttpPost("resetPassword")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordRequestDto requestDto)
+        {
+            var user = await _authService.ResetPassword(requestDto);
+            return Ok(user);
         }
     }
 }

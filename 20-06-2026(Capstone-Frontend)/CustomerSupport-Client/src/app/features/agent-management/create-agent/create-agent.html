@@ -1,0 +1,67 @@
+<form class="rounded-lg bg-white pt-5 pb-10 px-10 register-form w-[30rem]" [formGroup]="agentForm"
+    (ngSubmit)="submitForm()">
+    <div *ngIf="showPassword()" class="min-h-40 flex flex-col items-center justify-center gap-3">
+        <h1 class="text-ls font-medium">Password for the Created Agent</h1>
+        <div class="w-full flex items-center justify-between bg-blue-100 border border-blue-400 p-3 rounded-lg text-center cursor-pointer"
+            (click)="copyPasswordToClipboard()">
+            <p> {{password()}}</p>
+            <lucide-icon name="clipboard-copy" class="w-6 h-6  "></lucide-icon>
+        </div>
+        <div class="text-red-500 text-xs">
+            Note: Password cannot be seen again, please copy it
+        </div>
+    </div>
+    <ng-container *ngIf="!showPassword()">
+        <div class="flex  items-center justify-center w-full gap-3">
+            <lucide-icon name="user-plus" class="w-6 h-6 stroke-blue-600 "></lucide-icon>
+            <p class="text-xl font-medium">{{editingAgent == null ? "Create" : "Edit"}} Agent</p>
+        </div>
+        <div class="mt-5">
+            <fieldset class="fieldset">
+                <legend class="fieldset-legend">Name</legend>
+                <input type="text" class="input w-full" placeholder="" formControlName="name" />
+                @if (name.touched && (name.errors?.minlength || name.errors?.maxlength)){
+                <p class="text-red-500">
+                    Name length must be 5 to 20
+                </p>
+                }
+                @else if(name.touched && name?.errors){
+                <p class="text-red-500">
+                    Enter a valid name
+                </p>
+                }
+            </fieldset>
+        </div>
+
+        <div class="mt-5" *ngIf="!editingAgent">
+            <fieldset class="fieldset">
+                <legend class="fieldset-legend">Email</legend>
+                <input type="text" class="input w-full" placeholder="" formControlName="email" />
+                @if (email.touched && email?.errors ){
+                <p class="text-red-500">
+                    Enter a valid email
+                </p>
+                }
+            </fieldset>
+        </div>
+        <div class="mt-5">
+            <fieldset class="fieldset">
+                <legend class="fieldset-legend">DoJ</legend>
+                <input type="date" class="input w-full" placeholder="" formControlName="dateOfJoin" />
+                @if (dateOfJoin.touched && dateOfJoin?.errors ){
+                <p class="text-red-500">
+                    Choose a valid date
+                </p>
+                }
+            </fieldset>
+        </div>
+
+        <button class="btn btn-soft bg-blue-600 text-white w-full mt-10 cursor-pointer hover:bg-blue-700" type="submit">
+            @if (isSubmitting()) {
+            {{editingAgent == null ? "Adding " : "Editing "}} Agent...
+            }@else {
+            {{editingAgent == null ? "Add " : "Edit "}} Agent
+            }
+        </button>
+    </ng-container>
+</form>

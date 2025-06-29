@@ -41,7 +41,7 @@ public class AgentService : IAgentService
         user.Password = _hashingService.HashData(agentDto.Password);
         user.Roles = "Agent";
         user.Status = "Active";
-        
+
         var agent = _mapper.Map<AgentRegisterDto, Agent>(agentDto);
         agent.Status = "Active";
 
@@ -79,8 +79,7 @@ public class AgentService : IAgentService
     {
         var agents = await _agentRepository.GetAll();
 
-        agents = GetAgentsByName(agents, queryParams.Name);
-        agents = GetAgentsByEmail(agents, queryParams.Email);
+        agents = GetAgentsByQuery(agents, queryParams.Query);
 
         agents = agents.Skip((queryParams.PageNumber - 1) * queryParams.PageSize).Take(queryParams.PageSize);
 
@@ -91,12 +90,15 @@ public class AgentService : IAgentService
     {
         var existingAgent = await _agentRepository.GetById(id);
 
-        if (existingAgent.Email != userId)
+        var user = await _userRepository.GetById(userId ?? "");
+
+        if (existingAgent.Email != userId && user.Roles != "Admin")
             throw new UnauthorizedAccessException("User not authorized to update this account details");
 
         var agent = _mapper.Map<AgentUpdateDto, Agent>(agentDto);
         agent.Id = existingAgent.Id;
         agent.Email = existingAgent.Email;
+        agent.Status = existingAgent.Status;
 
         var updatedagent = await _agentRepository.Update(id, agent);
         await _auditLogService.CreateAuditLog(new AuditLog() { UserId = userId, Action = "Update", Entity = "Agent", CreatedOn = DateTime.UtcNow });
@@ -104,12 +106,12 @@ public class AgentService : IAgentService
         return updatedagent;
     }
 
-    public IEnumerable<Agent> GetAgentsByName(IEnumerable<Agent> agents, string? name)
+    public IEnumerable<Agent> GetAgentsByQuery(IEnumerable<Agent> agents, string? query)
     {
-        if (name == null || name.Length == 0)
+        if (query == null || query.Length == 0 || agents.Count() == 0)
             return agents;
 
-        return agents.Where(a => a.Name.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
+        return agents.Where(a => a.Name.Contains(query, StringComparison.OrdinalIgnoreCase) || a.Email.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
     }
 
     public IEnumerable<Agent> GetAgentsByEmail(IEnumerable<Agent> agents, string? email)
@@ -120,4 +122,37 @@ public class AgentService : IAgentService
         return agents.Where(a => a.Email.Contains(email, StringComparison.OrdinalIgnoreCase)).ToList();
     }
 
+    public async Task<Agent> ActivateAgent(string? userId, int id)
+    {
+        var user = await _userRepository.GetById(userId ?? "");
+        var agent = await _agentRepository.GetById(id);
+
+        if (agent.Email != userId && user.Roles != "Admin")
+            throw new UnauthorizedAccessException("User not authorized to activate the account");
+
+        agent.Status = "Active";
+        var updatedAgent = await _agentRepository.Update(id, agent);
+        var agentUser = await _userRepository.GetById(agent.Email);
+        agentUser.Status = "Active";
+        await _userRepository.Update(agent.Email, agentUser);
+
+        return updatedAgent;
+    }
+
+    public async Task<Agent> DeactivateAgent(string? userId, int id)
+    {
+        var user = await _userRepository.GetById(userId ?? "");
+        var agent = await _agentRepository.GetById(id);
+
+        if (agent.Email != userId && user.Roles != "Admin")
+            throw new UnauthorizedAccessException("User not authorized to deactivate the account");
+
+        agent.Status = "Inactive";
+        var updatedAgent = await _agentRepository.Update(id, agent);
+        var agentUser = await _userRepository.GetById(agent.Email);
+        agentUser.Status = "Inactive";
+        await _userRepository.Update(agent.Email, agentUser);
+
+        return updatedAgent;
+    }
 }

@@ -79,8 +79,7 @@ public class CustomerService : ICustomerService
     public async Task<IEnumerable<Customer>> GetCustomers(CustomerQueryParams queryParams)
     {
         var customers = await _customerRepository.GetAll();
-        customers = GetCustomerByName(customers, queryParams.Name);
-        customers = GetCustomerByEmail(customers, queryParams.Email);
+        customers = GetCustomerByQuery(customers, queryParams.Query);
 
         customers = customers.Skip((queryParams.PageNumber - 1) * queryParams.PageSize).Take(queryParams.PageSize);
         return customers;
@@ -90,12 +89,15 @@ public class CustomerService : ICustomerService
     {
         var existingCustomer = await _customerRepository.GetById(id);
 
-        if (existingCustomer.Email != userId)
+        var user = await _userRepository.GetById(userId ?? "");
+
+        if (existingCustomer.Email != userId && user.Roles != "Admin")
             throw new UnauthorizedAccessException("User not authorized to update this account details");
 
         var customer = _mapper.Map<CustomerUpdateDto, Customer>(customerDto);
         customer.Id = existingCustomer.Id;
         customer.Email = existingCustomer.Email;
+        customer.Status = existingCustomer.Status;
 
         var updatedCustomer = await _customerRepository.Update(customer.Id, customer);
         await _auditLogService.CreateAuditLog(new AuditLog() { UserId = userId, Action = "Update", Entity = "Customer", CreatedOn = DateTime.UtcNow });
@@ -103,12 +105,12 @@ public class CustomerService : ICustomerService
         return updatedCustomer;
     }
 
-    public IEnumerable<Customer> GetCustomerByName(IEnumerable<Customer> customers, string? name)
+    public IEnumerable<Customer> GetCustomerByQuery(IEnumerable<Customer> customers, string? query)
     {
-        if (name == null || name.Length == 0)
+        if (query == null || query.Length == 0 || customers.Count() == 0)
             return customers;
 
-        return customers.Where(a => a.Name.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
+        return customers.Where(a => a.Name.Contains(query, StringComparison.OrdinalIgnoreCase) || a.Email.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
     }
 
     public IEnumerable<Customer> GetCustomerByEmail(IEnumerable<Customer> customers, string? email)
@@ -117,6 +119,40 @@ public class CustomerService : ICustomerService
             return customers;
 
         return customers.Where(a => a.Email.Contains(email, StringComparison.OrdinalIgnoreCase)).ToList();
+    }
+
+    public async Task<Customer> ActivateCustomer(string? userId, int id)
+    {
+        var user = await _userRepository.GetById(userId ?? "");
+        var customer = await _customerRepository.GetById(id);
+
+        if (customer.Email != userId && user.Roles != "Admin")
+            throw new UnauthorizedAccessException("User not authorized to activate the account");
+
+        customer.Status = "Active";
+        var updatedCustomer = await _customerRepository.Update(id, customer);
+        var agentUser = await _userRepository.GetById(customer.Email);
+        agentUser.Status = "Active";
+        await _userRepository.Update(customer.Email, agentUser);
+
+        return updatedCustomer;
+    }
+
+    public async Task<Customer> DeactivateCustomer(string? userId, int id)
+    {
+        var user = await _userRepository.GetById(userId ?? "");
+        var customer = await _customerRepository.GetById(id);
+
+        if (customer.Email != userId && user.Roles != "Admin")
+            throw new UnauthorizedAccessException("User not authorized to activate the account");
+
+        customer.Status = "Inactive";
+        var updatedCustomer = await _customerRepository.Update(id, customer);
+        var agentUser = await _userRepository.GetById(customer.Email);
+        agentUser.Status = "Inactive";
+        await _userRepository.Update(customer.Email, agentUser);
+
+        return updatedCustomer;
     }
 
 }

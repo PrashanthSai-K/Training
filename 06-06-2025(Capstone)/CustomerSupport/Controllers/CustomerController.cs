@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using CustomerSupport.Interfaces;
 using CustomerSupport.Models.Dto;
 using CustomerSupport.Models.QueryParams;
@@ -27,17 +28,16 @@ namespace CustomerSupport.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = "Customer, Admin")]
         public async Task<IActionResult> UpdateCustomer(int id, CustomerUpdateDto customerDto)
         {
             var userId = User?.Identity?.Name;
-
             var customer = await _customerService.UpdateCustomer(userId, id, customerDto);
             return Ok(customer);
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = "Customer, Admin")]
         public async Task<IActionResult> DeleteCustomer(int id)
         {
             var userId = User?.Identity?.Name;
@@ -61,5 +61,25 @@ namespace CustomerSupport.Controllers
             var customers = await _customerService.GetCustomers(queryParams);
             return Ok(customers);
         }
+
+        [HttpPut("{id}/activate")]
+        [Authorize(Roles = "Customer, Admin")]
+        public async Task<IActionResult> ActivateCustomer(int id)
+        {
+            var userId = User?.Identity?.Name;
+
+            var customer = await _customerService.ActivateCustomer(userId, id);
+            return Ok(customer);
+        }
+
+        [HttpPut("{id}/deactivate")]
+        [Authorize(Roles = "Customer, Admin")]
+        public async Task<IActionResult> DeactivateCustomer(int id)
+        {
+            var userId = User?.Identity?.Name;
+            var customer = await _customerService.DeactivateCustomer(userId, id);
+            return Ok(customer);
+        }
+
     }
 }

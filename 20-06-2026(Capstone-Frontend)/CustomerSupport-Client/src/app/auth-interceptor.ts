@@ -24,6 +24,10 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return next(authReq).pipe(
     catchError((err) => {
       console.log("🚨 Interceptor error:", err);
+      const isLoginRequest = req.url.includes('/login'); 
+      if (isLoginRequest) {
+        return throwError(() => err);
+      }
 
       if (err.status === 401) {
         return authService.refreshToken().pipe(

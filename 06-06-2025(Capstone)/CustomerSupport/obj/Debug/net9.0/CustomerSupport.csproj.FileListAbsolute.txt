@@ -149,3 +149,6 @@
 /Users/presidio/sai/Training/06-06-2025(Capstone)/CustomerSupport/bin/Debug/net9.0/Serilog.Sinks.Debug.dll
 /Users/presidio/sai/Training/06-06-2025(Capstone)/CustomerSupport/bin/Debug/net9.0/Serilog.Sinks.File.dll
 /Users/presidio/sai/Training/06-06-2025(Capstone)/CustomerSupport/bin/Debug/net9.0/Microsoft.AspNetCore.Mvc.Versioning.dll
+/Users/presidio/sai/Training/06-06-2025(Capstone)/CustomerSupport/bin/Debug/net9.0/BouncyCastle.Cryptography.dll
+/Users/presidio/sai/Training/06-06-2025(Capstone)/CustomerSupport/bin/Debug/net9.0/MailKit.dll
+/Users/presidio/sai/Training/06-06-2025(Capstone)/CustomerSupport/bin/Debug/net9.0/MimeKit.dll
