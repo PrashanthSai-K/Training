@@ -9,9 +9,10 @@ import { CustomerManagement } from './features/customer-management/customer-mana
 import { ForgotPassword } from './features/auth/forgot-password/forgot-password';
 import { ResetPassword } from './features/auth/reset-password/reset-password';
 import { authGuard } from './auth-guard';
+import { UserProfile } from './features/user-profile/user-profile';
 
 export const routes: Routes = [
-    
+
     { path: "", component: Landing },
     { path: "login", component: Login },
     { path: "forgotPassword", component: ForgotPassword },
@@ -43,6 +44,13 @@ export const routes: Routes = [
         canActivate: [authGuard],
         data: {
             role: ['Admin']
+        }
+    },
+    {
+        path: "profile", component: UserProfile,
+        canActivate: [authGuard],
+        data: {
+            role: ['Agent', 'Customer']
         }
     }
 ];

@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class AdminSidebar {
   url = signal<string | null>(null);
+  @Input()isNavOpen!:boolean;
 
   constructor(public authservice: AuthService) {
     authservice.route$.subscribe({
@@ -21,25 +22,5 @@ export class AdminSidebar {
       }
     })
   }
-
-  // private _route$!: Observable<string>;
-
-  // @Input()
-  // set route$(value: Observable<string>) {
-  //   if (value) {
-  //     console.log("Sidebar received route$", value);
-  //     this._route$ = value;
-  //     this._route$.subscribe({
-  //       next: (url) => {
-  //       this.url = url;
-  //       console.log("Sidebar URL:", url);
-  //     },
-  //     error:(err)=>console.log(err),
-  //     complete:()=>console.log("completed")
-
-  //   });
-  //   }
-  // }
-
 
 }

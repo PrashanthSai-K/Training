@@ -75,6 +75,13 @@ public class AgentService : IAgentService
         return agent;
     }
 
+    public async Task<Agent> GetAgentFromToken(string userId)
+    {
+        var user = await _userRepository.GetById(userId);
+        var agents = await _agentRepository.GetAll();
+        return agents.FirstOrDefault(agent => agent.Email == user.Username) ?? throw new Exception("Agent not found");
+    }
+
     public async Task<IEnumerable<Agent>> GetAgents(AgentQueryParams queryParams)
     {
         var agents = await _agentRepository.GetAll();

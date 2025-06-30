@@ -2,7 +2,7 @@ import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListen
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { BotMessageSquare, CircleArrowLeft, CircleUser, CircleX, ClipboardCopy, KeyRound, LayoutDashboard, Lock, LucideAngularModule, MessageCirclePlus, MessageSquarePlus, MoreVertical, SendHorizontal, ShieldUser, TicketCheck, TicketPercent, Upload, UserCog, UserPlus } from 'lucide-angular';
+import { BotMessageSquare, CircleArrowLeft, CircleUser, CircleX, ClipboardCopy, Dot, KeyRound, LayoutDashboard, Lock, LucideAngularModule, MessageCirclePlus, MessageSquareMore, MessageSquarePlus, MoreVertical, SendHorizontal, ShieldUser, SquarePen, TicketCheck, TicketPercent, Upload, UserCog, UserPlus } from 'lucide-angular';
 import { ChatService } from './core/services/chat-service';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './auth-interceptor';
@@ -11,6 +11,7 @@ import { AuthService } from './core/services/auth-service';
 import { CustomerService } from './core/services/customer-service';
 import { AgentService } from './core/services/agent-service';
 import { DashboardService } from './core/services/dashboard-service';
+import { NotificationService } from './core/services/notification-service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,7 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     importProvidersFrom(LucideAngularModule.pick({
-      BotMessageSquare, CircleUser, MessageCirclePlus, ShieldUser, UserCog, UserPlus, ClipboardCopy,
+      BotMessageSquare, CircleUser, MessageCirclePlus, ShieldUser, UserCog, UserPlus, ClipboardCopy, MessageSquareMore, SquarePen, Dot,
       Upload, SendHorizontal, CircleArrowLeft, CircleX, MessageSquarePlus, TicketPercent, TicketCheck, LayoutDashboard, MoreVertical, KeyRound, Lock
     })),
     provideHttpClient(withInterceptors([authInterceptor])),
@@ -27,6 +28,7 @@ export const appConfig: ApplicationConfig = {
     AuthService,
     CustomerService,
     AgentService,
-    DashboardService
+    DashboardService,
+    NotificationService
   ],
 };

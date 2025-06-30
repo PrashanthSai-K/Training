@@ -64,6 +64,15 @@ namespace CustomerSupport.Controllers
             return Ok(agents);
         }
 
+        [HttpGet("profile")]
+        [Authorize(Roles = "Agent")]
+        public async Task<IActionResult> GetAgentFromToken()
+        {
+            var user = User?.Identity?.Name;
+            var agent = await _agentService.GetAgentFromToken(user ?? "");
+            return Ok(agent);
+        }
+
         [HttpPut("{id}/activate")]
         [Authorize(Roles = "Agent, Admin")]
         public async Task<IActionResult> ActivateAgent(int id)

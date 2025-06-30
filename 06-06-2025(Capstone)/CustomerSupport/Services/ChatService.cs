@@ -69,6 +69,7 @@ public class ChatService : IChatService
         if (agent == null || chat.AgentId != agent.Id)
             throw new UnauthorizedAccessException("User not allowed to delete this chat");
 
+        chat.UpdatedAt = DateTime.UtcNow;
         chat.Status = "Deleted";
         var deletedChat = await _chatRepository.Update(id, chat);
         await _auditLogService.CreateAuditLog(new AuditLog() { UserId = userId, Action = "Delete", Entity = "Chat", CreatedOn = DateTime.UtcNow });

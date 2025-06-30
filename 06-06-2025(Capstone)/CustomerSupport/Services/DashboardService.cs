@@ -48,16 +48,78 @@ public class DashboardService : IDashboardService
         return chats.Count();
     }
 
-    public async Task<int> GetChatCountByAgent(string userId, ChatCountRequestDto requestDto)
+    public async Task<int> GetChatCountByUser(string userId)
     {
         var user = await _userRepository.GetById(userId);
-        var agents = await _agentRepository.GetAll();
-        var agent = agents.FirstOrDefault(agent => agent.Email == user.Username);
-        if (agent == null)
-            throw new Exception("Agent not found");
+        IEnumerable<Chat> chats = new List<Chat>();
+        if (user.Roles == "Agent")
+        {
+            var agents = await _agentRepository.GetAll();
+            var agent = agents.FirstOrDefault(agent => agent.Email == user.Username);
+            if (agent == null)
+                throw new Exception("Agent not found");
+            chats = await _chatRepository.GetAll();
+            chats = chats.Where(chat => chat.AgentId == agent.Id).ToList();
+        }
+        if (user.Roles == "Customer")
+        {
+            var customers = await _customerRepository.GetAll();
+            var customer = customers.FirstOrDefault(customer => customer.Email == user.Username);
+            if (customer == null)
+                throw new Exception("Customer not found");
+            chats = await _chatRepository.GetAll();
+            chats = chats.Where(chat => chat.CustomerId == customer.Id).ToList();
+        }
+        return chats.Count();
+    }
 
-        var chats = await _chatRepository.GetAll();
-        chats = chats.Where(chat => chat.Status == requestDto.Status && chat.AgentId == agent.Id).ToList();
+    public async Task<int> GetActiveChatCountByUser(string userId)
+    {
+        var user = await _userRepository.GetById(userId);
+        IEnumerable<Chat> chats = new List<Chat>();
+        if (user.Roles == "Agent")
+        {
+            var agents = await _agentRepository.GetAll();
+            var agent = agents.FirstOrDefault(agent => agent.Email == user.Username);
+            if (agent == null)
+                throw new Exception("Agent not found");
+            chats = await _chatRepository.GetAll();
+            chats = chats.Where(chat => chat.AgentId == agent.Id && chat.Status == "Active").ToList();
+        }
+        if (user.Roles == "Customer")
+        {
+            var customers = await _customerRepository.GetAll();
+            var customer = customers.FirstOrDefault(customer => customer.Email == user.Username);
+            if (customer == null)
+                throw new Exception("Customer not found");
+            chats = await _chatRepository.GetAll();
+            chats = chats.Where(chat => chat.CustomerId == customer.Id && chat.Status == "Active").ToList();
+        }
+        return chats.Count();
+    }
+
+    public async Task<int> GetClosedChatCountByUser(string userId)
+    {
+        var user = await _userRepository.GetById(userId);
+        IEnumerable<Chat> chats = new List<Chat>();
+        if (user.Roles == "Agent")
+        {
+            var agents = await _agentRepository.GetAll();
+            var agent = agents.FirstOrDefault(agent => agent.Email == user.Username);
+            if (agent == null)
+                throw new Exception("Agent not found");
+            chats = await _chatRepository.GetAll();
+            chats = chats.Where(chat => chat.AgentId == agent.Id && chat.Status == "Deleted").ToList();
+        }
+        if (user.Roles == "Customer")
+        {
+            var customers = await _customerRepository.GetAll();
+            var customer = customers.FirstOrDefault(customer => customer.Email == user.Username);
+            if (customer == null)
+                throw new Exception("Customer not found");
+            chats = await _chatRepository.GetAll();
+            chats = chats.Where(chat => chat.CustomerId == customer.Id && chat.Status == "Deleted").ToList();
+        }
         return chats.Count();
     }
 
@@ -66,4 +128,52 @@ public class DashboardService : IDashboardService
         var customers = await _customerRepository.GetAll();
         return customers.Count();
     }
+
+    public async Task<IEnumerable<AdminChatTrendDto>> GetAdminChatTrend()
+    {
+        var chats = await _chatRepository.GetAll();
+        var trends = chats.Select(chat => new AdminChatTrendDto
+        {
+            Status = chat.Status,
+            Date = chat.Status == "Active" ? chat.CreatedOn : chat.UpdatedAt
+        }).ToList();
+
+        return trends;
+    }
+
+    public async Task<IEnumerable<AdminChatTrendDto>> GetUserChatTrend(string userId)
+    {
+        var user = await _userRepository.GetById(userId);
+        IEnumerable<AdminChatTrendDto> trends = new List<AdminChatTrendDto>();
+        if (user.Roles == "Agent")
+        {
+            var agents = await _agentRepository.GetAll();
+            var agent = agents.FirstOrDefault(agent => agent.Email == user.Username);
+            if (agent == null)
+                throw new Exception("Agent not found");
+
+            var chats = await _chatRepository.GetAll();
+            trends = chats.Where(chat => chat.AgentId == agent.Id).Select(chat => new AdminChatTrendDto
+            {
+                Status = chat.Status,
+                Date = chat.Status == "Active" ? chat.CreatedOn : chat.UpdatedAt
+            }).ToList();
+
+        }
+        if (user.Roles == "Customer")
+        {
+            var customers = await _customerRepository.GetAll();
+            var customer = customers.FirstOrDefault(customer => customer.Email == user.Username);
+            if (customer == null)
+                throw new Exception("Customer not found");
+            var chats = await _chatRepository.GetAll();
+            trends = chats.Where(chat => chat.AgentId == customer.Id).Select(chat => new AdminChatTrendDto
+            {
+                Status = chat.Status,
+                Date = chat.Status == "Active" ? chat.CreatedOn : chat.UpdatedAt
+            }).ToList();
+        }
+        return trends;
+    }
+
 }

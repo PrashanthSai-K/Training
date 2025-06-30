@@ -76,6 +76,13 @@ public class CustomerService : ICustomerService
         return customer;
     }
 
+    public async Task<Customer> GetCustomerFromToken(string userId)
+    {
+        var user = await _userRepository.GetById(userId);
+        var customers = await _customerRepository.GetAll();
+        return customers.FirstOrDefault(customer => customer.Email == user.Username) ?? throw new Exception("Customer not found");
+    }
+
     public async Task<IEnumerable<Customer>> GetCustomers(CustomerQueryParams queryParams)
     {
         var customers = await _customerRepository.GetAll();

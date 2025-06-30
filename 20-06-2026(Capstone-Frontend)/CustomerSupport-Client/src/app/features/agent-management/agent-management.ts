@@ -23,7 +23,7 @@ export class AgentManagement implements OnInit {
 
   private _snackBar = inject(MatSnackBar);
 
-  constructor(private agentService: AgentService, public authService:AuthService) {
+  constructor(private agentService: AgentService, public authService: AuthService) {
     authService.getUser().subscribe();
   }
 
@@ -32,6 +32,9 @@ export class AgentManagement implements OnInit {
   }
 
   activateAgent(agent: Agent) {
+    if (!window.confirm("Do you want to activate agent ?")) {
+      return;
+    }
     this.agentService.activateAgent(agent.id).subscribe({
       next: (data) => {
         this._snackBar.open("Agent account activated", "", {
@@ -44,6 +47,9 @@ export class AgentManagement implements OnInit {
   }
 
   deactivateAgent(agent: Agent) {
+    if (!window.confirm("Do you want to deactivate agent ?")) {
+      return;
+    }
     this.agentService.deactivateAgent(agent.id).subscribe({
       next: (data) => {
         this._snackBar.open("Agent account deactivated", "", {

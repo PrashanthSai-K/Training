@@ -14,4 +14,5 @@ public interface IAgentService
     public Task<Agent> DeleteAgent(string? userId, int id);
     public Task<IEnumerable<Agent>> GetAgents(AgentQueryParams queryParams);
     public Task<Agent> GetAgentById(int id);
+    public Task<Agent> GetAgentFromToken(string userId);
 }

@@ -1,23 +1,37 @@
-<div class="min-w-screen h-[92vh] grid grid-cols-1 sm:grid-cols-3 overflow-hidden"
+<div class="w-full h-[92vh] grid grid-cols-1 sm:grid-cols-3 overflow-hidden"
     *ngIf="authService.currentUser$ | async as user">
     <div class="col-span-1 h-full border-r flex-col border-gray-300 min-h-0 flex"
         *ngIf="isMobile && isListActive() || !isMobile">
         <div class="bg-white shadow-lg p-5 shrink-0">
             <div class="flex items-center justify-between">
                 <h1 class="text-lg font-semibold">Chats</h1>
-                <lucide-icon name="message-circle-plus" *ngIf="user.role == 'Customer'" (click)="showCreateChat()"
+                <lucide-icon title="New Chat" name="message-circle-plus" *ngIf="user.role == 'Customer'" (click)="showCreateChat()"
                     class="w-5 h-5 stroke-blue-600 cursor-pointer"></lucide-icon>
             </div>
             <div class="mt-2">
                 <fieldset class="fieldset">
-                    <input type="text" class="input w-full placeholder:text-sm placeholder:text-gray-400" [(ngModel)]="searchQuery"
-                       (input)="onSearch()" placeholder="Type to search..." />
+                    <input type="text" class="input w-full placeholder:text-sm placeholder:text-gray-400"
+                        [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Type to search..." />
                 </fieldset>
+            </div>
+            <div class="flex items-center gap-3 text-xs text-white mt-2">
+                <p class="py-0.5 px-2 bg-blue-400 rounded-lg cursor-pointer shadow-md " (click)="onAllFilter()"
+                    [ngClass]="{'bg-blue-600' : filterQuery == ''}">
+                    All
+                </p>
+                <p class="py-0.5 px-2 bg-blue-400 rounded-lg cursor-pointer shadow-md" (click)="onActiveFilter()"
+                    [ngClass]="{'bg-blue-600' : filterQuery == 'active'}">
+                    Active
+                </p>
+                <p class="py-0.5 px-2 bg-blue-400 rounded-lg cursor-pointer shadow-md" (click)="onClosedFilter()"
+                    [ngClass]="{'bg-blue-600' : filterQuery == 'deleted'}">
+                    Closed
+                </p>
             </div>
         </div>
 
         <div class="overflow-y-auto grow">
-            <app-chat-list (showChat)="showChat($event)" ></app-chat-list>
+            <app-chat-list (showChat)="showChat($event)"></app-chat-list>
         </div>
     </div>
 
@@ -34,7 +48,8 @@
                         <lucide-icon name="ticket-percent" class="w-8 h-8 fill-gray-50 stroke-blue-600"></lucide-icon>
                         <div class="">
                             <h1 class="text-md font-semibold">{{activeChat.issueName| titlecase}}</h1>
-                            <p class="text-sm">{{user.role == 'Agent' ? 'Customer : ' : 'Agent : '}} {{(user.role == 'Agent' ? activeChat.customer.name :
+                            <p class="text-sm">{{user.role == 'Agent' ? 'Customer : ' : 'Agent : '}} {{(user.role ==
+                                'Agent' ? activeChat.customer.name :
                                 activeChat.agent.name) | titlecase}}</p>
                         </div>
                     </div>
@@ -42,8 +57,8 @@
                         <lucide-icon name="circle-arrow-left" *ngIf="isMobile" (click)="backToList()"
                             class="w-6 h-6 stroke-blue-600 cursor-pointer"></lucide-icon>
 
-                        <lucide-icon name="circle-x" *ngIf="user.role == 'Agent' && activeChat.status != 'Deleted'" (click)="onCloseChat()"
-                            class="w-6 h-6 stroke-blue-600 cursor-pointer"></lucide-icon>
+                        <lucide-icon title="Close Chat" name="circle-x" *ngIf="user.role == 'Agent' && activeChat.status != 'Deleted'"
+                            (click)="onCloseChat()" class="w-6 h-6 stroke-blue-600 cursor-pointer"></lucide-icon>
                     </div>
                 </div>
             </div>

@@ -1,13 +1,15 @@
-<div class="h-screen bg-gray-50">
-  <app-navbar></app-navbar>
+<div class="h-screen bg-gray-50 transition-all duration-500">
+  <app-navbar (toggledNavbar)="toggledNavbar($event)" (toggledNotification)="toggleNotification($event)"
+    (navDisabled)="navChanged($event)"></app-navbar>
+  <app-notification [isVisible]="isNotificationOpen()"></app-notification>
+  <div class="min-h-[92vh] flex w-full" [ngClass]="{'pt-[8vh]': isNavVisible()}">
 
-  <div class="min-h-[92vh] flex w-full" [ngClass]="{'items-center justify-center': user?.role !== 'Admin'}">
-
-    <div *ngIf="user?.role === 'Admin'" class="sm:w-18">
-      <app-admin-sidebar></app-admin-sidebar>
+    <div [ngClass]="{ 'w-18': isNavOpen(), 'w-0 overflow-hidden': !isNavOpen() }" *ngIf="isNavVisible()"
+      class="transition-all duration-500 ease-in-out">
+      <app-admin-sidebar [isNavOpen]="isNavOpen()"></app-admin-sidebar>
     </div>
-
-    <router-outlet></router-outlet>
-
+    <div class="w-screen">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

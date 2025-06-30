@@ -44,6 +44,10 @@ export class AgentService {
         );
     }
 
+    getAgent() {
+        return this.httpClient.get(`${this.agentUrl}/profile`);
+    }
+
     updateAgent(agent: Agent, id: number) {
         return this.httpClient.put(`${this.agentUrl}/${id}`, { ...agent, dateOfJoin: new Date(agent.dateOfJoin).toISOString() });
     }

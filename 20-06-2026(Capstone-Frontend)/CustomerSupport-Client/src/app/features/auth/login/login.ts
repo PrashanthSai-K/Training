@@ -38,10 +38,7 @@ export class Login {
     authService.getUser().pipe(take(1)).subscribe({
       next: (value) => {
         if (value != null)
-          if (value?.role == 'Admin')
-            router.navigateByUrl("/dashboard");
-          else if (value)
-            router.navigateByUrl("/chat")
+          router.navigateByUrl("/dashboard");
       },
     })
   }
@@ -58,7 +55,7 @@ export class Login {
         this._snackBar.open("Logged in successfully", "", {
           duration: 1000
         });
-        return this.router.navigateByUrl("/chat");
+        return this.router.navigateByUrl("/dashboard");
       },
       error: (err) => {
         this.isSubmitting.set(false);

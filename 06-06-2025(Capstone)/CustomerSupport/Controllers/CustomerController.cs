@@ -62,6 +62,16 @@ namespace CustomerSupport.Controllers
             return Ok(customers);
         }
 
+        [HttpGet("profile")]
+        [Authorize(Roles = "Customer")]
+        public async Task<IActionResult> GetCustomerFromToken()
+        {
+            var user = User?.Identity?.Name;
+            var customer = await _customerService.GetCustomerFromToken(user ?? "");
+            return Ok(customer);
+        }
+
+
         [HttpPut("{id}/activate")]
         [Authorize(Roles = "Customer, Admin")]
         public async Task<IActionResult> ActivateCustomer(int id)

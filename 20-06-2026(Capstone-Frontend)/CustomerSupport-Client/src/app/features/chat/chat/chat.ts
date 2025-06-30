@@ -109,7 +109,7 @@ export class Chat implements OnInit {
       filter((chat): chat is ChatModel => !!chat),
       switchMap(chat => {
         this.chat = chat as ChatModel;
-        this.chatHubService.startConnection(chat.id);
+        this.chatHubService.joinChat(chat.id);
         return this.chatService.getChatMessages(chat.id);
       })
     ).subscribe({
@@ -124,7 +124,8 @@ export class Chat implements OnInit {
       next: (data) => {
         if (data) {
           // this.chatService.appendMessages(data as Message);
-          this.chatMessages.push(data);
+          if (data.chatId == this.chat?.id)
+            this.chatMessages.push(data);
         }
       }
     })

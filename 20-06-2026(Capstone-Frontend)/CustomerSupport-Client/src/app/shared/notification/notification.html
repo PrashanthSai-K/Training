@@ -1,0 +1,15 @@
+<div class="absolute top-[9vh] z-[999] right-5 bg-white w-64 min-h-64 shadow-lg rounded-lg p-5 overflow-y-auto"
+    *ngIf="isVisible" >
+    <div class="pt-1">
+        @if(notifications.length > 0){
+        @for (message of notifications; track $index) {
+        <div class="text-xs font-medium text-gray-500">
+            <p>{{message.userId}} sent an message</p>
+        </div>
+        }}
+    </div>
+    @if(notifications.length <= 0){ <div class="flex h-64 w-full items-center justify-center">
+        <p class="text-xs font-medium text-gray-500">No notifications found.</p>
+</div>
+}
+</div>

@@ -27,6 +27,7 @@ export class ChatTemplate implements OnInit {
   isChatActive = signal<boolean>(false);
   isCreateChatActive = signal<boolean>(false);
   searchQuery: string = "";
+  filterQuery: string = "";
 
   private _snackBar = inject(MatSnackBar);
 
@@ -61,6 +62,21 @@ export class ChatTemplate implements OnInit {
 
   onSearch() {
     this.chatService.searchSubject.next(this.searchQuery);
+  }
+
+  onAllFilter() {
+    this.filterQuery = '';
+    this.chatService.filterSubject.next(this.filterQuery);
+  }
+
+  onActiveFilter() {
+    this.filterQuery = 'active';
+    this.chatService.filterSubject.next(this.filterQuery);
+  }
+
+  onClosedFilter() {
+    this.filterQuery = 'deleted';
+    this.chatService.filterSubject.next(this.filterQuery);
   }
 
   showCreateChat() {

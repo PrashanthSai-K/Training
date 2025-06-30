@@ -1,21 +1,26 @@
-<div class="flex flex-col  p-5 sm:px-10 sm:py-5 w-[95vw] h-full ">
-    <div class="w-full py-5">
+@if (isLoading()) {
+<div class="flex h-full w-full items-center justify-center">
+    <span class="loading loading-dots loading-md text-blue-600"></span>
+</div>
+
+}@else {
+<div class="flex flex-col gap-5 p-5 sm:px-10 sm:py-5 w-full h-full " *ngIf="authService.currentUser$ | async as user">
+    <div class="w-full">
         <h1 class="w-full text-start font-medium text-2xl">Dashboard</h1>
     </div>
-    <div class="grid sm:grid-cols-4 gap-5">
-        <div class="card bg-gradient-to-r from-blue-600 to-blue-500 text-primary-content ">
+    <div class="grid gap-5"
+        [ngClass]="{'sm:grid-cols-5' : user.role == 'Admin', 'sm:grid-cols-3': user.role == 'Agent' ||  user.role == 'Customer' }">
+        <div class="card bg-gradient-to-r from-blue-600 to-blue-500 text-primary-content " *ngIf="user.role == 'Admin'">
             <div class="card-body">
                 <h2 class="card-title">Total Agents</h2>
-                <!-- <p>A card component has a figure, a body part, and inside body there are title and actions parts</p> -->
                 <div class="card-actions justify-end">
                     <button class="font-medium text-xl text-white">{{summary?.agent}}</button>
                 </div>
             </div>
         </div>
-        <div class="card bg-gradient-to-r from-blue-600 to-blue-500 text-primary-content ">
+        <div class="card bg-gradient-to-r from-blue-600 to-blue-500 text-primary-content " *ngIf="user.role == 'Admin'">
             <div class="card-body">
                 <h2 class="card-title">Total Customer</h2>
-                <!-- <p>A card component has a figure, a body part, and inside body there are title and actions parts</p> -->
                 <div class="card-actions justify-end">
                     <button class="font-medium text-xl text-white">{{summary?.customer}}</button>
                 </div>
@@ -24,7 +29,6 @@
         <div class="card bg-gradient-to-r from-blue-600 to-blue-500 text-primary-content ">
             <div class="card-body">
                 <h2 class="card-title">Total Issues</h2>
-                <!-- <p>A card component has a figure, a body part, and inside body there are title and actions parts</p> -->
                 <div class="card-actions justify-end">
                     <button class="font-medium text-xl text-white">{{summary?.chatCount}}</button>
                 </div>
@@ -33,13 +37,26 @@
         <div class="card bg-gradient-to-r from-blue-600 to-blue-500 text-primary-content ">
             <div class="card-body">
                 <h2 class="card-title">Open Issues</h2>
-                <!-- <p>A card component has a figure, a body part, and inside body there are title and actions parts</p> -->
                 <div class="card-actions justify-end">
                     <button class="font-medium text-xl text-white">{{summary?.activeChat}}</button>
                 </div>
             </div>
         </div>
+        <div class="card bg-gradient-to-r from-blue-600 to-blue-500 text-primary-content ">
+            <div class="card-body">
+                <h2 class="card-title">Closed Issues</h2>
+                <div class="card-actions justify-end">
+                    <button class="font-medium text-xl text-white">{{summary?.closedChat}}</button>
+                </div>
+            </div>
+        </div>
 
     </div>
-
+    <div class="sm:min-h-64">
+        <h1 class="w-full text-start font-medium text-2xl mb-5">Issue Opened vs Closed</h1>
+        <ngx-charts-area-chart [results]="trends" [yAxis]="true" [xAxis]="true" [legend]="true" [showXAxisLabel]="true"
+            [showYAxisLabel]="true" [xAxisLabel]="'Date'" [yAxisLabel]="'Issue Count'">
+        </ngx-charts-area-chart>
+    </div>
 </div>
+}

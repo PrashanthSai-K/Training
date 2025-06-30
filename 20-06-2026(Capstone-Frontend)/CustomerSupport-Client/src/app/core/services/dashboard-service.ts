@@ -7,7 +7,21 @@ export class DashboardService {
     private dashUrl = "http://localhost:5124/api/v1/dashboard"
     private httpClient = inject(HttpClient);
 
-    getAdminSummary(){
+    getAdminSummary() {
         return this.httpClient.get(`${this.dashUrl}/adminSummary`);
     }
+
+    getAdminChatTrend() {
+        return this.httpClient.get(`${this.dashUrl}/chatTrend`);
+    }
+
+    getUserSummary() {
+        return this.httpClient.get(`${this.dashUrl}/userSummary`);
+    }
+
+    getUserChatTrend() {
+        return this.httpClient.get(`${this.dashUrl}/userChatTrend`);
+    }
+
+
 }

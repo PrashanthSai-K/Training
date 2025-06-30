@@ -48,6 +48,10 @@ export class CustomerService {
         );
     }
 
+    getCustomer() {
+        return this.httpClient.get(`${this.custUrl}/profile`);
+    }
+
     updateCustomer(customer: CustomerModel) {
         return this.httpClient.put(`${this.custUrl}/${customer.id}`, customer);
     }

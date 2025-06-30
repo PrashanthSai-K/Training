@@ -12,7 +12,8 @@ export class ChatService {
     private chatUrl: string = "http://localhost:5124/api/v1/chat";
     pageSize: number = 1000;
     pageNumber: number = 1;
-    // searchQuery: string = '';
+    searchQuery: string = '';
+    filterQuery:string = "";
 
     private chatSubject = new BehaviorSubject<ChatModel[]>([]);
     chat$ = this.chatSubject.asObservable();
@@ -24,6 +25,7 @@ export class ChatService {
     messages$ = this.messagesSubject.asObservable();
 
     searchSubject = new BehaviorSubject<string>("");
+    filterSubject = new BehaviorSubject<string>("");
 
     constructor() {
         this.searchSubject.pipe(
@@ -31,11 +33,13 @@ export class ChatService {
             distinctUntilChanged(),
         ).subscribe({
             next: (query) => {
+                this.searchQuery = query;
                 this.httpClient.get(this.chatUrl, {
                     params: new HttpParams()
                         .set("pageSize", this.pageSize.toString())
                         .set("pageNumber", this.pageNumber.toString())
                         .set("query", query)
+                        .set("status", this.filterQuery)
                 }).subscribe({
                     next: (data: any) => {
                         if (data.length > 0) {
@@ -48,6 +52,28 @@ export class ChatService {
                 });
             }
         });
+
+        this.filterSubject.subscribe({
+            next: (value) => {
+                this.filterQuery = value;
+                this.httpClient.get(this.chatUrl, {
+                    params: new HttpParams()
+                        .set("pageSize", this.pageSize.toString())
+                        .set("pageNumber", this.pageNumber.toString())
+                        .set("status", value)
+                        .set("query", this.searchQuery)
+                }).subscribe({
+                    next: (data: any) => {
+                        if (data.length > 0) {
+                            const current = this.chatSubject.getValue();
+                            this.chatSubject.next(data as ChatModel[]);
+                        } else {
+                            this.chatSubject.next([]);
+                        }
+                    }
+                });
+            }
+        })
     }
 
 
@@ -100,7 +126,7 @@ export class ChatService {
         return this.httpClient.post(`${this.chatUrl}`, chatForm);
     }
 
-    closeChat(id:number){
+    closeChat(id: number) {
         return this.httpClient.delete(`${this.chatUrl}/${id}`);
     }
 }

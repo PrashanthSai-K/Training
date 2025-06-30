@@ -1,79 +1,82 @@
-<form class="rounded-lg bg-white pt-5 pb-10 px-10 register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <div class="flex flex-col items-center justify-center w-full gap-3">
-        <lucide-icon name="bot-message-square" class="w-12 h-12 stroke-white fill-blue-600"></lucide-icon>
-        <p class="text-xl font-medium"> Sign up to you account</p>
-    </div>
-    <div class="mt-5">
-        <fieldset class="fieldset">
-            <legend class="fieldset-legend">Name</legend>
-            <input type="text" class="input w-full" [ngClass]="{'input-error' : name.touched && name.invalid}"
-                placeholder="" formControlName="name" />
-            @if(name.touched && name?.errors){
-            <p class="text-red-500">
-                Enter a valid name
-            </p>
-            }
-        </fieldset>
-    </div>
+<div class="flex flex-col h-full w-full items-center justify-center">
 
-    <div class="mt-5">
-        <fieldset class="fieldset">
-            <legend class="fieldset-legend">Email address</legend>
-            <input type="text" class="input w-full" [ngClass]="{'input-error' : email.touched && email.invalid}"
-                placeholder="" formControlName="email" />
-            @if(email.touched && email?.errors){
-            <p class="text-red-500">
-                Enter a valid email address
-            </p>
-            }
-        </fieldset>
-    </div>
-    <div class="mt-5">
-        <fieldset class="fieldset">
-            <legend class="fieldset-legend">Phone</legend>
-            <input type="text" class="input w-full" [ngClass]="{'input-error' : phone.touched && phone.invalid}"
-                placeholder="" formControlName="phone" />
-            @if(phone.touched && phone.errors){
-            <p class="text-red-500">
-                Enter a valid phone number
-            </p>
-            }
-        </fieldset>
-    </div>
+    <form class="rounded-lg bg-white pt-5 pb-10 px-10 register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="flex flex-col items-center justify-center w-full gap-3">
+            <lucide-icon name="bot-message-square" class="w-12 h-12 stroke-white fill-blue-600"></lucide-icon>
+            <p class="text-xl font-medium"> Sign up to you account</p>
+        </div>
+        <div class="mt-5">
+            <fieldset class="fieldset">
+                <legend class="fieldset-legend">Name</legend>
+                <input type="text" class="input w-full" [ngClass]="{'input-error' : name.touched && name.invalid}"
+                    placeholder="" formControlName="name" />
+                @if(name.touched && name?.errors){
+                <p class="text-red-500">
+                    Enter a valid name
+                </p>
+                }
+            </fieldset>
+        </div>
 
-    <div class="mt-5">
-        <fieldset class="fieldset">
-            <legend class="fieldset-legend">Password</legend>
-            <input type="password" class="input w-full"
-                [ngClass]="{'input-error' : password.touched && password.invalid}" placeholder=""
-                formControlName="password" />
-            @if (password.errors?.lenError) {
-            <p class=" text-red-500">
-                Password length must be 6 to 12.
-            </p>
-            }@else if (password?.errors?.upperError) {
-            <p class=" text-red-500">
-                Password must contain one upper case letter.
-            </p>
-            }@else if (password?.errors?.lowerError) {
-            <p class=" text-red-500">
-                Password must contain one lower case letter.
-            </p>
-            }@else if (password?.errors?.digitError) {
-            <p class=" text-red-500">
-                Password must contain one digit.
-            </p>
-            } @else if(password?.touched && password?.errors){
-            <p class=" text-red-500">
-                Enter a valid password.
-            </p>
-            }
-        </fieldset>
-    </div>
-    <button class="btn btn-soft bg-blue-600 text-white w-full mt-10 cursor-pointer hover:bg-blue-700">
-        Sign Up
-    </button>
-    <p class="text-sm text-gray-400 text-center pt-5">Already user ? Please <span class="text-blue-600 cursor-pointer"
-            (click)="redirectLogin()">click here to sign in</span></p>
+        <div class="mt-5">
+            <fieldset class="fieldset">
+                <legend class="fieldset-legend">Email address</legend>
+                <input type="text" class="input w-full" [ngClass]="{'input-error' : email.touched && email.invalid}"
+                    placeholder="" formControlName="email" />
+                @if(email.touched && email?.errors){
+                <p class="text-red-500">
+                    Enter a valid email address
+                </p>
+                }
+            </fieldset>
+        </div>
+        <div class="mt-5">
+            <fieldset class="fieldset">
+                <legend class="fieldset-legend">Phone</legend>
+                <input type="text" class="input w-full" [ngClass]="{'input-error' : phone.touched && phone.invalid}"
+                    placeholder="" formControlName="phone" />
+                @if(phone.touched && phone.errors){
+                <p class="text-red-500">
+                    Enter a valid phone number
+                </p>
+                }
+            </fieldset>
+        </div>
 
-</form>
+        <div class="mt-5">
+            <fieldset class="fieldset">
+                <legend class="fieldset-legend">Password</legend>
+                <input type="password" class="input w-full"
+                    [ngClass]="{'input-error' : password.touched && password.invalid}" placeholder=""
+                    formControlName="password" />
+                @if (password.errors?.lenError) {
+                <p class=" text-red-500">
+                    Password length must be 6 to 12.
+                </p>
+                }@else if (password?.errors?.upperError) {
+                <p class=" text-red-500">
+                    Password must contain one upper case letter.
+                </p>
+                }@else if (password?.errors?.lowerError) {
+                <p class=" text-red-500">
+                    Password must contain one lower case letter.
+                </p>
+                }@else if (password?.errors?.digitError) {
+                <p class=" text-red-500">
+                    Password must contain one digit.
+                </p>
+                } @else if(password?.touched && password?.errors){
+                <p class=" text-red-500">
+                    Enter a valid password.
+                </p>
+                }
+            </fieldset>
+        </div>
+        <button class="btn btn-soft bg-blue-600 text-white w-full mt-10 cursor-pointer hover:bg-blue-700">
+            Sign Up
+        </button>
+        <p class="text-sm text-gray-400 text-center pt-5">Already user ? Please <span
+                class="text-blue-600 cursor-pointer" (click)="redirectLogin()">click here to sign in</span></p>
+
+    </form>
+</div>

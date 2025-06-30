@@ -30,25 +30,31 @@ export class CustomerManagement implements OnInit {
   }
 
   activateCustomer(customer: CustomerModel) {
+    if (!window.confirm("Do you want to activate customer ?")) {
+      return;
+    }
     this.customerService.activateCustomer(customer.id).subscribe({
       next: (data) => {
         this._snackBar.open("Customer account activated", "", {
           duration: 1000
         })
         this.customerService.getCustomers().subscribe();
-        (document.activeElement as HTMLElement)?.blur(); 
+        (document.activeElement as HTMLElement)?.blur();
       }
     })
   }
 
   deactivateCustomer(customer: CustomerModel) {
+    if (!window.confirm("Do you want to deactivate customer ?")) {
+      return;
+    }
     this.customerService.deactivateCustomer(customer.id).subscribe({
       next: (data) => {
         this._snackBar.open("Customer account deactivated", "", {
           duration: 1000
         });
         this.customerService.getCustomers().subscribe();
-        (document.activeElement as HTMLElement)?.blur(); 
+        (document.activeElement as HTMLElement)?.blur();
       }
     })
   }

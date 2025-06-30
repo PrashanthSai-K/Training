@@ -14,4 +14,5 @@ public interface ICustomerService
     public Task<Customer> DeleteCustomer(string? userId, int id);
     public Task<Customer> GetCustomerById(int id);
     public Task<IEnumerable<Customer>> GetCustomers(CustomerQueryParams queryParams);
+    public Task<Customer> GetCustomerFromToken(string userId);
 }
