@@ -9,7 +9,6 @@
                 class="w-6 h-6 stroke-blue-600 cursor-pointer"></lucide-icon>
             <lucide-icon (click)="disableEditing()" *ngIf="isEditing()" name="circle-x"
                 class="w-6 h-6 stroke-blue-600 cursor-pointer"></lucide-icon>
-
         </div>
 
         <!-- Name -->
@@ -23,18 +22,6 @@
                 </p>
             </fieldset>
         </div>
-
-        <!-- Email -->
-        <!-- <div class="mb-5">
-            <fieldset class="fieldset">
-                <legend class="fieldset-legend">Email Address</legend>
-                <input type="email" class="input w-full disabled:text-gray-600" placeholder="Enter your email"
-                    formControlName="email" [disabled]="isEditing()" />
-                <p *ngIf="email?.touched && email?.invalid" class="text-red-500 text-sm mt-1">
-                    Enter a valid email address
-                </p>
-            </fieldset>
-        </div> -->
 
         <!-- Phone -->
         <div class="mb-5" *ngIf="auser?.role == 'Customer'">
@@ -59,7 +46,6 @@
             </fieldset>
         </div>
 
-        <!-- Submit -->
         <button *ngIf="isEditing()" type="submit" class="btn bg-blue-600 text-white w-full mt-6 hover:bg-blue-700">
             Update Profile
         </button>

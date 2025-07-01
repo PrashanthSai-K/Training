@@ -5,8 +5,8 @@
         <div class="bg-white shadow-lg p-5 shrink-0">
             <div class="flex items-center justify-between">
                 <h1 class="text-lg font-semibold">Chats</h1>
-                <lucide-icon title="New Chat" name="message-circle-plus" *ngIf="user.role == 'Customer'" (click)="showCreateChat()"
-                    class="w-5 h-5 stroke-blue-600 cursor-pointer"></lucide-icon>
+                <lucide-icon title="New Chat" name="message-circle-plus" *ngIf="user.role == 'Customer'"
+                    (click)="showCreateChat()" class="w-5 h-5 stroke-blue-600 cursor-pointer"></lucide-icon>
             </div>
             <div class="mt-2">
                 <fieldset class="fieldset">
@@ -45,7 +45,12 @@
             <div class="bg-white shadow-lg shrink-0  border-gray-300 rounded-2xl p-5">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center justify-center gap-3 ">
-                        <lucide-icon name="ticket-percent" class="w-8 h-8 fill-gray-50 stroke-blue-600"></lucide-icon>
+                        <lucide-icon *ngIf="activeChat.status == 'Active'" name="ticket-percent"
+                            class="w-8 h-8 fill-gray-50 stroke-blue-600"></lucide-icon>
+                        <lucide-icon *ngIf="activeChat.status == 'Deleted'" name="ticket-check"
+                            class="w-10 h-10 fill-gray-50 stroke-blue-600">
+                        </lucide-icon>
+
                         <div class="">
                             <h1 class="text-md font-semibold">{{activeChat.issueName| titlecase}}</h1>
                             <p class="text-sm">{{user.role == 'Agent' ? 'Customer : ' : 'Agent : '}} {{(user.role ==
@@ -57,8 +62,9 @@
                         <lucide-icon name="circle-arrow-left" *ngIf="isMobile" (click)="backToList()"
                             class="w-6 h-6 stroke-blue-600 cursor-pointer"></lucide-icon>
 
-                        <lucide-icon title="Close Chat" name="circle-x" *ngIf="user.role == 'Agent' && activeChat.status != 'Deleted'"
-                            (click)="onCloseChat()" class="w-6 h-6 stroke-blue-600 cursor-pointer"></lucide-icon>
+                        <lucide-icon title="Close Chat" name="circle-x"
+                            *ngIf="user.role == 'Agent' && activeChat.status != 'Deleted'" (click)="onCloseChat()"
+                            class="w-6 h-6 stroke-blue-600 cursor-pointer"></lucide-icon>
                     </div>
                 </div>
             </div>
@@ -66,10 +72,18 @@
         </div>
         }
     </div>
-    <div class="h-[100vh] w-full absolute top-0 left-0 backdrop-blur-xs flex items-center justify-center"
+    <div class="h-[100vh] w-full absolute top-0 left-0 z-[999] backdrop-blur-xs flex items-center justify-center"
         style="background-color: rgba(0, 0, 0, 0.4);" *ngIf="isCreateChatActive()">
         <lucide-icon name="circle-x" *ngIf="user.role == 'Customer'" (click)="closeCreateChat(true)"
             class="w-6 h-6 stroke-white cursor-pointer absolute top-2 right-2"></lucide-icon>
         <app-create-chat (closeChatEmit)="closeCreateChat($event)"></app-create-chat>
+    </div>
+    <div class="h-[100vh] w-full absolute top-0 left-0 z-[999] bg-[rgba(0, 0, 0, 0.1)] backdrop-blur-xs flex items-center justify-center"
+        *ngIf="isPreviewVisible()">
+        <div class="h-[80vh]">
+            <img [src]="previewImage" alt="" class="h-full w-full border border-gray-400">
+            <lucide-icon name="circle-x" (click)="closePreview()"
+                class="w-6 h-6 stroke-black cursor-pointer absolute top-2 right-2"></lucide-icon>
+        </div>
     </div>
 </div>

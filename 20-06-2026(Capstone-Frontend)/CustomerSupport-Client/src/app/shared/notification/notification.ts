@@ -15,7 +15,6 @@ export class Notification implements OnInit {
   notifications: Message[] = [];
 
   constructor(private notificationService: NotificationService) {
-
   }
 
   ngOnInit(): void {

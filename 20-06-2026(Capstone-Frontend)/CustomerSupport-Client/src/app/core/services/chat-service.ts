@@ -14,6 +14,9 @@ export class ChatService {
     pageNumber: number = 1;
     searchQuery: string = '';
     filterQuery:string = "";
+    
+    previewImageSubject = new BehaviorSubject<string>("");
+    previewImage$ = this.previewImageSubject.asObservable();
 
     private chatSubject = new BehaviorSubject<ChatModel[]>([]);
     chat$ = this.chatSubject.asObservable();

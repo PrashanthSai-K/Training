@@ -1,0 +1,23 @@
+services:
+  backend:
+    build: .
+    ports:
+      - "8085:8080"   
+    networks:
+      - demo
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    ports:
+      - "5431:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=Clinic
+    networks:
+      - demo
+
+networks:
+  demo:
+    driver: bridge

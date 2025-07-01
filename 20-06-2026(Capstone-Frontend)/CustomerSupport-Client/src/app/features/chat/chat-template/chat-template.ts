@@ -26,12 +26,14 @@ export class ChatTemplate implements OnInit {
   isListActive = signal<boolean>(true);
   isChatActive = signal<boolean>(false);
   isCreateChatActive = signal<boolean>(false);
+  isPreviewVisible = signal<boolean>(false);
   searchQuery: string = "";
   filterQuery: string = "";
+  previewImage: string = "";
 
   private _snackBar = inject(MatSnackBar);
 
-  constructor(private chatService: ChatService, public authService: AuthService) {
+  constructor(public chatService: ChatService, public authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -44,6 +46,15 @@ export class ChatTemplate implements OnInit {
         this.activeChat = data as ChatModel;
       }
     });
+    this.chatService.previewImage$.subscribe({
+      next: (data) => {
+        if (data) {
+          this.previewImage = data;
+          this.isPreviewVisible.set(true);
+          console.log(data);
+        }
+      }
+    })
   }
 
   onCloseChat() {
@@ -58,6 +69,11 @@ export class ChatTemplate implements OnInit {
           })
         }
       })
+  }
+
+  closePreview(){
+    this.isPreviewVisible.set(false);
+    this.previewImage = "";
   }
 
   onSearch() {

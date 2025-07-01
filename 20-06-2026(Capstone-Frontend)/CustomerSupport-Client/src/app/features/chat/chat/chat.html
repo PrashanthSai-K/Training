@@ -9,7 +9,7 @@
                 <p class="text-sm" *ngIf="msg.message">{{ msg.message }}</p>
                 <span class="block text-[0.5rem] mt-1 text-gray-400">{{ msg.createdAt | date:'shortTime' }}</span>
             </div>
-            <div *ngIf="msg.imageName" class="inline-block min-h-96">
+            <div *ngIf="msg.imageName" class="inline-block min-h-96" (click)="previewImage(msg.imageName)">
                 <img *ngIf="msg.imageName"
                     [src]="getImage(msg.imageName) || 'https://placehold.co/600x400?text=Loading...'"
                     alt={{msg.imageName}} class="mt-2 max-w-xs rounded text-sm object-cover h-80" />
@@ -35,8 +35,9 @@
                 class="w-6 h-6 fill-gray-50 stroke-blue-500 cursor-pointer"></lucide-icon>
             <input #imageUpload type="file" style="display: none;" (change)="onFileSelected($event)"
                 accept="image/png, image/jpeg">
-            <input type="text" placeholder="Type to send message..." name="message" [(ngModel)]="message" autocomplete="off"
-                [disabled]="file != null" class="input rounded-xl w-full placeholder:text-gray-400" />
+            <input type="text" placeholder="Type to send message..." name="message" [(ngModel)]="message"
+                autocomplete="off" [disabled]="file != null"
+                class="input rounded-xl w-full placeholder:text-gray-400" />
             <button type="submit">
                 <lucide-icon name="send-horizontal" strokeWidth="1"
                     class="w-8 h-8 fill-blue-500 stroke-gray-50 cursor-pointer"></lucide-icon>

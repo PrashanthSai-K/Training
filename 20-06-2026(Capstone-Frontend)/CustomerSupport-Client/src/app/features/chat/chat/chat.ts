@@ -104,6 +104,10 @@ export class Chat implements OnInit {
     return "";
   }
 
+  previewImage(name: string) {
+    this.chatService.previewImageSubject.next(this.getImage(name));
+  }
+
   ngOnInit(): void {
     this.chatService.activeChat$.pipe(
       filter((chat): chat is ChatModel => !!chat),
@@ -123,9 +127,11 @@ export class Chat implements OnInit {
     this.chatHubService.messages$.subscribe({
       next: (data) => {
         if (data) {
-          // this.chatService.appendMessages(data as Message);
-          if (data.chatId == this.chat?.id)
+          if (data.chatId == this.chat?.id) {
             this.chatMessages.push(data);
+            this.cdr.detectChanges();
+            this.scrollToBottom();
+          }
         }
       }
     })

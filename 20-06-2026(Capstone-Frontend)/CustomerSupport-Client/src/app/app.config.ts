@@ -2,7 +2,7 @@ import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListen
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { BotMessageSquare, CircleArrowLeft, CircleUser, CircleX, ClipboardCopy, Dot, KeyRound, LayoutDashboard, Lock, LucideAngularModule, MessageCirclePlus, MessageSquareMore, MessageSquarePlus, MoreVertical, SendHorizontal, ShieldUser, SquarePen, TicketCheck, TicketPercent, Upload, UserCog, UserPlus } from 'lucide-angular';
+import { BotMessageSquare, CircleArrowLeft, CircleUser, CircleX, ClipboardCopy, Dot, KeyRound, LayoutDashboard, Lock, LucideAngularModule, MessageCirclePlus, MessageSquareDot, MessageSquareMore, MessageSquarePlus, MoreVertical, SendHorizontal, ShieldUser, SquarePen, TicketCheck, TicketPercent, Upload, UserCog, UserPlus } from 'lucide-angular';
 import { ChatService } from './core/services/chat-service';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './auth-interceptor';
@@ -19,7 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     importProvidersFrom(LucideAngularModule.pick({
-      BotMessageSquare, CircleUser, MessageCirclePlus, ShieldUser, UserCog, UserPlus, ClipboardCopy, MessageSquareMore, SquarePen, Dot,
+      BotMessageSquare, CircleUser, MessageCirclePlus, ShieldUser, UserCog, UserPlus, ClipboardCopy, MessageSquareMore, SquarePen, Dot, MessageSquareDot,
       Upload, SendHorizontal, CircleArrowLeft, CircleX, MessageSquarePlus, TicketPercent, TicketCheck, LayoutDashboard, MoreVertical, KeyRound, Lock
     })),
     provideHttpClient(withInterceptors([authInterceptor])),

@@ -24,7 +24,7 @@ export class Navbar implements OnInit {
   @Output() navDisabled = new EventEmitter<string>();
   // @Input() route$ !: Observable<string>;
 
-  constructor(private route: Router, public authService: AuthService, public notificationService:NotificationService) {
+  constructor(private route: Router, public authService: AuthService, public notificationService: NotificationService) {
     authService.currentUser$.subscribe({
       next: (data) => {
         this.user = data;
@@ -34,24 +34,26 @@ export class Navbar implements OnInit {
   toggleNavbar() {
     this.toggledNavbar.emit();
   }
-  toggleNotification(){
+  toggleNotification() {
     this.toggledNotification.emit();
   }
   url = ['login', 'register', 'forgotPassword', 'resetPassword?']
   ngOnInit(): void {
     this.authService.route$.subscribe({
-      next: (url) => {      
-        this.navDisabled.emit(url);  
+      next: (url) => {
+        this.navDisabled.emit(url);
         if (url == "/")
           this.isVisible = false;
         else
           this.isVisible = !this.url.some(u => url.includes(u));
       }
-    })
+    });
     this.notificationService.notification$.subscribe({
-      next:(data)=>{
-        if(data?.length > 0)
+      next: (data) => {
+        if (data?.length > 0)
           this.notificationAvailable.set(true);
+        else
+          this.notificationAvailable.set(false);
       }
     })
   }

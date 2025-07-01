@@ -12,4 +12,10 @@ export class NotificationService {
         const notifications = this.notificationSubject.value;
         this.notificationSubject.next([...notifications, notification]);
     }
+
+    removeNotifications(chatId:number){
+        const notifications = this.notificationSubject.value;
+        const newnotifications = notifications.filter(notification=> notification.chatId != chatId);
+        this.notificationSubject.next([...newnotifications]);
+    }
 }

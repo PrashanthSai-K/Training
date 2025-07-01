@@ -4,13 +4,23 @@
         [class]="(activeChat?.id == chat.id ? 'opacity-100' : 'opacity-0') + ' absolute top-0 left-0 w-1 z-20 h-full bg-blue-500 transition-opacity duration-300'">
     </div>
     <div class="flex items-center gap-3">
-        <lucide-icon name="ticket-percent" class="w-10 h-10 fill-gray-50 stroke-blue-600">
+        <lucide-icon *ngIf="chat.status == 'Active'" name="ticket-percent"
+            class="w-10 h-10 fill-gray-50 stroke-blue-600">
         </lucide-icon>
+        <lucide-icon *ngIf="chat.status == 'Deleted'" name="ticket-check"
+            class="w-10 h-10 fill-gray-50 stroke-blue-600">
+        </lucide-icon>
+
         <div class="">
             <h1 class="text-md font-semibold">{{chat.issueName| titlecase}}</h1>
             <p class="text-sm">{{user.role == 'Agent' ? 'Customer : ' : 'Agent : '}} {{(user.role == 'Agent' ?
                 chat.customer.name :
                 chat.agent.name) | titlecase}}</p>
+        </div>
+        <div class=" absolute right-5 top-8 flex items-cente gap-1" *ngIf="newMessages()">
+            <lucide-icon name="message-square-dot" class="w-5 h-5 fill-gray-50 stroke-blue-600">
+            </lucide-icon>
+            <span class="text-[0.6rem] bg-blue-500 text-white px-1 py-0.5 rounded-lg">New messages</span>
         </div>
     </div>
 </div>
