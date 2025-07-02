@@ -5,6 +5,7 @@ import { AgentService } from '../../../core/services/agent-service';
 import { Agent } from '../../../core/models/chat';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
+import { validDoJValidator } from '../../../core/validators/dateOfJoin-validator';
 
 @Component({
   selector: 'app-create-agent',
@@ -22,7 +23,7 @@ export class CreateAgent implements OnInit {
   agentForm = new FormGroup({
     name: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
     email: new FormControl("", [Validators.required, Validators.email]),
-    dateOfJoin: new FormControl("", [Validators.required,])
+    dateOfJoin: new FormControl("", [Validators.required, validDoJValidator()])
   });
 
 

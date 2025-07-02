@@ -27,20 +27,12 @@ export class ChatItem implements OnInit {
     this.chatService.activeChat$.subscribe({
       next: (data) => {
         this.activeChat = data as ChatModel;
-        if(this.activeChat.id == this.chat.id){
+        if (this.activeChat?.id == this.chat?.id) {
           this.newMessages.set(false);
           this.notificationService.removeNotifications(this.chat.id);
         }
       }
-    })
-    this.notificationService.notification$.subscribe({
-      next: (messages) => {
-        messages.map(message => {
-          if (this.chat.id == message.chatId && message.chatId != this.activeChat?.id) {
-            this.newMessages.set(true);
-          }
-        })
-      }
-    })
+    });
+
   }
 }

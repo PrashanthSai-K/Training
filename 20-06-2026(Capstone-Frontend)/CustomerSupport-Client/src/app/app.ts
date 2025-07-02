@@ -7,10 +7,12 @@ import { AdminSidebar } from './shared/admin-sidebar/admin-sidebar';
 import { User } from './core/models/user';
 import { filter, Subject } from 'rxjs';
 import { Notification } from "./shared/notification/notification";
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, Navbar, AsyncPipe, AdminSidebar, CommonModule, Notification],
+  // providers: [provideNoopAnimations()],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

@@ -123,7 +123,6 @@ export class Chat implements OnInit {
         this.scrollToBottom();
       }
     });
-
     this.chatHubService.messages$.subscribe({
       next: (data) => {
         if (data) {
@@ -133,6 +132,18 @@ export class Chat implements OnInit {
             this.scrollToBottom();
           }
         }
+      }
+    })
+    this.authService.currentUser$.subscribe({
+      next: (data) => {
+        this.chatHubService.closedChat$.subscribe({
+          next: (notification) => {
+            this.chatService.getChats().subscribe();
+            if (this.chat && notification && notification.chatId == notification.id) {
+              this.chat.status = 'Deleted';
+            }
+          }
+        })
       }
     })
   }

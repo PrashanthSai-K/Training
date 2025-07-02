@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ChatHubService } from '../../../core/services/chat-hub-service';
 import { Message } from '../../../core/models/message';
 import { NotificationService } from '../../../core/services/notification-service';
+import { AuthService } from '../../../core/services/auth-service';
 
 @Component({
   selector: 'app-chat-list',
@@ -21,7 +22,7 @@ export class ChatList implements OnInit {
   isLoading = signal<boolean>(true);
   activeChat: ChatModel | null = null
 
-  constructor(private chatService: ChatService, private chatHubService: ChatHubService, private notificationService: NotificationService) {
+  constructor(private chatService: ChatService, private authService: AuthService, private chatHubService: ChatHubService, private notificationService: NotificationService) {
   }
 
   setMessage(chat: ChatModel) {
@@ -69,9 +70,29 @@ export class ChatList implements OnInit {
           this.pushNotification(message);
       }
     })
-    this.notificationService.notification$.subscribe({
+    this.authService.currentUser$.subscribe({
       next: (data) => {
-        console.log(data);
+        this.chatHubService.closedChat$.subscribe({
+          next: (chat) => {
+            this.chatService.getChats().subscribe();
+            if (chat && (chat.agentEmail == data?.username || chat.customerEmail == data?.username)) {
+              this.pushNotification(chat);
+            }
+          }
+        })
+      }
+    })
+
+    this.authService.currentUser$.subscribe({
+      next: (data) => {
+        this.chatHubService.assignedChat$.subscribe({
+          next: (chat) => {
+            this.chatService.getChats().subscribe();
+            if (chat && (chat.agentEmail == data?.username || chat.customerEmail == data?.username))
+              this.pushNotification(chat);
+          }
+        })
+
       }
     })
   }

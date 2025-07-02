@@ -88,7 +88,7 @@ ILoggerFactory loggerFactory = new SerilogLoggerFactory(Log.Logger);
 builder.Services.AddDbContext<ChatDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
-    options.UseLoggerFactory(loggerFactory);
+    // options.UseLoggerFactory(loggerFactory);
 });
 #endregion
 

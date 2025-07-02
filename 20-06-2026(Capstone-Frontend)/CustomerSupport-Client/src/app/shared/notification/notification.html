@@ -1,11 +1,23 @@
 <div class="absolute top-[9vh] z-[999] right-5 bg-white w-64 min-h-64 shadow-lg rounded-lg p-5 overflow-y-auto"
-    *ngIf="isVisible" >
+    *ngIf="isVisible">
     <div class="pt-1">
         @if(notifications.length > 0){
-        @for (message of notifications; track $index) {
+        @for (notification of notifications; track $index) {
+        @if(notification?.status == 'Active'){
         <div class="text-xs font-medium text-gray-500">
-            <p>{{message.userId}} sent an message</p>
+            <p>#{{notification.chatId}} issue has been assigned</p>
         </div>
+        }
+        @else if(notification?.status == 'Deleted'){
+        <div class="text-xs font-medium text-gray-500">
+            <p>#{{notification.chatId}} issue has been closed</p>
+        </div>
+        }
+        @else if(notification?.message || notification?.imageName){
+        <div class="text-xs font-medium text-gray-500">
+            <p>{{notification.userId}} sent an message</p>
+        </div>
+        }
         }}
     </div>
     @if(notifications.length <= 0){ <div class="flex h-64 w-full items-center justify-center">

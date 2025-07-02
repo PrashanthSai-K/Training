@@ -5,10 +5,10 @@ import { Message } from "../models/message";
 
 @Injectable()
 export class NotificationService {
-    private notificationSubject = new BehaviorSubject<Message[] | []>([]);
+    private notificationSubject = new BehaviorSubject<any[] | []>([]);
     notification$ = this.notificationSubject.asObservable();
 
-    addNewNotification(notification:Message){
+    addNewNotification(notification:any){
         const notifications = this.notificationSubject.value;
         this.notificationSubject.next([...notifications, notification]);
     }

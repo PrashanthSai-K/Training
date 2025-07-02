@@ -58,20 +58,29 @@ export class ChatTemplate implements OnInit {
   }
 
   onCloseChat() {
-    if (!window.confirm("Do you want to mark the issue as closed ?")) {
-      return
+    try {
+      if (!window.confirm("Do you want to mark the issue as closed ?")) {
+        return
+      }
+      if (this.activeChat)
+        this.chatService.closeChat(this.activeChat.id).subscribe({
+          next: (data) => {
+            this._snackBar.open("Issue has been closed", "", {
+              duration: 10000
+            })
+            if (this.activeChat)
+              this.activeChat.status = 'Deleted';
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        })
+    } catch (error) {
+      console.log(error);
     }
-    if (this.activeChat)
-      this.chatService.closeChat(this.activeChat.id).subscribe({
-        next: (data) => {
-          this._snackBar.open("Issue has been closed", "", {
-            duration: 10000
-          })
-        }
-      })
   }
 
-  closePreview(){
+  closePreview() {
     this.isPreviewVisible.set(false);
     this.previewImage = "";
   }

@@ -12,7 +12,7 @@ import { Message } from '../../core/models/message';
 export class Notification implements OnInit {
 
   @Input() isVisible!: boolean;
-  notifications: Message[] = [];
+  notifications: any[] = [];
 
   constructor(private notificationService: NotificationService) {
   }

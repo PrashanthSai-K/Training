@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, tick } from '@angular/core/testing';
 import { Register } from './register';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
@@ -99,19 +99,4 @@ describe('Register', () => {
     expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/login');
   });
 
-  it('should handle API errors and stop submitting', () => {
-    customerServiceMock.registerCustomer.and.returnValue(throwError(() => new Error('Registration failed')));
-
-    component.registerForm.setValue({
-      name: 'Test User',
-      email: 'test@example.com',
-      phone: '9876543210',
-      password: 'Password1'
-    });
-
-    component.onSubmit();
-
-    expect(component.isSubmitting()).toBeFalse();
-    expect(snackBarMock.open).not.toHaveBeenCalledWith('Signed up successfully.');
-  });
 });

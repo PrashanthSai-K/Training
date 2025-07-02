@@ -8,8 +8,14 @@ export class ChatHubService {
   private messageSubject = new BehaviorSubject<Message | null>(null);
   messages$ = this.messageSubject.asObservable();
 
+  closedChatSubject = new BehaviorSubject<any>("");
+  closedChat$ = this.closedChatSubject.asObservable();
+
+  assignedChatSubject = new BehaviorSubject<any>("");
+  assignedChat$ = this.assignedChatSubject.asObservable();
+
   private isConnected = false;
-  private joinedChats = new Set<number>(); 
+  private joinedChats = new Set<number>();
 
   constructor() {
     this.initConnection();
@@ -28,6 +34,16 @@ export class ChatHubService {
     this.hubConnection.on("ReceiveMessage", (message: Message) => {
       console.log("📥 Received message from hub:", message);
       this.messageSubject.next(message);
+    });
+
+    this.hubConnection.on("ReceiveAssignedNotification", (chat: any) => {
+      console.log("📥 Received assigned message from hub:", chat);
+      this.assignedChatSubject.next(chat);
+    });
+
+    this.hubConnection.on("ReceiveClosedNotification", (chat: any) => {
+      console.log("📥 Received closed message from hub:", chat);
+      this.closedChatSubject.next(chat);
     });
 
     this.hubConnection

@@ -4,15 +4,25 @@
         [class]="(activeChat?.id == chat.id ? 'opacity-100' : 'opacity-0') + ' absolute top-0 left-0 w-1 z-20 h-full bg-blue-500 transition-opacity duration-300'">
     </div>
     <div class="flex items-center gap-3">
-        <lucide-icon *ngIf="chat.status == 'Active'" name="ticket-percent"
+        <lucide-icon *ngIf="chat.status == 'Active' && user.role == 'Agent'" name="ticket-percent"
+            class="w-10 h-10 fill-gray-50 stroke-purple-600">
+        </lucide-icon>
+        <lucide-icon *ngIf="chat.status == 'Active' && user.role == 'Customer'" name="ticket-percent"
             class="w-10 h-10 fill-gray-50 stroke-blue-600">
         </lucide-icon>
-        <lucide-icon *ngIf="chat.status == 'Deleted'" name="ticket-check"
+
+        <lucide-icon *ngIf="chat.status == 'Deleted'&& user.role == 'Agent' " name="ticket-check"
+            class="w-10 h-10 fill-gray-50 stroke-purple-600">
+        </lucide-icon>
+        <lucide-icon *ngIf="chat.status == 'Deleted'&& user.role == 'Customer' " name="ticket-check"
             class="w-10 h-10 fill-gray-50 stroke-blue-600">
         </lucide-icon>
 
         <div class="">
-            <h1 class="text-md font-semibold">{{chat.issueName| titlecase}}</h1>
+            <div class="flex items-center gap-3">
+                <h1 class="text-md font-semibold">{{chat.issueName| titlecase}}</h1>
+                <p class="text-xs">Issue ref: #{{chat.id}}</p>
+            </div>
             <p class="text-sm">{{user.role == 'Agent' ? 'Customer : ' : 'Agent : '}} {{(user.role == 'Agent' ?
                 chat.customer.name :
                 chat.agent.name) | titlecase}}</p>

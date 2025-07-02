@@ -48,10 +48,10 @@
             <fieldset class="fieldset">
                 <legend class="fieldset-legend">DoJ</legend>
                 <input type="date" class="input w-full" placeholder="" formControlName="dateOfJoin" />
-                @if (dateOfJoin.touched && dateOfJoin?.errors ){
-                <p class="text-red-500">
-                    Choose a valid date
-                </p>
+                @if (dateOfJoin.touched && dateOfJoin.errors) {
+                <p class="text-red-500" *ngIf="dateOfJoin.errors['futureDate']">Date cannot be in the future</p>
+                <p class="text-red-500" *ngIf="dateOfJoin.errors['tooOld']">Date is too far in the past</p>
+                <p class="text-red-500" *ngIf="dateOfJoin.errors['required']">Date of Join is required</p>
                 }
             </fieldset>
         </div>

@@ -3,11 +3,13 @@ import { DashboardService } from '../../core/services/dashboard-service';
 import { AuthService } from '../../core/services/auth-service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { AsyncPipe, CommonModule } from '@angular/common';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 
 @Component({
   selector: 'app-dashboard',
   imports: [NgxChartsModule, AsyncPipe, CommonModule],
+  providers: [provideNoopAnimations() ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
@@ -50,7 +52,7 @@ export class Dashboard implements OnInit {
           })
         }
       },
-      complete:()=>{
+      complete: () => {
         this.isLoading.set(false);
       }
     })
@@ -61,12 +63,13 @@ export class Dashboard implements OnInit {
 
     for (const item of data) {
       const date = new Date(item.date).toISOString().slice(0, 10);
+      const status = item.status === 'Deleted' ? 'Closed' : item.status;
 
-      if (!grouped.has(item.status)) {
-        grouped.set(item.status, new Map());
+      if (!grouped.has(status)) {
+        grouped.set(status, new Map());
       }
 
-      const statusMap = grouped.get(item.status)!;
+      const statusMap = grouped.get(status)!;
       statusMap.set(date, (statusMap.get(date) || 0) + 1);
     }
 

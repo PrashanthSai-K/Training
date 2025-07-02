@@ -3,31 +3,51 @@
         <aside class="flex flex-col items-center bg-white text-gray-700 shadow h-full">
             <ul>
                 <li class="" title="Dashboard">
-                    <a href="/dashboard" class="h-16 px-6 flex flex-col justify-center items-center w-full cursor-pointer group
-					focus:text-blue-500">
-                        <lucide-icon name="layout-dashboard" strokeWidth="2" class="w-6 h-6 group-hover:stroke-blue-600"
+                    <a href="/dashboard"
+                        class="h-16 px-6 flex flex-col justify-center items-center w-full cursor-pointer group"
+                        [ngClass]="{'focus:text-blue-500' : user.role == 'Customer' || user.role == 'Admin', 'focus:text-purple-500' : user.role == 'Agent'}">
+                        <lucide-icon name="layout-dashboard" *ngIf="user.role == 'Customer' || user.role == 'Admin'"
+                            strokeWidth="2" class="w-6 h-6 group-hover:stroke-blue-600"
                             [class]=" url()?.includes('dashboard') ? 'stroke-blue-600' : ''">
                         </lucide-icon>
+                        <lucide-icon name="layout-dashboard" *ngIf="user.role == 'Agent'" strokeWidth="2"
+                            class="w-6 h-6 group-hover:stroke-purple-600"
+                            [class]=" url()?.includes('dashboard') ? 'stroke-purple-600' : ''">
+                        </lucide-icon>
+
                         <p class="text-[0.65rem] text-center">Dashboard</p>
                     </a>
                 </li>
                 <li class=" mt-2" title="Agent Management" *ngIf="user.role === 'Customer' || user.role === 'Agent'">
-                    <a href="/chat" class="h-16 px-6 flex flex-col justify-center items-center w-full cursor-pointer group
-					focus:text-blue-500">
-                        <lucide-icon name="message-square-more" strokeWidth="2"
+                    <a href="/chat"
+                        class="h-16 px-6 flex flex-col justify-center items-center w-full cursor-pointer group"
+                        [ngClass]="{'focus:text-blue-500' : user.role == 'Customer', 'focus:text-purple-500' : user.role == 'Agent'}">
+                        <lucide-icon name="message-square-more" *ngIf="user.role == 'Customer'" strokeWidth="2"
                             class="w-6 h-6 group-hover:stroke-blue-600"
                             [class]=" url()?.includes('chat') ? 'stroke-blue-600' : ''">
                         </lucide-icon>
+                        <lucide-icon name="message-square-more" *ngIf="user.role == 'Agent'" strokeWidth="2"
+                            class="w-6 h-6 group-hover:stroke-purple-600"
+                            [class]=" url()?.includes('chat') ? 'stroke-purple-600' : ''">
+                        </lucide-icon>
+
                         <p class="text-[0.65rem] text-center">Chat</p>
                     </a>
                 </li>
 
                 <li class=" mt-2" title="Agent Management" *ngIf="user.role === 'Customer' || user.role === 'Agent'">
-                    <a href="/profile" class="h-16 px-6 flex flex-col justify-center items-center w-full cursor-pointer group
-					focus:text-blue-500">
-                        <lucide-icon name="circle-user" strokeWidth="2" class="w-6 h-6 group-hover:stroke-blue-600"
+                    <a href="/profile"
+                        class="h-16 px-6 flex flex-col justify-center items-center w-full cursor-pointer group"
+                        [ngClass]="{'focus:text-blue-500' : user.role == 'Customer', 'focus:text-purple-500' : user.role == 'Agent'}">
+                        <lucide-icon name="circle-user" *ngIf="user.role == 'Customer'" strokeWidth="2"
+                            class="w-6 h-6 group-hover:stroke-blue-600"
                             [class]=" url()?.includes('profile') ? 'stroke-blue-600' : ''">
                         </lucide-icon>
+                        <lucide-icon name="circle-user" *ngIf="user.role == 'Agent'" strokeWidth="2"
+                            class="w-6 h-6 group-hover:stroke-purple-600"
+                            [class]=" url()?.includes('profile') ? 'stroke-purple-600' : ''">
+                        </lucide-icon>
+
                         <p class="text-[0.65rem] text-center">Profile</p>
                     </a>
                 </li>
@@ -56,9 +76,10 @@
             <div class="mt-auto h-16 flex items-center w-full">
                 <button (click)="authservice.logoutUser()" class="h-16 w-10 mx-auto flex flex-col justify-center items-center  cursor-pointer
 				 hover:text-black">
-                    <svg class="h-5 w-5 text-blue-600 hover:text-black" xmlns="http://www.w3.org/2000/svg" width="24"
-                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="h-5 w-5  hover:text-black"
+                        [ngClass]="{'text-blue-600' : user.role == 'Customer' || user.role == 'Admin', 'text-purple-600' : user.role == 'Agent' }"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                         <polyline points="16 17 21 12 16 7"></polyline>
                         <line x1="21" y1="12" x2="9" y2="12"></line>

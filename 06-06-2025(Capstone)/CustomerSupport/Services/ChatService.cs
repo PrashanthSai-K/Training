@@ -3,9 +3,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CustomerSupport.Exceptions;
 using CustomerSupport.Interfaces;
+using CustomerSupport.MessageHub;
 using CustomerSupport.Models;
 using CustomerSupport.Models.Dto;
 using CustomerSupport.Models.QueryParams;
+using Microsoft.AspNetCore.SignalR;
 
 namespace CustomerSupport.Services;
 
@@ -16,6 +18,7 @@ public class ChatService : IChatService
     private readonly IRepository<int, Customer> _customerRepository;
     private readonly IAuditLogService _auditLogService;
     private readonly IOtherContextFunctions _otherContextFunctions;
+    private readonly IHubContext<ChatHub> _chatHub;
     private readonly IMapper _mapper;
 
     public ChatService(IRepository<int, Chat> chatRepository,
@@ -23,6 +26,7 @@ public class ChatService : IChatService
                         IRepository<int, Customer> customerRepository,
                         IAuditLogService auditLogService,
                         IOtherContextFunctions otherContextFunctions,
+                        IHubContext<ChatHub> hubContext,
                         IMapper mapper)
     {
         _chatRepository = chatRepository;
@@ -30,6 +34,7 @@ public class ChatService : IChatService
         _customerRepository = customerRepository;
         _auditLogService = auditLogService;
         _otherContextFunctions = otherContextFunctions;
+        _chatHub = hubContext;
         _mapper = mapper;
     }
 
@@ -41,6 +46,8 @@ public class ChatService : IChatService
             throw new ItemNotFoundException($"User with UserId:{userId} not found");
 
         var agents = await _agentRepository.GetAll();
+        agents = agents.Where(agent => agent.Status == "Active").ToList();
+        
         if (agents == null || !agents.Any())
             throw new Exception("No agents available for assignment.");
 
@@ -55,6 +62,21 @@ public class ChatService : IChatService
         chat.Status = "Active";
 
         var createdChat = await _chatRepository.Create(chat);
+        await _chatHub.Clients.All.SendAsync("ReceiveAssignedNotification", new
+        {
+            chatId = chat.Id,
+            chat.AgentId,
+            chat.CustomerId,
+            chat.IssueName,
+            chat.CreatedOn,
+            status = chat.Status,
+            updatedAt = chat.UpdatedAt,
+            customerEmail = customer.Email,
+            agentEmail = randomAgent.Email
+        });
+
+        Console.WriteLine($"Sending to groups: {customer.Email}, {randomAgent.Email}");
+
         await _auditLogService.CreateAuditLog(new AuditLog() { UserId = userId, Action = "Create", Entity = "Chat", CreatedOn = DateTime.UtcNow });
 
         return createdChat;
@@ -64,14 +86,30 @@ public class ChatService : IChatService
     {
         var chat = await _chatRepository.GetById(id);
         var agents = await _agentRepository.GetAll();
+        var customers = await _customerRepository.GetAll();
+        var customer = customers.FirstOrDefault(customer => customer.Id == chat.CustomerId);
 
         var agent = agents.FirstOrDefault(a => a.Email == userId);
-        if (agent == null || chat.AgentId != agent.Id)
+        if (agent == null || customer == null || chat.AgentId != agent.Id)
             throw new UnauthorizedAccessException("User not allowed to delete this chat");
 
         chat.UpdatedAt = DateTime.UtcNow;
         chat.Status = "Deleted";
         var deletedChat = await _chatRepository.Update(id, chat);
+        Console.WriteLine("created cat");
+        await _chatHub.Clients.Group(chat.Id.ToString()).SendAsync("ReceiveClosedNotification", new
+        {
+            chatId = chat.Id,
+            chat.AgentId,
+            chat.CustomerId,
+            chat.IssueName,
+            chat.CreatedOn,
+            status = chat.Status,
+            updatedAt = chat.UpdatedAt,
+            customerEmail = customer.Email,
+            agentEmail = agent.Email
+        });
+
         await _auditLogService.CreateAuditLog(new AuditLog() { UserId = userId, Action = "Delete", Entity = "Chat", CreatedOn = DateTime.UtcNow });
 
         return deletedChat;

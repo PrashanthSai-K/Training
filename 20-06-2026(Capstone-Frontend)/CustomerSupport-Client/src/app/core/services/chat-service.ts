@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { BehaviorSubject, debounceTime, distinctUntilChanged, Observable, tap } from "rxjs";
 import { Message } from "../models/message";
 import { Subject } from "@microsoft/signalr";
+import { Chat } from "../../features/chat/chat/chat";
 
 @Injectable()
 export class ChatService {
@@ -13,12 +14,12 @@ export class ChatService {
     pageSize: number = 1000;
     pageNumber: number = 1;
     searchQuery: string = '';
-    filterQuery:string = "";
-    
+    filterQuery: string = "";
+
     previewImageSubject = new BehaviorSubject<string>("");
     previewImage$ = this.previewImageSubject.asObservable();
 
-    private chatSubject = new BehaviorSubject<ChatModel[]>([]);
+    chatSubject = new BehaviorSubject<ChatModel[]>([]);
     chat$ = this.chatSubject.asObservable();
 
     activeChatSubject = new BehaviorSubject<ChatModel | null>(null);
@@ -29,6 +30,7 @@ export class ChatService {
 
     searchSubject = new BehaviorSubject<string>("");
     filterSubject = new BehaviorSubject<string>("");
+
 
     constructor() {
         this.searchSubject.pipe(
@@ -81,8 +83,7 @@ export class ChatService {
 
 
     getChats() {
-        console.log("called get chats");
-        return this.httpClient.get(this.chatUrl, {
+        return this.httpClient.get<ChatModel[]>(this.chatUrl, {
             params: new HttpParams().set("pageSize", this.pageSize).set("pageNumber", this.pageNumber)
         }).pipe(
             tap((data: any) => {

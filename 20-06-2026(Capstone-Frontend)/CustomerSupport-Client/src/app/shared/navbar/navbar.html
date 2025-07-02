@@ -10,9 +10,18 @@
     </div>
     <div class="navbar-center">
         <a class="btn btn-ghost text-xl">
-            <lucide-icon name="bot-message-square" class="w-10 h-10 stroke-white fill-blue-600">
-            </lucide-icon>Customer Support</a>
-
+            <lucide-icon name="bot-message-square" *ngIf="user?.role == 'Customer' || user?.role == 'Admin'"
+                class="w-10 h-10 stroke-white fill-blue-600">
+            </lucide-icon>
+            <lucide-icon name="bot-message-square" *ngIf="user?.role == 'Agent'"
+                class="w-10 h-10 stroke-white fill-purple-600">
+            </lucide-icon>Customer Support -
+            @if(user?.role == 'Agent'){
+            Agent
+            }@else {
+            Customer
+            }
+        </a>
     </div>
     <div class="navbar-end">
         <button class="btn btn-ghost btn-circle" (click)="toggleNotification()" *ngIf="user">

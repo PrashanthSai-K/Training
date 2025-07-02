@@ -38,7 +38,12 @@
                         <td>{{agent.name}}</td>
                         <td>{{agent.email}}</td>
                         <td>{{agent.dateOfJoin | date}}</td>
-                        <td>{{agent.status}}</td>
+                        <td>@if(agent.status == 'Active'){
+                            <p class=" text-center w-16 px-1 py-0.5 rounded-lg bg-green-600 text-white">Active</p>
+                            } @else {
+                            <p class="text-center w-16 px-1 py-0.5 rounded-lg bg-red-600 text-white">Inactive</p>
+                            }
+                        </td>
                         <td class="relative">
                             <div class="dropdown">
                                 <label tabindex="0" class="btn btn-sm bg-white border-none shadow-none">

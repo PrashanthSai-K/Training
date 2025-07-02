@@ -2,13 +2,22 @@
     <form class="rounded-lg bg-white p-10 shadow-lg w-full max-w-md" [formGroup]="userform" (ngSubmit)="onSubmit()">
         <div class="flex items-center justify-between gap-3 mb-6">
             <div class="flex items-center gap-3 ">
-                <lucide-icon name="circle-user" class="w-8 h-8 stroke-blue-600"></lucide-icon>
+                <lucide-icon name="circle-user" *ngIf="auser.role == 'Customer'"
+                    class="w-8 h-8 stroke-blue-600"></lucide-icon>
+                <lucide-icon name="circle-user" *ngIf="auser.role == 'Agent'"
+                    class="w-8 h-8 stroke-purple-600"></lucide-icon>
+
                 <p class="text-xl font-medium">User Profile</p>
             </div>
-            <lucide-icon (click)="enableEditing()" *ngIf="!isEditing()" name="square-pen"
+            <lucide-icon (click)="enableEditing()" *ngIf="!isEditing() && auser.role == 'Customer'" name="square-pen"
                 class="w-6 h-6 stroke-blue-600 cursor-pointer"></lucide-icon>
-            <lucide-icon (click)="disableEditing()" *ngIf="isEditing()" name="circle-x"
+            <lucide-icon (click)="enableEditing()" *ngIf="!isEditing() && auser.role == 'Agent'" name="square-pen"
+                class="w-6 h-6 stroke-purple-600 cursor-pointer"></lucide-icon>
+
+            <lucide-icon (click)="disableEditing()" *ngIf="isEditing() && auser.role == 'Customer'" name="circle-x"
                 class="w-6 h-6 stroke-blue-600 cursor-pointer"></lucide-icon>
+            <lucide-icon (click)="disableEditing()" *ngIf="isEditing() && auser.role == 'Agent'" name="circle-x"
+                class="w-6 h-6 stroke-purple-600 cursor-pointer"></lucide-icon>
         </div>
 
         <!-- Name -->
@@ -46,7 +55,7 @@
             </fieldset>
         </div>
 
-        <button *ngIf="isEditing()" type="submit" class="btn bg-blue-600 text-white w-full mt-6 hover:bg-blue-700">
+        <button *ngIf="isEditing()" type="submit" [ngClass]="{'bg-blue-600 hover:bg-blue-700' : auser.role == 'Customer', 'bg-purple-600 hover:bg-purple-700' : auser.role == 'Agent'}" class="btn  text-white w-full mt-6 ">
             Update Profile
         </button>
     </form>
