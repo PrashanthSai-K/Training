@@ -135,7 +135,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("http://127.0.0.1:5500", "http://localhost:4200", "https://h4t8wz09-4200.inc1.devtunnels.ms")
+        policy.WithOrigins("http://localhost:4200","http://localhost:8080",  "https://h4t8wz09-4200.inc1.devtunnels.ms")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
@@ -196,11 +196,11 @@ builder.Services.AddSignalR();
 var app = builder.Build();
 
 
-if (app.Environment.IsDevelopment())
-{
+// if (app.Environment.IsDevelopment())
+// {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+// }
 
 app.UseExceptionHandler();
 

@@ -1,10 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
+import { environment } from "./agent-service";
 
 @Injectable()
 export class DashboardService {
 
-    private dashUrl = "http://localhost:5124/api/v1/dashboard"
+    private dashUrl = `${environment.apiUrl}/dashboard`
     private httpClient = inject(HttpClient);
 
     getAdminSummary() {

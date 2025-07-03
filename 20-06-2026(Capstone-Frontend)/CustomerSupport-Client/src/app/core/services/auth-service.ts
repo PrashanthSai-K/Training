@@ -5,13 +5,14 @@ import { BehaviorSubject, catchError, of, tap, throwError } from "rxjs";
 import { CustomerModel } from "../models/register";
 import { Router } from "@angular/router";
 import { User } from "../models/user";
+import { environment } from "./agent-service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
 
-    private authUrl = "http://localhost:5124/api/v1/auth";
+    private authUrl = `${environment.apiUrl}/auth`;
     private httpClient = inject(HttpClient);
     private router = inject(Router);
 

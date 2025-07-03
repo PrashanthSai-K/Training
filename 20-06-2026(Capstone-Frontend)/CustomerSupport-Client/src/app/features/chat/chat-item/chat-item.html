@@ -5,14 +5,14 @@
     </div>
     <div class="flex items-center gap-3">
         <lucide-icon *ngIf="chat.status == 'Active' && user.role == 'Agent'" name="ticket-percent"
-            class="w-10 h-10 fill-gray-50 stroke-purple-600">
+            class="w-10 h-10 fill-gray-50 stroke-sky-600">
         </lucide-icon>
         <lucide-icon *ngIf="chat.status == 'Active' && user.role == 'Customer'" name="ticket-percent"
             class="w-10 h-10 fill-gray-50 stroke-blue-600">
         </lucide-icon>
 
         <lucide-icon *ngIf="chat.status == 'Deleted'&& user.role == 'Agent' " name="ticket-check"
-            class="w-10 h-10 fill-gray-50 stroke-purple-600">
+            class="w-10 h-10 fill-gray-50 stroke-sky-600">
         </lucide-icon>
         <lucide-icon *ngIf="chat.status == 'Deleted'&& user.role == 'Customer' " name="ticket-check"
             class="w-10 h-10 fill-gray-50 stroke-blue-600">

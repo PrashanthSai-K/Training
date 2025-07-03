@@ -2,10 +2,11 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { CustomerModel } from "../models/register";
 import { BehaviorSubject, debounceTime, distinctUntilChanged, tap } from "rxjs";
+import { environment } from "./agent-service";
 
 @Injectable()
 export class CustomerService {
-    private custUrl = "http://localhost:5124/api/v1/customer";
+    private custUrl = `${environment.apiUrl}/customer`;
     private httpClient = inject(HttpClient);
     search = "";
 

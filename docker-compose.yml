@@ -1,0 +1,34 @@
+services:
+  frontend:
+    build: ./20-06-2026(Capstone-Frontend)/CustomerSupport-Client
+    ports:
+      - 8080:80
+    networks:
+      - ChatApp
+
+  backend:
+    build: ./06-06-2025(Capstone)/CustomerSupport
+    ports:
+      - 8090:8080
+    depends_on:
+      - db
+    networks:
+      - ChatApp
+
+  db:
+    image: postgres
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=ChatApp
+    volumes:
+      - chatapp_data:/var/lib/postgresql/data 
+    networks:
+      - ChatApp
+
+networks:
+  ChatApp:
+
+volumes:
+  chatapp_data:

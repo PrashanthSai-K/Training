@@ -5,12 +5,13 @@ import { BehaviorSubject, debounceTime, distinctUntilChanged, Observable, tap } 
 import { Message } from "../models/message";
 import { Subject } from "@microsoft/signalr";
 import { Chat } from "../../features/chat/chat/chat";
+import { environment } from "./agent-service";
 
 @Injectable()
 export class ChatService {
 
     private httpClient = inject(HttpClient);
-    private chatUrl: string = "http://localhost:5124/api/v1/chat";
+    private chatUrl: string = `${environment.apiUrl}/chat`;
     pageSize: number = 1000;
     pageNumber: number = 1;
     searchQuery: string = '';

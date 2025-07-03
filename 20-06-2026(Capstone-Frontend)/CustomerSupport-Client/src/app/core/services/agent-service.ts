@@ -3,9 +3,14 @@ import { inject, Injectable } from "@angular/core";
 import { Agent } from "../models/chat";
 import { BehaviorSubject, debounceTime, distinctUntilChanged, tap } from "rxjs";
 
+export const environment = {
+  apiUrl: 'http://localhost:8090/api/v1',
+  hubUrl: 'http://localhost:8090'
+};
+
 @Injectable()
 export class AgentService {
-    private agentUrl = "http://localhost:5124/api/v1/agent";
+    private agentUrl = `${environment.apiUrl}/agent`;
     private httpClient = inject(HttpClient);
     search = "";
 

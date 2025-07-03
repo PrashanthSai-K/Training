@@ -1,0 +1,3 @@
+2025-07-03 10:21:31.869 +05:30 [INF] Serilog is configured properly
+2025-07-03 15:43:32.932 +05:30 [INF] Serilog is configured properly
+2025-07-03 16:04:55.021 +05:30 [INF] Serilog is configured properly

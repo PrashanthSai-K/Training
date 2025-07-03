@@ -27,7 +27,7 @@
         <lucide-icon name="circle-x" *ngIf="user.role == 'Cutsomer'" strokeWidth="1" (click)="onPreviewClose()"
             class="w-6 h-6 fill-blue-500 stroke-gray-50 cursor-pointer absolute top-1 right-2"></lucide-icon>
         <lucide-icon name="circle-x" *ngIf="user.role == 'Agent'" strokeWidth="1" (click)="onPreviewClose()"
-            class="w-6 h-6 fill-purple-500 stroke-gray-50 cursor-pointer absolute top-1 right-2"></lucide-icon>
+            class="w-6 h-6 fill-sky-500 stroke-gray-50 cursor-pointer absolute top-1 right-2"></lucide-icon>
 
         <img [src]="('data:image/jpeg;base64,'+ previewImageUrl) " alt="" class="h-full rounded-lg ">
     </div>
@@ -37,7 +37,7 @@
             <lucide-icon name="upload" strokeWidth="2" (click)="imageUpload.click()" *ngIf="user.role == 'Customer'"
                 class="w-6 h-6 fill-gray-50 stroke-blue-500 cursor-pointer"></lucide-icon>
             <lucide-icon name="upload" strokeWidth="2" (click)="imageUpload.click()" *ngIf="user.role == 'Agent'"
-                class="w-6 h-6 fill-gray-50 stroke-purple-500 cursor-pointer"></lucide-icon>
+                class="w-6 h-6 fill-gray-50 stroke-sky-500 cursor-pointer"></lucide-icon>
             <input #imageUpload type="file" style="display: none;" (change)="onFileSelected($event)"
                 accept="image/png, image/jpeg">
             <input type="text" placeholder="Type to send message..." name="message" [(ngModel)]="message"
@@ -47,7 +47,7 @@
                 <lucide-icon name="send-horizontal" strokeWidth="1" *ngIf="user.role == 'Customer'"
                     class="w-8 h-8 fill-blue-500 stroke-gray-50 cursor-pointer"></lucide-icon>
                 <lucide-icon name="send-horizontal" strokeWidth="1" *ngIf="user.role == 'Agent'"
-                    class="w-8 h-8 fill-purple-500 stroke-gray-50 cursor-pointer"></lucide-icon>
+                    class="w-8 h-8 fill-sky-500 stroke-gray-50 cursor-pointer"></lucide-icon>
 
             </button>
         </div>
@@ -57,7 +57,7 @@
         <lucide-icon name="ticket-check" strokeWidth="1" *ngIf="user.role == 'Customer'"
             class="w-8 h-8 fill-blue-500 stroke-gray-50 cursor-pointer"></lucide-icon>
         <lucide-icon name="ticket-check" strokeWidth="1" *ngIf="user.role == 'Agent'"
-            class="w-8 h-8 fill-purple-500 stroke-gray-50 cursor-pointer"></lucide-icon>
+            class="w-8 h-8 fill-sky-500 stroke-gray-50 cursor-pointer"></lucide-icon>
 
         <p class="font-medium">Issue has been resolved</p>
     </div>
