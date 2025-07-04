@@ -139,7 +139,7 @@ export class Chat implements OnInit {
         this.chatHubService.closedChat$.subscribe({
           next: (notification) => {
             this.chatService.getChats().subscribe();
-            if (this.chat && notification && notification.chatId == notification.id) {
+            if (this.chat && notification && notification.chatId == this.chat.id) {
               this.chat.status = 'Deleted';
             }
           }

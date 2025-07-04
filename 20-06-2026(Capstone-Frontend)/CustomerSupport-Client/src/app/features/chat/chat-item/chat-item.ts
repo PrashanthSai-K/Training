@@ -33,6 +33,14 @@ export class ChatItem implements OnInit {
         }
       }
     });
-
+    this.notificationService.notification$.subscribe({
+      next: (data) => {
+        data.map((d) => {
+          if (d.chatId == this.chat.id && (!this.activeChat || this.activeChat.id != d.chatId) && !d.issueName) {
+            this.newMessages.set(true);
+          }
+        })
+      }
+    })
   }
 }

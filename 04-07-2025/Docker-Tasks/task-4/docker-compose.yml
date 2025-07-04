@@ -1,0 +1,30 @@
+services:
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 8080:80
+    networks:
+      - reactapp
+    depends_on:
+      - frontend
+      - backend
+
+  frontend:
+    build: ./ui
+    ports:
+      - 8081:80
+    networks:
+      - reactapp
+    depends_on:
+      - backend
+
+  backend:
+    build: ./api
+    ports:
+      - 9090:3000
+    networks:
+      - reactapp
+
+networks:
+  reactapp:

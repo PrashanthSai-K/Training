@@ -1,0 +1,51 @@
+docker swarm init
+------------------
+
+task-6: Create a Swarm Service
+
+docker service create --name nginx-web --replicas 3 --publish 8080:80 nginx
+
+docker service ls
+docker service ps nginx-web
+curl localhost:8080
+
+-------------------------------------------------------------------------------------------------------
+
+task-7: Update a Service
+
+docker service update --image nginx:alpine nginx-web
+
+docker service inspect nginx-web --pretty
+docker service ps nginx-web
+
+-------------------------------------------------------------------------------------------------------
+
+task-8: Scale a Service
+
+docker service scale nginx-web=5
+
+docker service ps nginx-web
+
+-------------------------------------------------------------------------------------------------------
+
+task-9: Rolling Update with Delay
+
+docker service create --name webapp --replicas 3 --update-delay 10s httpd
+docker service update --image httpd:alpine webapp
+
+docker service ps webapp
+
+-------------------------------------------------------------------------------------------------------
+
+task-10: Visualize Swarm
+
+docker service create \
+  --name=SuperViz \
+  --publish=8081:8080/tcp \
+  --constraint=node.role==manager \
+  --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
+  dockersamples/visualizer
+
+docker service ls
+
+-------------------------------------------------------------------------------------------------------

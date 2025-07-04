@@ -1,8 +1,9 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import * as signalR from '@microsoft/signalr';
 import { BehaviorSubject, } from "rxjs";
 import { Message } from "../models/message";
 import { environment } from "./agent-service";
+import { MatSnackBar } from "@angular/material/snack-bar";
 @Injectable()
 export class ChatHubService {
   private hubConnection!: signalR.HubConnection;
@@ -17,6 +18,9 @@ export class ChatHubService {
 
   private isConnected = false;
   private joinedChats = new Set<number>();
+
+  private _snackbar = inject(MatSnackBar);
+
 
   constructor() {
     this.initConnection();
@@ -39,11 +43,17 @@ export class ChatHubService {
 
     this.hubConnection.on("ReceiveAssignedNotification", (chat: any) => {
       console.log("📥 Received assigned message from hub:", chat);
+      this._snackbar.open(`#${chat.chatId} has been assigned`, '', {
+        duration: 2000
+      })
       this.assignedChatSubject.next(chat);
     });
 
     this.hubConnection.on("ReceiveClosedNotification", (chat: any) => {
       console.log("📥 Received closed message from hub:", chat);
+      this._snackbar.open(`#${chat.chatId} has been resolved`, '', {
+        duration: 2000
+      })
       this.closedChatSubject.next(chat);
     });
 

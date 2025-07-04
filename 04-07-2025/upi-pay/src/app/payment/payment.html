@@ -1,0 +1,46 @@
+<div class="main-container">
+    <div class="form-container">
+        <div class="logo-container">
+            Payment Form
+        </div>
+
+        <form class="form" [formGroup]="form" (ngSubmit)="payWithRazorpay()">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" formControlName="name" placeholder="Enter your name" required>
+                <div *ngIf="name?.touched && name?.invalid" class="error">
+                    <small *ngIf="name?.errors?.['required']">Name is required.</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" formControlName="email" placeholder="Enter your email" required>
+                <div *ngIf="email?.touched && email?.invalid" class="error">
+                    <small *ngIf="email?.errors?.['required']">Email is required.</small>
+                    <small *ngIf="email?.errors?.['email']">Enter a valid email.</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="number">Phone</label>
+                <input type="text" formControlName="number" placeholder="Enter your phone" required>
+                <div *ngIf="number?.touched && number?.invalid" class="error">
+                    <small *ngIf="number?.errors?.['required']">Phone number is required.</small>
+                    <small *ngIf="number?.errors?.['minlength']">Phone number must be at least 10 digits.</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="number" formControlName="amount" placeholder="Enter amount" required>
+                <div *ngIf="amount?.touched && amount?.invalid" class="error">
+                    <small *ngIf="amount?.errors?.['required']">Amount is required.</small>
+                    <small *ngIf="amount?.errors?.['min']">Minimum amount should be ₹1.</small>
+                </div>
+            </div>
+
+            <button class="form-submit-btn" type="submit" >Make Payment</button>
+        </form>
+    </div>
+</div>

@@ -4,8 +4,8 @@ import { Agent } from "../models/chat";
 import { BehaviorSubject, debounceTime, distinctUntilChanged, tap } from "rxjs";
 
 export const environment = {
-  apiUrl: 'http://localhost:8090/api/v1',
-  hubUrl: 'http://localhost:8090'
+  apiUrl: 'http://localhost:5124/api/v1',
+  hubUrl: 'http://localhost:5124'
 };
 
 @Injectable()
