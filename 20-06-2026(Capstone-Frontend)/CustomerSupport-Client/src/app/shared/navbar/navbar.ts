@@ -3,14 +3,14 @@ import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/rout
 import { LucideAngularModule, BotMessageSquare } from 'lucide-angular';
 import { every, filter, Observable } from 'rxjs';
 import { AuthService } from '../../core/services/auth-service';
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule, TitleCasePipe } from '@angular/common';
 import { User } from '../../core/models/user';
 import { Subject } from '@microsoft/signalr';
 import { NotificationService } from '../../core/services/notification-service';
 
 @Component({
   selector: 'app-navbar',
-  imports: [LucideAngularModule, RouterLink, CommonModule],
+  imports: [LucideAngularModule, CommonModule, TitleCasePipe],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css'
 })

@@ -24,6 +24,7 @@
         </a>
     </div>
     <div class="navbar-end">
+        <h1 *ngIf="user" class="text-xs">Hi, {{user.username.split("@")[0] | titlecase }}</h1>
         <button class="btn btn-ghost btn-circle" (click)="toggleNotification()" *ngIf="user">
             <div class="absolute top-1 -right-1" *ngIf="notificationAvailable()">
                 <lucide-icon name="dot" class="w-10 h-10 stroke-blue-600">

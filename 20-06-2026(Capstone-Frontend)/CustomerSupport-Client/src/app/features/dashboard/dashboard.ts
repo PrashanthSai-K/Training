@@ -9,7 +9,7 @@ import { provideNoopAnimations } from '@angular/platform-browser/animations';
 @Component({
   selector: 'app-dashboard',
   imports: [NgxChartsModule, AsyncPipe, CommonModule],
-  providers: [provideNoopAnimations() ],
+  providers: [provideNoopAnimations()],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
@@ -63,7 +63,7 @@ export class Dashboard implements OnInit {
 
     for (const item of data) {
       const date = new Date(item.date).toISOString().slice(0, 10);
-      const status = item.status === 'Deleted' ? 'Closed' : item.status;
+      const status = item.status === 'Deleted' ? 'Closed' : item.status === 'Active' ? 'Open' : item.status;
 
       if (!grouped.has(status)) {
         grouped.set(status, new Map());

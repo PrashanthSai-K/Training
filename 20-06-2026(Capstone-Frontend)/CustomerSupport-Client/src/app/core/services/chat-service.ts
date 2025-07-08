@@ -93,7 +93,7 @@ export class ChatService {
         )
     }
 
-    setActiveChat(chat: ChatModel) {
+    setActiveChat(chat: ChatModel | null) {
         this.activeChatSubject.next(chat);
     }
 

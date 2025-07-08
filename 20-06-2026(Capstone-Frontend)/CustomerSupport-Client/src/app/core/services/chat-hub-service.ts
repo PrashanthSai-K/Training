@@ -4,6 +4,8 @@ import { BehaviorSubject, } from "rxjs";
 import { Message } from "../models/message";
 import { environment } from "./agent-service";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { User } from "../models/user";
+import { AuthService } from "./auth-service";
 @Injectable()
 export class ChatHubService {
   private hubConnection!: signalR.HubConnection;
@@ -20,9 +22,14 @@ export class ChatHubService {
   private joinedChats = new Set<number>();
 
   private _snackbar = inject(MatSnackBar);
+  private user: User | null = null;
 
-
-  constructor() {
+  constructor(private authService: AuthService) {
+    authService.currentUser$.subscribe({
+      next: (data) => {
+        this.user = data
+      }
+    })
     this.initConnection();
   }
 
@@ -43,17 +50,21 @@ export class ChatHubService {
 
     this.hubConnection.on("ReceiveAssignedNotification", (chat: any) => {
       console.log("📥 Received assigned message from hub:", chat);
-      this._snackbar.open(`#${chat.chatId} has been assigned`, '', {
-        duration: 2000
-      })
+      if (this.user && (chat.customerEmail == this.user.username || chat.agentEmail == this.user.username)) {
+        this._snackbar.open(`#${chat.chatId} has been assigned`, '', {
+          duration: 2000
+        })
+      }
       this.assignedChatSubject.next(chat);
     });
 
     this.hubConnection.on("ReceiveClosedNotification", (chat: any) => {
       console.log("📥 Received closed message from hub:", chat);
-      this._snackbar.open(`#${chat.chatId} has been resolved`, '', {
-        duration: 2000
-      })
+      if (this.user && (chat.customerEmail == this.user.username || chat.agentEmail == this.user.username)) {
+        this._snackbar.open(`#${chat.chatId} has been closed`, '', {
+          duration: 2000
+        })
+      }
       this.closedChatSubject.next(chat);
     });
 

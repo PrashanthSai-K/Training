@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { ChatHubService } from '../../../core/services/chat-hub-service';
 import { AuthService } from '../../../core/services/auth-service';
 import { filter, switchMap } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -25,6 +26,8 @@ export class Chat implements OnInit {
   previewImageUrl: string = "";
   previewVisible = signal<boolean>(false);
   file: File | null = null;
+
+  private _snackBar = inject(MatSnackBar);
 
   constructor(private chatService: ChatService, private chatHubService: ChatHubService, private cdr: ChangeDetectorRef, public authService: AuthService) {
   }
@@ -73,6 +76,11 @@ export class Chat implements OnInit {
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     input.files && console.log(input?.files[0].name, input.files[0].type);
+    if (input.files && input.files[0].size >= 1 * 1024 * 1024) {
+      return this._snackBar.open("File size must be less than 1 mb", "", {
+        duration: 2000
+      })
+    }
     const reader = new FileReader();
     if (input.files) {
       reader.readAsBinaryString(input.files[0]);
@@ -82,6 +90,7 @@ export class Chat implements OnInit {
         this.previewVisible.set(true);
       };
     }
+    return
   }
 
   onPreviewClose() {

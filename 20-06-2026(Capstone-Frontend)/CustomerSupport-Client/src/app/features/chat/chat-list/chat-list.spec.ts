@@ -7,6 +7,7 @@ import { NotificationService } from '../../../core/services/notification-service
 import { ChatModel } from '../../../core/models/chat';
 import { Message } from '../../../core/models/message';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { AuthService } from '../../../core/services/auth-service';
 
 @Component({
   selector: 'app-chat-item',
@@ -24,6 +25,8 @@ describe('ChatList', () => {
   let chatServiceMock: any;
   let chatHubServiceMock: any;
   let notificationServiceMock: any;
+  let authServiceMock: any;
+
 
   beforeEach(async () => {
     // Mock services
@@ -36,12 +39,18 @@ describe('ChatList', () => {
 
     chatHubServiceMock = {
       joinChat: jasmine.createSpy('joinChat'),
-      messages$: new BehaviorSubject<Message | null>(null)
+      messages$: new BehaviorSubject<Message | null>(null),
+      closedChat$: new BehaviorSubject<any>(null),
+      assignedChat$: new BehaviorSubject<any>(null),
     };
 
     notificationServiceMock = {
       addNewNotification: jasmine.createSpy('addNewNotification'),
       notification$: new BehaviorSubject<Message[]>([])
+    };
+
+    authServiceMock = {
+      currentUser$: new BehaviorSubject<any>({ username: 'john@example.com' })
     };
 
     await TestBed.configureTestingModule({
@@ -50,7 +59,8 @@ describe('ChatList', () => {
       providers: [
         { provide: ChatService, useValue: chatServiceMock },
         { provide: ChatHubService, useValue: chatHubServiceMock },
-        { provide: NotificationService, useValue: notificationServiceMock }
+        { provide: NotificationService, useValue: notificationServiceMock },
+        { provide: AuthService, useValue: authServiceMock }
       ]
     }).compileComponents();
 
@@ -80,7 +90,7 @@ describe('ChatList', () => {
       createdOn: '',
       agent: { id: 1, name: 'Agent', email: '', status: '', dateOfJoin: '' },
       customer: { id: 1, name: 'Customer', email: '', status: '', phone: '' },
-      updatedAt : ""
+      updatedAt: ""
     };
     component.setMessage(chat);
     expect(chatServiceMock.setActiveChat).toHaveBeenCalledWith(chat);
@@ -106,14 +116,14 @@ describe('ChatList', () => {
   });
 
   it('should not push notification if activeChat is the same chatId', () => {
-    const message: Message = { id: 1, chatId: 99,  };
+    const message: Message = { id: 1, chatId: 99, };
     component.activeChat = { id: 99 } as ChatModel;
     component.pushNotification(message);
     expect(notificationServiceMock.addNewNotification).not.toHaveBeenCalled();
   });
 
   it('should push notification if activeChat is different', () => {
-    const message: Message = { id: 1, chatId: 77,  };
+    const message: Message = { id: 1, chatId: 77, };
     component.activeChat = { id: 99 } as ChatModel;
     component.pushNotification(message);
     expect(notificationServiceMock.addNewNotification).toHaveBeenCalledWith(message);

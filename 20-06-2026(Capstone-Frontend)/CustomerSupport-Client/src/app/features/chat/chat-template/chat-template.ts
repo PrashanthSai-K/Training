@@ -120,6 +120,7 @@ export class ChatTemplate implements OnInit {
   }
 
   backToList() {
+    this.chatService.setActiveChat(null);
     this.isListActive.set(true);
     this.isChatActive.set(false);
   }

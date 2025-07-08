@@ -3,8 +3,13 @@
     <span class="loading loading-dots loading-md text-blue-600"></span>
 </div>
 }
-@if (chats) {
+@if (chats.length > 0) {
 @for (chat of chats; track $index) {
 <app-chat-item (click)="setMessage(chat)" [chat]="chat"></app-chat-item>
 }
+}
+@if (chats.length < 1){
+    <div class="w-full h-full flex items-center justify-center">
+        No chats yet
+    </div>
 }
