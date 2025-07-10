@@ -29,6 +29,6 @@
 
 #### 🌐 Extras: Azure ACR
 
-![View 9](./AzureRegistryPush-Local.png.png)
+![View 9](./AzureRegistryPush-Local.png)
 
 ![View 10](./AzureRegistryPull.png)
