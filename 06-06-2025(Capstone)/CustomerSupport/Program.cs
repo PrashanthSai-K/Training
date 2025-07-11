@@ -20,6 +20,8 @@ using Serilog.Extensions.Logging;
 
 
 var builder = WebApplication.CreateBuilder(args);
+Serilog.Debugging.SelfLog.Enable(Console.Error);
+var logfileName = $"log-{DateTime.UtcNow:yyyy-MM-dd}.txt";
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -30,6 +32,12 @@ Log.Logger = new LoggerConfiguration()
     .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
     .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day,
         outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
+    .WriteTo.AzureBlobStorage(
+        connectionString: builder.Configuration["Azure:StorageConnectionString"],
+        storageContainerName: "logs",
+        storageFileName: "{yyyy}/{MM}/{dd}/log.txt",
+        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}"
+    )
     .CreateLogger();
 
 Log.Information("Serilog is configured properly");
@@ -88,7 +96,7 @@ ILoggerFactory loggerFactory = new SerilogLoggerFactory(Log.Logger);
 builder.Services.AddDbContext<ChatDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
-    // options.UseLoggerFactory(loggerFactory);
+    options.UseLoggerFactory(loggerFactory);
 });
 #endregion
 
@@ -135,7 +143,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("http://localhost:4200","http://localhost:8080",  "https://h4t8wz09-4200.inc1.devtunnels.ms")
+        policy.WithOrigins("http://localhost:4200", "http://localhost:8080", "https://chatappsai.z13.web.core.windows.net", "https://h4t8wz09-4200.inc1.devtunnels.ms")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
@@ -149,7 +157,7 @@ builder.Services.AddTransient<ICustomerService, CustomerService>();
 builder.Services.AddTransient<IHashingService, HashingService>();
 builder.Services.AddTransient<IChatService, ChatService>();
 builder.Services.AddTransient<IChatMessageService, ChatMessageService>();
-builder.Services.AddTransient<IImageService, ImageService>();
+builder.Services.AddTransient<IImageService, ImageServiceBlob>();
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<ITokenService, TokenService>();
 builder.Services.AddTransient<IEmailService, EmailService>();
@@ -198,8 +206,8 @@ var app = builder.Build();
 
 // if (app.Environment.IsDevelopment())
 // {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+app.UseSwagger();
+app.UseSwaggerUI();
 // }
 
 app.UseExceptionHandler();

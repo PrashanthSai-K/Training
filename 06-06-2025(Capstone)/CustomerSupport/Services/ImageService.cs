@@ -1,4 +1,5 @@
 using System;
+using Azure.Storage.Blobs;
 using CustomerSupport.Exceptions;
 using CustomerSupport.Interfaces;
 using CustomerSupport.MessageHub;
@@ -17,6 +18,7 @@ public class ImageService : IImageService
     private readonly IOtherContextFunctions _otherContextFUnctions;
     private readonly IHubContext<ChatHub> _chatHub;
     private readonly IRepository<string, User> _userRepository;
+    private readonly BlobContainerClient _containerClient;
 
     public ImageService(IRepository<string, Image> imageRepository,
                         IRepository<int, Chat> chatRepository,
@@ -24,7 +26,8 @@ public class ImageService : IImageService
                         IAuditLogService auditLogService,
                         IOtherContextFunctions otherContextFunctions,
                         IHubContext<ChatHub> chatHub,
-                        IRepository<string, User> userRepository)
+                        IRepository<string, User> userRepository,
+                        IConfiguration configuration)
     {
         _imageRepository = imageRepository;
         _chatRepository = chatRepository;
@@ -33,6 +36,8 @@ public class ImageService : IImageService
         _otherContextFUnctions = otherContextFunctions;
         _chatHub = chatHub;
         _userRepository = userRepository;
+        var sasUrl = configuration["Azure:ContainerUrl"] ?? throw new ItemNotFoundException("Azure Sas url not found");
+        _containerClient = new BlobContainerClient(new Uri(sasUrl));
     }
 
     public async Task<Image> DeleteImage(string userId, int chatId, string imageName)
@@ -95,6 +100,7 @@ public class ImageService : IImageService
 
         return "Image Uploaded";
     }
+
 
     public async Task<ChatMessage> CreateImageMessage(int chatId, string imageName, string UserId)
     {
