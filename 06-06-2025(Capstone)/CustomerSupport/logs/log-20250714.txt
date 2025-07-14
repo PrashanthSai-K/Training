@@ -1,0 +1,979 @@
+2025-07-14 10:52:29.703 +05:30 [INF] Serilog is configured properly
+2025-07-14 10:52:57.119 +05:30 [INF] Executed DbCommand (74ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles", u."Status"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-07-14 10:52:57.576 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles", u."Status"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-07-14 10:52:57.665 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@p1='?', @p0='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "RefreshToken" = @p0
+WHERE "Username" = @p1;
+2025-07-14 14:40:36.783 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles", u."Status"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-07-14 14:40:37.060 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles", u."Status"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-07-14 14:40:37.070 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@p1='?', @p0='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "RefreshToken" = @p0
+WHERE "Username" = @p1;
+2025-07-14 14:40:37.286 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles", u."Status"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-07-14 14:40:37.303 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles", u."Status"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-07-14 14:40:37.318 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
+2025-07-14 14:40:37.318 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
+2025-07-14 14:40:37.398 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."IssueDescription", c."IssueName", c."Status", c."UpdatedAt"
+FROM "Chats" AS c
+2025-07-14 14:40:37.398 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."IssueDescription", c."IssueName", c."Status", c."UpdatedAt"
+FROM "Chats" AS c
+2025-07-14 14:40:37.430 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles", u."Status"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-07-14 14:40:37.432 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
+2025-07-14 14:40:37.433 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."IssueDescription", c."IssueName", c."Status", c."UpdatedAt"
+FROM "Chats" AS c
+2025-07-14 14:40:37.436 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles", u."Status"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-07-14 14:40:37.438 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
+2025-07-14 14:40:37.439 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."IssueDescription", c."IssueName", c."Status", c."UpdatedAt"
+FROM "Chats" AS c
+2025-07-14 14:41:19.404 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."IssueDescription", c."IssueName", c."Status", c."UpdatedAt"
+FROM "Chats" AS c
+2025-07-14 14:41:19.405 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."IssueDescription", c."IssueName", c."Status", c."UpdatedAt"
+FROM "Chats" AS c
+2025-07-14 14:41:19.547 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.547 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.553 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.554 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.555 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.556 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.557 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.558 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.559 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.560 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.562 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.564 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.566 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.567 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.568 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.569 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.570 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.571 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.572 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.573 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.574 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.575 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.576 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.577 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.578 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.579 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.580 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.582 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.583 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.583 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.584 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.586 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.587 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.588 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.589 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.590 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.590 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.593 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.593 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.595 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.595 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.597 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.597 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.598 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.598 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.600 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.608 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Email", c."Name", c."Phone", c."Status"
+FROM "Customers" AS c
+2025-07-14 14:41:19.608 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Email", c."Name", c."Phone", c."Status"
+FROM "Customers" AS c
+2025-07-14 14:41:19.623 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
+2025-07-14 14:41:19.623 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
+2025-07-14 14:41:19.676 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."IssueDescription", c."IssueName", c."Status", c."UpdatedAt"
+FROM "Chats" AS c
+2025-07-14 14:41:19.679 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.682 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.685 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.687 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.690 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.693 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.695 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.697 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.699 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.706 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.708 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.710 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."IssueDescription", c."IssueName", c."Status", c."UpdatedAt"
+FROM "Chats" AS c
+2025-07-14 14:41:19.710 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.712 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.712 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.714 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.714 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.716 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.716 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.717 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.717 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.720 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.720 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.722 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.722 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.724 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.724 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.725 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.725 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.727 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.727 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.729 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.729 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.731 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.731 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.732 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Email", c."Name", c."Phone", c."Status"
+FROM "Customers" AS c
+2025-07-14 14:41:19.733 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.734 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
+2025-07-14 14:41:19.735 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.738 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.741 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.741 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."IssueDescription", c."IssueName", c."Status", c."UpdatedAt"
+FROM "Chats" AS c
+2025-07-14 14:41:19.742 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.743 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.744 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.744 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.746 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.746 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.748 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.748 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.749 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.749 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.757 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.757 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.759 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.759 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.761 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.761 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.762 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Email", c."Name", c."Phone", c."Status"
+FROM "Customers" AS c
+2025-07-14 14:41:19.762 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.763 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
+2025-07-14 14:41:19.764 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.766 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.768 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.770 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.771 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.773 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.774 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.776 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.778 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.779 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.781 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.782 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.784 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.785 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__chatId_0='?' (DbType = Int32), @__email_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Chats" AS c
+    INNER JOIN "Agents" AS a ON c."AgentId" = a."Id"
+    INNER JOIN "Customers" AS c0 ON c."CustomerId" = c0."Id"
+    WHERE c."Id" = @__chatId_0 AND (a."Email" = @__email_1 OR c0."Email" = @__email_1))
+2025-07-14 14:41:19.786 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Email", c."Name", c."Phone", c."Status"
+FROM "Customers" AS c
+2025-07-14 14:41:19.787 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
+2025-07-14 14:41:25.616 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles", u."Status"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-07-14 14:41:25.617 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
+2025-07-14 14:41:26.110 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Email", c."Name", c."Phone", c."Status"
+FROM "Customers" AS c
+2025-07-14 14:41:26.167 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
+2025-07-14 14:41:26.791 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles", u."Status"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-07-14 14:41:26.792 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles", u."Status"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-07-14 14:41:26.792 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
+2025-07-14 14:41:26.792 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
+2025-07-14 14:41:26.794 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."IssueDescription", c."IssueName", c."Status", c."UpdatedAt"
+FROM "Chats" AS c
+2025-07-14 14:41:26.794 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."IssueDescription", c."IssueName", c."Status", c."UpdatedAt"
+FROM "Chats" AS c
+2025-07-14 14:41:26.798 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles", u."Status"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-07-14 14:41:26.801 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
+2025-07-14 14:41:26.803 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."IssueDescription", c."IssueName", c."Status", c."UpdatedAt"
+FROM "Chats" AS c
+2025-07-14 14:41:26.810 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles", u."Status"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-07-14 14:41:26.813 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
+2025-07-14 14:41:26.814 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."IssueDescription", c."IssueName", c."Status", c."UpdatedAt"
+FROM "Chats" AS c

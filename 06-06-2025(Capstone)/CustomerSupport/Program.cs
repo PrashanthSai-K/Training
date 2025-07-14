@@ -1,6 +1,8 @@
 
 using System.Text;
 using System.Threading.RateLimiting;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 using CustomerSupport.Context;
 using CustomerSupport.Exceptions;
 using CustomerSupport.Interfaces;
@@ -32,12 +34,12 @@ Log.Logger = new LoggerConfiguration()
     .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
     .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day,
         outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
-    .WriteTo.AzureBlobStorage(
-        connectionString: builder.Configuration["Azure:StorageConnectionString"],
-        storageContainerName: "logs",
-        storageFileName: "{yyyy}/{MM}/{dd}/log.txt",
-        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}"
-    )
+    // .WriteTo.AzureBlobStorage(
+    //     connectionString: builder.Configuration["Azure:StorageConnectionString"],
+    //     storageContainerName: "logs",
+    //     storageFileName: "{yyyy}/{MM}/{dd}/log.txt",
+    //     outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}"
+    // )
     .CreateLogger();
 
 Log.Information("Serilog is configured properly");
@@ -93,9 +95,16 @@ builder.Services.AddApiVersioning(opts =>
 
 #region Database Context
 ILoggerFactory loggerFactory = new SerilogLoggerFactory(Log.Logger);
+
+var KeyVaultUrl = builder.Configuration["Azure:KeyVaultUrl"] ?? throw new ItemNotFoundException("KeyVaultUrlNotFound");
+var client = new SecretClient(new Uri(KeyVaultUrl), new DefaultAzureCredential());
+
+KeyVaultSecret secret = await client.GetSecretAsync("DbConnectionString");
+string dbConnectionString = secret.Value;
+
 builder.Services.AddDbContext<ChatDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseNpgsql(dbConnectionString);
     options.UseLoggerFactory(loggerFactory);
 });
 #endregion
@@ -157,7 +166,7 @@ builder.Services.AddTransient<ICustomerService, CustomerService>();
 builder.Services.AddTransient<IHashingService, HashingService>();
 builder.Services.AddTransient<IChatService, ChatService>();
 builder.Services.AddTransient<IChatMessageService, ChatMessageService>();
-builder.Services.AddTransient<IImageService, ImageServiceBlob>();
+builder.Services.AddTransient<IImageService, ImageService>();
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<ITokenService, TokenService>();
 builder.Services.AddTransient<IEmailService, EmailService>();
