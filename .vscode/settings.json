@@ -1,3 +1,9 @@
 {
-    "dotnet.defaultSolution": "task1.sln"
+    "dotnet.defaultSolution": "task1.sln",
+    "azureFunctions.deploySubpath": "16-07-2025/AzureFunc/bin/Release/net8.0/publish",
+    "azureFunctions.projectLanguage": "C#",
+    "azureFunctions.projectRuntime": "~4",
+    "debug.internalConsoleOptions": "neverOpen",
+    "azureFunctions.preDeployTask": "publish (functions)",
+    "azureFunctions.projectSubpath": "16-07-2025/AzureFunc"
 }

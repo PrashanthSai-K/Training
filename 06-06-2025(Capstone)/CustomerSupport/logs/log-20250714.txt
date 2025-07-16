@@ -977,3 +977,61 @@ FROM "Agents" AS a
 2025-07-14 14:41:26.814 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
 SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."IssueDescription", c."IssueName", c."Status", c."UpdatedAt"
 FROM "Chats" AS c
+2025-07-14 17:33:14.608 +05:30 [INF] Serilog is configured properly
+2025-07-14 17:33:26.536 +05:30 [INF] Executed DbCommand (73ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles", u."Status"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-07-14 17:33:27.092 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles", u."Status"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-07-14 17:33:27.196 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p1='?', @p0='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "RefreshToken" = @p0
+WHERE "Username" = @p1;
+2025-07-14 17:50:04.221 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles", u."Status"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-07-14 17:50:04.221 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles", u."Status"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-07-14 17:50:04.251 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
+2025-07-14 17:50:04.251 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
+2025-07-14 17:50:04.323 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."IssueDescription", c."IssueName", c."Status", c."UpdatedAt"
+FROM "Chats" AS c
+2025-07-14 17:50:04.323 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."IssueDescription", c."IssueName", c."Status", c."UpdatedAt"
+FROM "Chats" AS c
+2025-07-14 17:50:04.361 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles", u."Status"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-07-14 17:50:04.363 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
+2025-07-14 17:50:04.364 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."IssueDescription", c."IssueName", c."Status", c."UpdatedAt"
+FROM "Chats" AS c
+2025-07-14 17:50:04.368 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Username", u."Password", u."RefreshToken", u."Roles", u."Status"
+FROM "Users" AS u
+WHERE u."Username" = @__username_0
+LIMIT 1
+2025-07-14 17:50:04.370 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."DateOfJoin", a."Email", a."Name", a."Status"
+FROM "Agents" AS a
+2025-07-14 17:50:04.371 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."AgentId", c."CreatedOn", c."CustomerId", c."IssueDescription", c."IssueName", c."Status", c."UpdatedAt"
+FROM "Chats" AS c

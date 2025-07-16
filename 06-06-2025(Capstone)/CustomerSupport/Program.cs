@@ -96,15 +96,15 @@ builder.Services.AddApiVersioning(opts =>
 #region Database Context
 ILoggerFactory loggerFactory = new SerilogLoggerFactory(Log.Logger);
 
-var KeyVaultUrl = builder.Configuration["Azure:KeyVaultUrl"] ?? throw new ItemNotFoundException("KeyVaultUrlNotFound");
-var client = new SecretClient(new Uri(KeyVaultUrl), new DefaultAzureCredential());
+// var KeyVaultUrl = builder.Configuration["Azure:KeyVaultUrl"] ?? throw new ItemNotFoundException("KeyVaultUrlNotFound");
+// var client = new SecretClient(new Uri(KeyVaultUrl), new DefaultAzureCredential());
 
-KeyVaultSecret secret = await client.GetSecretAsync("DbConnectionString");
-string dbConnectionString = secret.Value;
+// KeyVaultSecret secret = await client.GetSecretAsync("DbConnectionString");
+// string dbConnectionString = secret.Value;
 
 builder.Services.AddDbContext<ChatDbContext>(options =>
 {
-    options.UseNpgsql(dbConnectionString);
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
     options.UseLoggerFactory(loggerFactory);
 });
 #endregion
