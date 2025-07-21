@@ -1,0 +1,17 @@
+<div class="w-full max-w-4xl mx-auto p-6">
+  <h2 class="text-xl font-bold text-center mb-4 text-gray-800">{{ title }}</h2>
+
+  <div *ngIf="videoUrl; else noVideo" class="rounded-lg shadow-md overflow-hidden">
+    <video
+      class="w-full h-auto"
+      [src]="videoUrl"
+      controls
+      autoplay
+      preload="metadata"
+    ></video>
+  </div>
+
+  <ng-template #noVideo>
+    <p class="text-gray-500 text-center mt-4">No video found for playback.</p>
+  </ng-template>
+</div>
