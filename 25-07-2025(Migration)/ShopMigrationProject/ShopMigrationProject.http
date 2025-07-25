@@ -1,0 +1,6 @@
+@ShopMigrationProject_HostAddress = http://localhost:5038
+
+GET {{ShopMigrationProject_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

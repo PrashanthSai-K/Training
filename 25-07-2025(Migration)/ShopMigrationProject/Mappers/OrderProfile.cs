@@ -1,0 +1,13 @@
+using AutoMapper;
+using ChienVHShopOnline.Models;
+using ChienVHShopOnline.Models.Dto;
+
+namespace ChienVHShopOnline.Mappers;
+
+public class OrderProfile : Profile
+{
+    public OrderProfile()
+    {
+        CreateMap<OrderCreateDto, Order>();
+    }
+}

@@ -1,0 +1,83 @@
+using AutoMapper;
+using ChienVHShopOnline.Interfaces;
+using ChienVHShopOnline.Models;
+using ChienVHShopOnline.Models.Dto;
+using Microsoft.EntityFrameworkCore;
+
+namespace ChienVHShopOnline.Services;
+
+public class OrdersService : IOrderService
+{
+    private readonly ChienVHShopDBEntities _context;
+    private readonly IMapper _mapper;
+
+    public OrdersService(ChienVHShopDBEntities context, IMapper mapper)
+    {
+        _context = context;
+        _mapper = mapper;
+    }
+
+    public async Task<Order> CreateOrder(OrderCreateDto orderDto)
+    {
+        var order = _mapper.Map<Order>(orderDto);
+
+        _context.Orders.Add(order);
+        await _context.SaveChangesAsync();
+        
+        Console.WriteLine(orderDto.OrderDetailsDto);
+
+        // Add OrderDetails
+        double total = 0;
+        foreach (var item in orderDto.OrderDetailsDto)
+        {
+            var orderDetail = new OrderDetail
+            {
+                OrderID = order.OrderID,
+                ProductID = item.ProductID,
+                Price = item.Price,
+                Quantity = item.Quantity
+            };
+
+            _context.OrderDetails.Add(orderDetail);
+
+            if (item.Price.HasValue && item.Quantity.HasValue)
+            {
+                total += item.Price.Value * item.Quantity.Value;
+            }
+        }
+
+        await _context.SaveChangesAsync();
+
+        return order;
+    }
+
+    public async Task<Order> DeleteOrder(int id)
+    {
+        var order = await _context.Orders.FindAsync(id);
+        if (order == null)
+            throw new Exception("Order not found");
+
+        _context.Orders.Remove(order);
+        await _context.SaveChangesAsync();
+        return order;
+    }
+
+    public async Task<Order> GetOrder(int id)
+    {
+        var order = await _context.Orders.FindAsync(id);
+
+        if (order == null)
+            throw new Exception("Order not found");
+
+        return order;
+    }
+
+    public async Task<IEnumerable<Order>> GetOrders()
+    {
+        var orders = await _context.Orders
+            .OrderByDescending(x => x.OrderID)
+            .ToListAsync();
+
+        return orders;
+    }
+}
