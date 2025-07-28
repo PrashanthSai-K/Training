@@ -1,0 +1,8 @@
+<h2>Checkout</h2>
+<form #checkoutForm="ngForm" (ngSubmit)="submit()">
+  <input name="name" [(ngModel)]="form.name" placeholder="Name" required />
+  <input name="phone" [(ngModel)]="form.phone" placeholder="Phone" required />
+  <input name="email" [(ngModel)]="form.email" placeholder="Email" required />
+  <input name="address" [(ngModel)]="form.address" placeholder="Address" required />
+  <button type="submit">Submit Order</button>
+</form>

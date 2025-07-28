@@ -1,0 +1,24 @@
+<h2>Categories</h2>
+<button routerLink="/categories/create">Create New</button>
+
+<table class="table">
+  <thead>
+    <tr><th>Name</th><th>Actions</th></tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cat of categories">
+      <td>{{ cat.name }}</td>
+      <td>
+        <a [routerLink]="['/categories/edit', cat.categoryId]">Edit</a> |
+        <a [routerLink]="['/categories/details', cat.categoryId]">Details</a> |
+        <a href="#" (click)="delete(cat.categoryId)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<nav *ngIf="totalPages > 1">
+  <button *ngFor="let p of [].constructor(totalPages); let i = index" (click)="changePage(i+1)">
+    {{ i+1 }}
+  </button>
+</nav>

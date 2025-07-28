@@ -8,12 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+#region Controller
 builder.Services.AddControllers()
                 .AddJsonOptions(opts =>
                 {
-                    opts.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+                    opts.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
                     opts.JsonSerializerOptions.WriteIndented = true;
                 });
+#endregion
 
 builder.Services.AddDbContext<ChienVHShopDBEntities>(options =>
 {
@@ -40,6 +42,18 @@ builder.Services.AddAutoMapper(typeof(User));
 builder.Services.AddAutoMapper(typeof(News));
 
 
+#region CORS
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:4200", "http://localhost:53579")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
+#endregion
 
 var app = builder.Build();
 
@@ -49,7 +63,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors();
 app.MapControllers();
 
 app.Run();

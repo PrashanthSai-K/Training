@@ -1,0 +1,8 @@
+<h2>Color Details</h2>
+
+<div *ngIf="color">
+  <p><strong>Color:</strong> {{ color.color1 }}</p>
+</div>
+
+<a [routerLink]="['/colors/edit', color.colorId]">Edit</a> |
+<a routerLink="/colors">Back to List</a>

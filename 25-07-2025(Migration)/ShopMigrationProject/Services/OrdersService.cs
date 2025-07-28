@@ -23,7 +23,7 @@ public class OrdersService : IOrderService
 
         _context.Orders.Add(order);
         await _context.SaveChangesAsync();
-        
+
         Console.WriteLine(orderDto.OrderDetailsDto);
 
         // Add OrderDetails
@@ -68,6 +68,8 @@ public class OrdersService : IOrderService
 
         if (order == null)
             throw new Exception("Order not found");
+            
+        var orderDetails = await _context.OrderDetails.Where(x => x.OrderID == order.OrderID).ToListAsync();
 
         return order;
     }
@@ -77,6 +79,8 @@ public class OrdersService : IOrderService
         var orders = await _context.Orders
             .OrderByDescending(x => x.OrderID)
             .ToListAsync();
+
+        var orderDetails = await _context.OrderDetails.OrderByDescending(x => x.OrderID).ToListAsync();
 
         return orders;
     }

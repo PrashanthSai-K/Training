@@ -16,7 +16,7 @@ namespace ChienVHShopOnline.Controllers
     public class NewsController : ControllerBase
     {
         // private readonly IUserService _userService;
-        private readonly ChienVHShopDBEntities _context;
+              private readonly ChienVHShopDBEntities _context;
         private readonly IMapper _mapper;
 
         public NewsController(IUserService userService, ChienVHShopDBEntities dbEntities, IMapper mapper)

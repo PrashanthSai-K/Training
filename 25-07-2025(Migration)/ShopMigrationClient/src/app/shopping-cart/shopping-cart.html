@@ -1,0 +1,25 @@
+<h2>Your Cart</h2>
+<div *ngIf="cartItems.length > 0; else emptyCart">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th><th>Price</th><th>Qty</th><th>Total</th><th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cartItems">
+        <td>{{ item.productName }}</td>
+        <td>\${{ item.price | number }}</td>
+        <td>
+          <input type="number" [value]="item.quantity"
+                 (change)="updateQty(item.productId, $event.target)" />
+        </td>
+        <td>\${{ item.price * item.quantity | number }}</td>
+        <td><button (click)="remove(item.productId)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Total: \${{ total | number }}</p>
+  <a routerLink="/checkout">Proceed to Checkout</a>
+</div>
+<ng-template #emptyCart><p>No items in your cart!</p></ng-template>

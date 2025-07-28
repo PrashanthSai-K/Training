@@ -1,0 +1,21 @@
+<h2>Colors</h2>
+<button routerLink="/colors/create" class="btn btn-primary">Create New</button>
+
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th>Color</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let color of colors">
+      <td>{{ color.color1 }}</td>
+      <td>
+        <a [routerLink]="['/colors/edit', color.colorId]">Edit</a> |
+        <a [routerLink]="['/colors/details', color.colorId]">Details</a> |
+        <a (click)="deleteColor(color.colorId)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

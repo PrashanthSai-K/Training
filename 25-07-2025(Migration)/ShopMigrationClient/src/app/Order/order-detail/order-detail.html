@@ -1,0 +1,48 @@
+<h2>Order Details</h2>
+
+<div *ngIf="order">
+  <h4>Order: {{ order.orderID }}</h4>
+  <hr />
+  <dl>
+    <dt>Order Date:</dt>
+    <dd>{{ order.orderDate | date: 'MM/dd/yyyy' }}</dd>
+
+    <dt>Payment Type:</dt>
+    <dd>{{ order.paymentType }}</dd>
+
+    <dt>Status:</dt>
+    <dd>{{ order.status }}</dd>
+
+    <dt>Customer Name:</dt>
+    <dd>{{ order.customerName }}</dd>
+
+    <dt>Customer Phone:</dt>
+    <dd>{{ order.customerPhone }}</dd>
+
+    <dt>Customer Email:</dt>
+    <dd>{{ order.customerEmail }}</dd>
+
+    <dt>Customer Address:</dt>
+    <dd>{{ order.customerAddress }}</dd>
+  </dl>
+
+  <h3>Order Items</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product Id</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let detail of order.orderDetails">
+        <td>{{ detail.productID}}</td>
+        <td>{{ detail.quantity }}</td>
+        <td>${{ detail.price | number:'1.0-0' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <a routerLink="/orders">Back to List</a>
+</div>

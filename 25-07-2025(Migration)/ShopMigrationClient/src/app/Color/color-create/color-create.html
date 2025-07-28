@@ -1,0 +1,14 @@
+<h2>Create Color</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label>Color</label>
+    <input class="form-control" formControlName="color1" />
+    <div class="text-danger" *ngIf="form.controls['color1'].invalid && form.controls['color1'].touched">
+      Color is required.
+    </div>
+  </div>
+
+  <button class="btn btn-success" type="submit">Create</button>
+  <button class="btn btn-secondary" routerLink="/colors">Back</button>
+</form>
