@@ -18,15 +18,23 @@
           Products
         </a>
       </li>
+            <li>
+        <a [routerLink]="['/products/create']">
+          Create Products
+        </a>
+      </li>
+
       <li>
-        ContactUs
+        <a [routerLink]="['/contactus']">
+          ContactUs
+        </a>
       </li>
       <li>
         <a [routerLink]="['/colors']">
           Manage Color</a>
       </li>
       <li>
-        <a [routerLink]="['/cart']">
+        <a [routerLink]="['/newslist']">
           News Management
         </a>
       </li>
@@ -42,7 +50,6 @@
       </li>
       <li>
         <a [routerLink]="['/orders']">
-
           Order
         </a>
       </li>
@@ -51,17 +58,17 @@
   <div class="clear"></div>
   <div class="div-left">
     <div class="category-title">Category</div><!--category-title-->
-    <div class="category-list">
-      <p *ngFor="let item of categories">
-        {{item.name}}
-      </p>
+    <div class="category-list" style="display: flex; flex-direction: column; gap: 10px; margin-left: 10px; margin-top: 10px;">
+      <a style="text-decoration: underline; color: blue; cursor: pointer;" *ngFor="let item of categories" (click)="setCategories(item.categoryId)">
+        {{ item.name }}
+      </a>
     </div><!--category-list-->
   </div><!--div-left-->
   <div class="div-main">
     <div class="top-breadcrumb">
       <ul>
         <li><a href="#">Home</a><span class="span-breadcrumb">>></span></li>
-        <li><a href="#">Product</a></li>
+        <li><a href="#">{{breadCrumb | titlecase}}</a></li>
       </ul>
     </div><!--top-breadcrumb-->
     <div class="clear"></div>
@@ -71,7 +78,7 @@
   </div><!--div-main-->
   <div class="clear"></div>
   <div class="div-footer">
-    <p>Copyright © DateTime.Now.Year by Chien Vu Hoang. All rights reserved.</p>
+    <p>Copyright © {{year}} by Chien Vu Hoang. All rights reserved.</p>
     <p>Email: <a href="mailto:chien.vh@gmail.com">ChienVH</a></p>
     <p>Facebook: <a href="https://facebook.com/chienvh">https://facebook.com/chienvh</a> </p>
   </div><!--div-footer-->

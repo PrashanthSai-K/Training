@@ -21,8 +21,6 @@ export class ColorList {
   loadColors(): void {
     this.colorService.getAll().subscribe({
       next: (data) => {
-        console.log(data);
-        
         this.colors = data;
       }
     });
@@ -33,5 +31,4 @@ export class ColorList {
       this.colorService.delete(id).subscribe(() => this.loadColors());
     }
   }
-
 }

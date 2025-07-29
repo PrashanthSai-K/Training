@@ -1,0 +1,11 @@
+<!-- news-detail.component.html -->
+<div *ngIf="news">
+  <h2>News Details</h2>
+  <p><strong>Title:</strong> {{ news.title }}</p>
+  <p><strong>Description:</strong> {{ news.shortDescription }}</p>
+  <p><strong>Content:</strong> {{ news.content }}</p>
+  <p><strong>Image:</strong> <img [src]="news.image" alt="" style="height: 10rem;"></p>
+  <p><strong>Date:</strong> {{ news.createdDate }}</p>
+  <p><strong>Status:</strong> {{ news.status === 1 ? 'Active' : 'Inactive' }}</p>
+  <p><strong>User:</strong> {{ news.user?.username }}</p>
+</div>

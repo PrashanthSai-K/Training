@@ -36,6 +36,11 @@ export class CategoryForm {
   }
 
   submit() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
     const cat = this.form.value;
     if (this.isEdit) {
       this.service.update(cat).subscribe(() => this.router.navigate(['/categories']));

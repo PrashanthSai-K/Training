@@ -22,6 +22,7 @@ builder.Services.AddDbContext<ChienVHShopDBEntities>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddHttpClient();
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IColorsService, ColorService>();

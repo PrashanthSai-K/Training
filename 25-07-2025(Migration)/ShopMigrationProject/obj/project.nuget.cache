@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JoG8qAs1iCo=",
+  "dgSpecHash": "hWjBEn9q/mo=",
   "success": true,
   "projectFilePath": "/Users/presidio/sai/Training/25-07-2025(Migration)/ShopMigrationProject/ShopMigrationProject.csproj",
   "expectedPackageFiles": [
@@ -34,6 +34,7 @@
     "/Users/presidio/.nuget/packages/microsoft.extensions.primitives/9.0.7/microsoft.extensions.primitives.9.0.7.nupkg.sha512",
     "/Users/presidio/.nuget/packages/microsoft.openapi/1.6.23/microsoft.openapi.1.6.23.nupkg.sha512",
     "/Users/presidio/.nuget/packages/mono.texttemplating/3.0.0/mono.texttemplating.3.0.0.nupkg.sha512",
+    "/Users/presidio/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
     "/Users/presidio/.nuget/packages/npgsql/9.0.3/npgsql.9.0.3.nupkg.sha512",
     "/Users/presidio/.nuget/packages/npgsql.entityframeworkcore.postgresql/9.0.4/npgsql.entityframeworkcore.postgresql.9.0.4.nupkg.sha512",
     "/Users/presidio/.nuget/packages/swashbuckle.aspnetcore/9.0.3/swashbuckle.aspnetcore.9.0.3.nupkg.sha512",

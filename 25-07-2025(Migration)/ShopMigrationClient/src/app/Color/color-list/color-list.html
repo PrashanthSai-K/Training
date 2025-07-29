@@ -14,7 +14,7 @@
       <td>
         <a [routerLink]="['/colors/edit', color.colorId]">Edit</a> |
         <a [routerLink]="['/colors/details', color.colorId]">Details</a> |
-        <a (click)="deleteColor(color.colorId)">Delete</a>
+        <a (click)="deleteColor(color.colorId)" style="cursor: pointer; color: blue;text-decoration: underline;">Delete</a>
       </td>
     </tr>
   </tbody>

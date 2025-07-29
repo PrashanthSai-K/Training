@@ -15,7 +15,12 @@ import { OrderFailure } from './order-failure/order-failure';
 import { OrderList } from './Order/order-list/order-list';
 import { OrderDetail } from './Order/order-detail/order-detail';
 import { Home } from './home/home';
+import { NewsList as NewsManagementList } from './NewsManagement/news-list/news-list';
 import { NewsList } from './News/news-list/news-list';
+import { NewsForm } from './NewsManagement/news-form/news-form';
+import { NewsDetail } from './NewsManagement/news-detail/news-detail';
+import { ContactUs } from './contact-us/contact-us';
+import { ProductCreate } from './Product/product-create/product-create';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -28,6 +33,7 @@ export const routes: Routes = [
     { path: 'colors/edit/:id', component: ColorEdit },
     { path: 'colors/details/:id', component: ColorDetails },
     { path: 'products', component: ProductList },
+    { path: 'products/create', component: ProductCreate },
     { path: 'products/:id', component: ProductDetail },
     { path: 'cart', component: ShoppingCart },
     { path: 'checkout', component: Checkout },
@@ -41,5 +47,9 @@ export const routes: Routes = [
         ]
     },
     { path: 'news', component: NewsList },
-
+    { path: 'newslist', component: NewsManagementList },
+    { path: 'news/create', component: NewsForm },
+    { path: 'news/edit/:id', component: NewsForm },
+    { path: 'news/:id', component: NewsDetail },
+    { path: 'contactus', component: ContactUs },
 ];

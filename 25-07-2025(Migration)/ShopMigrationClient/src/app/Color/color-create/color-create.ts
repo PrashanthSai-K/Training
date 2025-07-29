@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ColorService } from '../../Services/color.Service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-color-create',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './color-create.html',
   styleUrl: './color-create.css'
 })
@@ -31,7 +31,6 @@ export class ColorCreate {
       },
       error:(err)=>{
         console.log(err);
-        
       }
     });
     }

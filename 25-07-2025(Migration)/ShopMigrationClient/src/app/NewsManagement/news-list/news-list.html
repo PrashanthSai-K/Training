@@ -1,0 +1,27 @@
+<!-- news-list.component.html -->
+<h2>News Management</h2>
+<a routerLink="/news/create">Create New</a>
+<table class="table">
+  <tr>
+    <th>Title</th>
+    <th>Short Description</th>
+    <th>Image</th>
+    <th>Created Date</th>
+    <th>Status</th>
+    <th>Author</th>
+    <th>Actions</th>
+  </tr>
+  <tr *ngFor="let news of newsList">
+    <td>{{ news.title }}</td>
+    <td>{{ news.shortDescription }}</td>
+    <td>{{ news.image }}</td>
+    <td>{{ news.createdDate }}</td>
+    <td>{{ news.status === 1 ? 'Active' : 'Inactive' }}</td>
+    <td>{{ news.user?.username }}</td>
+    <td>
+      <a [routerLink]="['/news', news.newsId]">Details</a> |
+      <a [routerLink]="['/news/edit', news.newsId]">Edit</a> |
+      <a (click)="deleteNews(news.newsId!)" style="cursor: pointer; color: blue;text-decoration: underline;">Delete</a>
+    </td>
+  </tr>
+</table>

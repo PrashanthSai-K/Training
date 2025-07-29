@@ -1,8 +1,17 @@
 <h2>Checkout</h2>
-<form #checkoutForm="ngForm" (ngSubmit)="submit()">
-  <input name="name" [(ngModel)]="form.name" placeholder="Name" required />
-  <input name="phone" [(ngModel)]="form.phone" placeholder="Phone" required />
-  <input name="email" [(ngModel)]="form.email" placeholder="Email" required />
-  <input name="address" [(ngModel)]="form.address" placeholder="Address" required />
-  <button type="submit">Submit Order</button>
+
+<form [formGroup]="checkoutForm" (ngSubmit)="submit()" novalidate>
+  <input formControlName="name" placeholder="Name" />
+  <div *ngIf="checkoutForm.get('name')?.invalid && checkoutForm.get('name')?.touched">Name is required</div>
+
+  <input formControlName="phone" placeholder="Phone" />
+  <div *ngIf="checkoutForm.get('phone')?.invalid && checkoutForm.get('phone')?.touched">Phone is required</div>
+
+  <input formControlName="email" placeholder="Email" />
+  <div *ngIf="checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched">Valid Email is required</div>
+
+  <input formControlName="address" placeholder="Address" />
+  <div *ngIf="checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched">Address is required</div>
 </form>
+
+<div id="paypal-button-container"></div>

@@ -129,3 +129,4 @@
 /Users/presidio/sai/Training/25-07-2025(Migration)/ShopMigrationProject/obj/Debug/net9.0/ShopMigrationProject.genruntimeconfig.cache
 /Users/presidio/sai/Training/25-07-2025(Migration)/ShopMigrationProject/obj/Debug/net9.0/ref/ShopMigrationProject.dll
 /Users/presidio/sai/Training/25-07-2025(Migration)/ShopMigrationProject/bin/Debug/net9.0/AutoMapper.dll
+/Users/presidio/sai/Training/25-07-2025(Migration)/ShopMigrationProject/bin/Debug/net9.0/Newtonsoft.Json.dll

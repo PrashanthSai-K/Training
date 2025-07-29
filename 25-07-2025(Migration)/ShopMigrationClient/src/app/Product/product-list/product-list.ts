@@ -15,7 +15,13 @@ export class ProductList {
   currentPage = 1;
   totalPages = 1;
 
-  constructor(private productService: ProductService, private cartService: CartService) { }
+  constructor(private productService: ProductService, private cartService: CartService) { 
+    productService.productsSubject.subscribe({
+      next:(data)=>{
+        this.products = data;
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.loadPage(1);

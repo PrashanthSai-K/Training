@@ -1,13 +1,15 @@
 <h2>{{ isEdit ? 'Edit' : 'Create' }} Category</h2>
 
 <form [formGroup]="form" (ngSubmit)="submit()">
-    <label>Name</label>
-    <input type="text" formControlName="name" class="form-control" />
-    <!-- <div *ngIf="form.controls.name.invalid && form.controls.name.touched">
+  <label>Name</label>
+  <input type="text" formControlName="name" class="form-control" />
+  <div *ngIf="form.get('name')?.touched && form.get('name')?.invalid" class="text-danger">
     Name is required.
-  </div> -->
+  </div>
 
-    <button type="submit" class="btn btn-primary">{{ isEdit ? 'Update' : 'Create' }}</button>
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+    {{ isEdit ? 'Update' : 'Create' }}
+  </button>
 </form>
 
 <a routerLink="/categories">Back to List</a>

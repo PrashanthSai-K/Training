@@ -1,0 +1,41 @@
+<!-- news-form.component.html -->
+<h2>{{ isEdit ? 'Edit News' : 'Create News' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+    <label>User Id</label>
+    <select formControlName="userId" class="form-control">
+        <option [value]="null" selected>Select User</option>
+        <option *ngFor="let s of users" [value]="s.userId">{{ s.username }}</option>
+    </select>
+    <div *ngIf="form.controls['userId'].invalid && form.controls['userId'].touched">
+        User ID is required.
+    </div>
+
+    <label>Title</label>
+    <input formControlName="title" class="form-control" />
+    <div *ngIf="form.controls['title'].invalid && form.controls['title'].touched">
+        Title is required.
+    </div>
+
+    <label>Short Description</label>
+    <input formControlName="shortDescription" class="form-control" />
+
+    <label>Image</label>
+    <input formControlName="image" class="form-control" />
+
+    <label>Content</label>
+    <textarea formControlName="content" class="form-control"></textarea>
+
+    <label>Status</label>
+    <select formControlName="status" class="form-control">
+        <option [value]="1">Active</option>
+        <option [value]="0">Inactive</option>
+    </select>
+
+    <label>Created Date</label>
+    <input formControlName="createdDate" class="form-control" type="datetime-local" />
+
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Save</button>
+</form>
+
+<a routerLink="/news">Back to List</a>

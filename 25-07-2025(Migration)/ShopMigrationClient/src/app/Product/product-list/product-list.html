@@ -1,7 +1,7 @@
 <div *ngFor="let item of products" class="main-content">
   <div class="content-image">
     <a [routerLink]="['/products', item.productId]">
-      <img [src]="'/assets/images/' + item.image" />
+      <img [src]="item.image" />
     </a>
   </div>
   <div class="content-title">
@@ -11,7 +11,7 @@
     Price: ${{ item.price | number: '1.0-0' }}
   </div>
   <div class="content-price">
-    <a (click)="addToCart(item)">Add to Cart</a>
+    <a (click)="addToCart(item)" style="cursor: pointer; color: blue;text-decoration: underline;">Add to Cart</a>
   </div>
 </div>
 

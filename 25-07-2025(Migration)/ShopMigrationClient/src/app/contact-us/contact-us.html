@@ -1,0 +1,40 @@
+<h2>You guys contact me if have any issues:</h2>
+
+<p><strong>FullName:</strong> Chien Vu Hoang</p>
+<p><strong>Email:</strong> {{'chien.vh@gmail.com'}}</p>
+<p><strong>Skype:</strong> chien.vh</p>
+<p><strong>Facebook:</strong> <a href="https://facebook.com/chienvh" target="_blank">facebook.com/chienvh</a></p>
+
+<div *ngIf="message" class="message">
+    <p><b>Captcha Message: {{ message }}</b></p>
+</div>
+
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" id="contact-form" novalidate>
+    <table>
+        <tr>
+            <td colspan="2" style="text-align: center;"><b>Send Queries to Us</b></td>
+        </tr>
+        <tr>
+            <td>Customer Name:</td>
+            <td><input type="text" formControlName="name" /></td>
+        </tr>
+        <tr>
+            <td>Customer Phone:</td>
+            <td><input type="text" formControlName="phone" /></td>
+        </tr>
+        <tr>
+            <td>Customer Email:</td>
+            <td><input type="email" formControlName="email" /></td>
+        </tr>
+        <tr>
+            <td>Content:</td>
+            <td>
+                <textarea formControlName="content" rows="10" cols="30"></textarea>
+            </td>
+        </tr>
+    </table>
+    <re-captcha [siteKey]="siteKey" (resolved)="onCaptchaResolved($event)">
+    </re-captcha>
+
+    <button type="submit" [disabled]="contactForm.invalid">Submit Form</button>
+</form>

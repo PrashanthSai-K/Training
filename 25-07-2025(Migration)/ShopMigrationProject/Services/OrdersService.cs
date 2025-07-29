@@ -20,30 +20,24 @@ public class OrdersService : IOrderService
     public async Task<Order> CreateOrder(OrderCreateDto orderDto)
     {
         var order = _mapper.Map<Order>(orderDto);
-
+        order.Status = "Completed";
         _context.Orders.Add(order);
         await _context.SaveChangesAsync();
 
         Console.WriteLine(orderDto.OrderDetailsDto);
 
         // Add OrderDetails
-        double total = 0;
         foreach (var item in orderDto.OrderDetailsDto)
         {
             var orderDetail = new OrderDetail
             {
                 OrderID = order.OrderID,
                 ProductID = item.ProductID,
-                Price = item.Price,
+                Price = item.Quantity * item.Price,
                 Quantity = item.Quantity
             };
 
             _context.OrderDetails.Add(orderDetail);
-
-            if (item.Price.HasValue && item.Quantity.HasValue)
-            {
-                total += item.Price.Value * item.Quantity.Value;
-            }
         }
 
         await _context.SaveChangesAsync();
@@ -68,7 +62,7 @@ public class OrdersService : IOrderService
 
         if (order == null)
             throw new Exception("Order not found");
-            
+
         var orderDetails = await _context.OrderDetails.Where(x => x.OrderID == order.OrderID).ToListAsync();
 
         return order;

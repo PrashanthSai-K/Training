@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { News, NewsService } from '../../Services/news.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-news-list',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './news-list.html',
   styleUrl: './news-list.css'
 })

@@ -1,0 +1,40 @@
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <input formControlName="productName" placeholder="Product Name" />
+    <input formControlName="image" placeholder="Image URL" />
+    <input formControlName="price" type="number" placeholder="Price" />
+
+    <select formControlName="categoryId">
+        <option [value]="null">Select Category</option>
+        <option *ngFor="let cat of categories" [value]="cat.categoryId">{{ cat.name }}</option>
+    </select>
+
+    <select formControlName="colorId">
+        <option [value]="null">Select Color</option>
+
+        <option *ngFor="let c of colors" [value]="c.colorId">{{ c.color1 }}</option>
+    </select>
+
+    <select formControlName="modelId">
+        <option [value]="null">Select Model</option>
+
+        <option *ngFor="let m of models" [value]="m.modelId">{{ m.model1 }}</option>
+    </select>
+
+    <select formControlName="userId">
+        <option [value]="null">Select User</option>
+        <option *ngFor="let s of users" [value]="s.userId">{{ s.username }}</option>
+    </select>
+
+    <input formControlName="sellStartDate" type="datetime-local" />
+    <input formControlName="sellEndDate" type="datetime-local" />
+
+    <label>
+        Is New:
+        <select formControlName="isNew">
+            <option [value]="1">Yes</option>
+            <option [value]="0">No</option>
+        </select>
+    </label>
+
+    <button type="submit">Create Product</button>
+</form>
