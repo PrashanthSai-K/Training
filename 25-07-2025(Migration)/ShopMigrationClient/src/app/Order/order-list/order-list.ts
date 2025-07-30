@@ -12,7 +12,7 @@ import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 export class OrderList {
   orders: Order[] = [];
 
-  constructor(private orderService: OrderService) {}
+  constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
     this.fetchOrders();
@@ -22,6 +22,17 @@ export class OrderList {
     this.orderService.getAllOrders().subscribe({
       next: (data) => this.orders = data,
       error: (err) => console.error(err),
+    });
+  }
+
+  downloadOrderReport() {
+    this.orderService.downloadPdf().subscribe(blob => {
+      const a = document.createElement('a');
+      const objectUrl = URL.createObjectURL(blob);
+      a.href = objectUrl;
+      a.download = `OrderListing_${new Date().toISOString()}.pdf`;
+      a.click();
+      URL.revokeObjectURL(objectUrl);
     });
   }
 

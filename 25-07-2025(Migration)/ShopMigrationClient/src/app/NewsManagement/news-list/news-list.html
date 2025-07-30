@@ -1,6 +1,11 @@
 <!-- news-list.component.html -->
 <h2>News Management</h2>
 <a routerLink="/news/create">Create New</a>
+<div class="export-buttons">
+  <button (click)="exportCsv()">Export to CSV</button>
+  <button (click)="exportExcel()">Export to Excel</button>
+</div>
+
 <table class="table">
   <tr>
     <th>Title</th>

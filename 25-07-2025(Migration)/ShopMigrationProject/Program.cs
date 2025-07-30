@@ -56,6 +56,8 @@ builder.Services.AddCors(options =>
 });
 #endregion
 
+QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

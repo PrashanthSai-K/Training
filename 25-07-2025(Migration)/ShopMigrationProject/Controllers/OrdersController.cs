@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ChienVHShopOnline.Models.Dto;
 using ChienVHShopOnline.Interfaces;
+using ChienVHShopOnline.Reports;
+using QuestPDF.Fluent;
 
 namespace ChienVHShopOnline.Controllers
 {
@@ -62,6 +64,18 @@ namespace ChienVHShopOnline.Controllers
         {
             var order = await _orderService.DeleteOrder(id);
             return Ok(order);
+        }
+
+        [HttpGet("export")]
+        public async Task<IActionResult> ExportOrder()
+        {
+            var orders = await _orderService.GetOrders();
+            var document = new OrderReportDocument(orders);
+            var stream = new MemoryStream();
+            document.GeneratePdf(stream);
+            stream.Position = 0;
+            var fileName = $"OrderListing_{DateTime.Now:yyyyMMddHHmmss}.pdf";
+            return File(stream, "application/pdf", fileName);
         }
     }
 }

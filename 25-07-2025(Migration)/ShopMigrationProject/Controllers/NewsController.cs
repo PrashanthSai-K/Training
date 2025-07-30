@@ -8,6 +8,7 @@ using ChienVHShopOnline.Models;
 using ChienVHShopOnline.Models.Dto;
 using AutoMapper;
 using ChienVHShopOnline.Interfaces;
+using System.Text;
 
 namespace ChienVHShopOnline.Controllers
 {
@@ -16,7 +17,7 @@ namespace ChienVHShopOnline.Controllers
     public class NewsController : ControllerBase
     {
         // private readonly IUserService _userService;
-              private readonly ChienVHShopDBEntities _context;
+        private readonly ChienVHShopDBEntities _context;
         private readonly IMapper _mapper;
 
         public NewsController(IUserService userService, ChienVHShopDBEntities dbEntities, IMapper mapper)
@@ -92,5 +93,46 @@ namespace ChienVHShopOnline.Controllers
             await _context.SaveChangesAsync();
             return Ok(news);
         }
+
+        [HttpGet("csv")]
+        public async Task<IActionResult> ExportNewsToCsv()
+        {
+            var newsList = await _context.News.OrderBy(n => n.NewsId).ToListAsync();
+
+            var sb = new StringBuilder();
+            sb.AppendLine("\"NewsId\",\"Title\",\"ShortDescription\",\"CreatedDate\",\"Status\"");
+
+            foreach (var news in newsList)
+            {
+                sb.AppendLine($"\"{news.NewsId}\",\"{news.Title}\",\"{news.ShortDescription}\",\"{news.CreatedDate:yyyy-MM-dd}\",\"{news.Status}\"");
+            }
+
+            var bytes = Encoding.UTF8.GetBytes(sb.ToString());
+            var fileName = $"NewsListing_{DateTime.Now:yyyyMMddHHmmss}.csv";
+
+            return File(bytes, "text/csv", fileName);
+        }
+
+        [HttpGet("excel")]
+        public async Task<IActionResult> ExportNewsToExcel()
+        {
+            var newsList = await _context.News.OrderBy(n => n.NewsId).ToListAsync();
+
+            var sb = new StringBuilder();
+            sb.AppendLine("<table border='1'><tr><th>NewsId</th><th>Title</th><th>ShortDescription</th><th>CreatedDate</th><th>Status</th></tr>");
+
+            foreach (var news in newsList)
+            {
+                sb.AppendLine($"<tr><td>{news.NewsId}</td><td>{news.Title}</td><td>{news.ShortDescription}</td><td>{news.CreatedDate:yyyy-MM-dd}</td><td>{news.Status}</td></tr>");
+            }
+
+            sb.AppendLine("</table>");
+
+            var bytes = Encoding.UTF8.GetBytes(sb.ToString());
+            var fileName = $"NewsListing_{DateTime.Now:yyyyMMddHHmmss}.xls";
+
+            return File(bytes, "application/vnd.ms-excel", fileName);
+        }
+
     }
 }

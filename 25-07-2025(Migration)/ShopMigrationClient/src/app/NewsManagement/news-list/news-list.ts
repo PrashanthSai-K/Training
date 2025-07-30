@@ -25,5 +25,12 @@ export class NewsList {
       });
     }
   }
+  exportCsv() {
+    window.open('http://localhost:5038/api/News/csv', '_blank');
+  }
+
+  exportExcel() {
+    window.open('http://localhost:5038/api/News/excel', '_blank');
+  }
 
 }

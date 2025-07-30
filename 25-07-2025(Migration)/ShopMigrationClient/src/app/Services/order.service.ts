@@ -33,4 +33,11 @@ export class OrderService {
   getOrderById(id: number): Observable<Order> {
     return this.http.get<Order>(`${this.apiUrl}/${id}`);
   }
+
+  downloadPdf(): Observable<Blob> {
+  return this.http.get(`${this.apiUrl}/export`, {
+    responseType: 'blob'
+  });
+}
+
 }
