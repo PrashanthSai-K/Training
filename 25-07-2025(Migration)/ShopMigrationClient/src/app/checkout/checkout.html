@@ -1,16 +1,16 @@
 <h2>Checkout</h2>
 
-<form [formGroup]="checkoutForm" (ngSubmit)="submit()" novalidate>
-  <input formControlName="name" placeholder="Name" />
+<form [formGroup]="checkoutForm" (ngSubmit)="submit()" novalidate class="d-flex flex-column gap-2 mb-2">
+  <input formControlName="name" placeholder="Name" class="form-control" />
   <div *ngIf="checkoutForm.get('name')?.invalid && checkoutForm.get('name')?.touched">Name is required</div>
 
-  <input formControlName="phone" placeholder="Phone" />
+  <input formControlName="phone" placeholder="Phone" class="form-control" />
   <div *ngIf="checkoutForm.get('phone')?.invalid && checkoutForm.get('phone')?.touched">Phone is required</div>
 
-  <input formControlName="email" placeholder="Email" />
+  <input formControlName="email" placeholder="Email" class="form-control" />
   <div *ngIf="checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched">Valid Email is required</div>
 
-  <input formControlName="address" placeholder="Address" />
+  <input formControlName="address" placeholder="Address" class="form-control" />
   <div *ngIf="checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched">Address is required</div>
 </form>
 

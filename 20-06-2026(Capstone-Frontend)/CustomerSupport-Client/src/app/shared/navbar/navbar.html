@@ -18,8 +18,10 @@
             </lucide-icon>Customer Support -
             @if(user?.role == 'Agent'){
             Agent
-            }@else {
+            }@else if(user?.role == 'Customer'){
             Customer
+            }@else {
+                Admin
             }
         </a>
     </div>

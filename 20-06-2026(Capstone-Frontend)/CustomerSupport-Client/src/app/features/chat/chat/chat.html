@@ -24,7 +24,7 @@
 
     <div class="w-full h-96 bg-white absolute bottom-20 left-0 rounded-lg shadow-lg inline-flex justify-center p-2"
         *ngIf="previewVisible()">
-        <lucide-icon name="circle-x" *ngIf="user.role == 'Cutsomer'" strokeWidth="1" (click)="onPreviewClose()"
+        <lucide-icon name="circle-x" *ngIf="user.role == 'Customer'" strokeWidth="1" (click)="onPreviewClose()"
             class="w-6 h-6 fill-blue-500 stroke-gray-50 cursor-pointer absolute top-1 right-2"></lucide-icon>
         <lucide-icon name="circle-x" *ngIf="user.role == 'Agent'" strokeWidth="1" (click)="onPreviewClose()"
             class="w-6 h-6 fill-sky-500 stroke-gray-50 cursor-pointer absolute top-1 right-2"></lucide-icon>

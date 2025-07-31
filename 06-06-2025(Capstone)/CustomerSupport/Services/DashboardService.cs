@@ -167,7 +167,7 @@ public class DashboardService : IDashboardService
             if (customer == null)
                 throw new Exception("Customer not found");
             var chats = await _chatRepository.GetAll();
-            trends = chats.Where(chat => chat.AgentId == customer.Id).Select(chat => new AdminChatTrendDto
+            trends = chats.Where(chat => chat.CustomerId == customer.Id).Select(chat => new AdminChatTrendDto
             {
                 Status = chat.Status,
                 Date = chat.Status == "Active" ? chat.CreatedOn : chat.UpdatedAt

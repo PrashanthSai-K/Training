@@ -152,7 +152,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("http://localhost:4200", "http://localhost:8080", "https://chatappsai.z13.web.core.windows.net", "https://h4t8wz09-4200.inc1.devtunnels.ms")
+        policy.WithOrigins("http://localhost:4200", "http://localhost:59029", "https://chatappsai.z13.web.core.windows.net", "https://h4t8wz09-4200.inc1.devtunnels.ms")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();

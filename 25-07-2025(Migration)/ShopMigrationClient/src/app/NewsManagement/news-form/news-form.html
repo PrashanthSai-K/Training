@@ -1,7 +1,7 @@
 <!-- news-form.component.html -->
 <h2>{{ isEdit ? 'Edit News' : 'Create News' }}</h2>
 
-<form [formGroup]="form" (ngSubmit)="save()">
+<form [formGroup]="form" (ngSubmit)="save()" >
     <label>User Id</label>
     <select formControlName="userId" class="form-control">
         <option [value]="null" selected>Select User</option>

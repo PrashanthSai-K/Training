@@ -60,10 +60,14 @@ export class Dashboard implements OnInit {
 
   transformToNgxChartFormat(data: any) {
     const grouped = new Map<string, Map<string, number>>();
+    const allDates = new Set<string>();
 
+    // 1. Group data and collect all unique dates
     for (const item of data) {
       const date = new Date(item.date).toISOString().slice(0, 10);
       const status = item.status === 'Deleted' ? 'Closed' : item.status === 'Active' ? 'Open' : item.status;
+
+      allDates.add(date);
 
       if (!grouped.has(status)) {
         grouped.set(status, new Map());
@@ -73,14 +77,16 @@ export class Dashboard implements OnInit {
       statusMap.set(date, (statusMap.get(date) || 0) + 1);
     }
 
+    // 2. Convert Set to sorted array of dates (descending or ascending as needed)
+    const sortedDates = Array.from(allDates).sort((a, b) => a.localeCompare(b)); 
+    
+    // 3. Create series for each status with all dates (fill missing with 0)
     const chartData = Array.from(grouped.entries()).map(([status, dateMap]) => ({
       name: status,
-      series: Array.from(dateMap.entries())
-        .sort(([a], [b]) => a.localeCompare(b))
-        .map(([date, value]) => ({
-          name: date,
-          value: value
-        }))
+      series: sortedDates.map(date => ({
+        name: date,
+        value: dateMap.get(date) || 0
+      }))
     }));
 
     return chartData;
