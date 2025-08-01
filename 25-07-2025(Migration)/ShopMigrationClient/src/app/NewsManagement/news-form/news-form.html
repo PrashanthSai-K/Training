@@ -2,7 +2,7 @@
 <h2>{{ isEdit ? 'Edit News' : 'Create News' }}</h2>
 
 <form [formGroup]="form" (ngSubmit)="save()" >
-    <label>User Id</label>
+    <label>User</label>
     <select formControlName="userId" class="form-control">
         <option [value]="null" selected>Select User</option>
         <option *ngFor="let s of users" [value]="s.userId">{{ s.username }}</option>
@@ -38,4 +38,4 @@
     <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Save</button>
 </form>
 
-<a routerLink="/news">Back to List</a>
+<a routerLink="/newslist">Back to List</a>

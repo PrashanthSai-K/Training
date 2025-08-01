@@ -1,7 +1,7 @@
 <h2>Checkout</h2>
 
 <form [formGroup]="checkoutForm" (ngSubmit)="submit()" novalidate class="d-flex flex-column gap-2 mb-2">
-  <input formControlName="name" placeholder="Name" class="form-control" />
+  <input formControlName="name" placeholder="Name" class="form-control" style="width: 25rem;" />
   <div *ngIf="checkoutForm.get('name')?.invalid && checkoutForm.get('name')?.touched">Name is required</div>
 
   <input formControlName="phone" placeholder="Phone" class="form-control" />
