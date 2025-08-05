@@ -20,7 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     importProvidersFrom(LucideAngularModule.pick({
       BotMessageSquare, CircleUser, MessageCirclePlus, ShieldUser, UserCog, UserPlus, ClipboardCopy, MessageSquareMore, SquarePen, Dot, MessageSquareDot,
-      Upload, SendHorizontal, CircleArrowLeft, CircleX, MessageSquarePlus, TicketPercent, TicketCheck, LayoutDashboard, MoreVertical, KeyRound, Lock
+      Upload, SendHorizontal, CircleArrowLeft, CircleX, MessageSquarePlus, TicketPercent, TicketCheck, LayoutDashboard, MoreVertical, KeyRound, Lock,
     })),
     provideHttpClient(withInterceptors([authInterceptor])),
     ChatService,

@@ -31,7 +31,6 @@ export class App implements OnInit {
       })
   }
   toggledNavbar(event: any) {
-    console.log("toggled nav");
     this.isNavOpen.set(!this.isNavOpen());
   }
 

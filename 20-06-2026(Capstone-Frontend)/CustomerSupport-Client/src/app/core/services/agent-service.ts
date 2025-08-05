@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Agent } from "../models/chat";
-import { BehaviorSubject, debounceTime, distinctUntilChanged, tap } from "rxjs";
+import { BehaviorSubject, debounceTime, distinctUntilChanged, Observable, tap } from "rxjs";
 
 export const environment = {
   apiUrl: 'http://localhost:5124/api/v1',
@@ -50,7 +50,7 @@ export class AgentService {
     }
 
     getAgent() {
-        return this.httpClient.get(`${this.agentUrl}/profile`);
+        return this.httpClient.get<any>(`${this.agentUrl}/profile`);
     }
 
     updateAgent(agent: Agent, id: number) {

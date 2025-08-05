@@ -27,7 +27,7 @@ public class AuthService : IAuthService
     {
         var user = await _userRepository.GetById(requestDto.Username);
 
-        if (user.Status != "Active")
+        if (user.Roles == "Customer" && user.Status != "Active")
             throw new UnauthorizedAccessException("User account has been deactivated");
 
         if (!_hashingService.VerifyHash(requestDto.Password, user.Password))

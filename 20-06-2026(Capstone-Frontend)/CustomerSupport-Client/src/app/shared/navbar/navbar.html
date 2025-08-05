@@ -15,17 +15,40 @@
             </lucide-icon>
             <lucide-icon name="bot-message-square" *ngIf="user?.role == 'Agent'"
                 class="w-10 h-10 stroke-white fill-sky-600">
-            </lucide-icon>Customer Support -
-            @if(user?.role == 'Agent'){
-            Agent
-            }@else if(user?.role == 'Customer'){
-            Customer
-            }@else {
+            </lucide-icon>
+            <span *ngIf="isNavOpen()">
+                Customer Support -
+                @if(user?.role == 'Agent'){
+                Agent
+                }@else if(user?.role == 'Customer'){
+                Customer
+                }@else {
                 Admin
-            }
+                }
+            </span>
         </a>
     </div>
     <div class="navbar-end">
+        <div #dropdown class="relative w-24 pr-4" (click)="toggleDropdown()" *ngIf="user?.role == 'Agent'">
+            <div class="flex justify-between items-center border border-gray-300 px-2  rounded cursor-pointer text-xs">
+                <span>{{ agent?.status }}</span>
+                <lucide-icon name="dot" class="stroke-green-600 w-8 h-8" *ngIf="agent?.status === 'Active'">
+                </lucide-icon>
+                <lucide-icon name="dot" class="stroke-red-600 w-8 h-8" *ngIf="agent?.status === 'Inactive'">
+                </lucide-icon>
+            </div>
+
+            <ul *ngIf="showDropdown()" class="absolute bg-white border mt-1 w-full rounded shadow text-xs">
+                <li class="hover:bg-gray-100 px-2 py-1 cursor-pointer" *ngIf="agent?.status === 'Active'"
+                    (click)="updateStatus('Inactive')">
+                    Inactive
+                </li>
+                <li class="hover:bg-gray-100 px-2 py-1 cursor-pointer" *ngIf="agent?.status === 'Inactive'"
+                    (click)="updateStatus('Active')">
+                    Active
+                </li>
+            </ul>
+        </div>
         <h1 *ngIf="user" class="text-xs">Hi, {{user.username.split("@")[0] | titlecase }}</h1>
         <button class="btn btn-ghost btn-circle" (click)="toggleNotification()" *ngIf="user">
             <div class="absolute top-1 -right-1" *ngIf="notificationAvailable()">
